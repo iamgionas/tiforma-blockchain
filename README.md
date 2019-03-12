@@ -1,9 +1,9 @@
 # TiformaBlockchain
 
-L'obiettivo del progetto è quello di implementare una soluzione basata su blockchain al problema della gestione dei percorsi formativi. La soluzione dovrà inoltre offrire un'interfaccia utente Web.
+The goal of this semester project is to implement a blockchain-based solution to the problem of managing training paths. The solution will also have to offer a web user interface.
 
 ## Tecnologie
 - Hyperledger Fabric
 - Hyperledger Composer
 - Javascript / NodeJS
-- Tecnologie Web (HTML, CSS, AngularJS)
+- Web technologies (HTML, CSS, AngularJS)
