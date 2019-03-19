@@ -1,0 +1,21 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-md-2 bg-primary position-fixed h-100" id="sidebar">
+      <div class="logo mt-3 mb-5 pb-3 text-center" id="sidebarHeader">
+        <h3>SUPSI</h3>
+        <h6>Academic Training Course</h6>
+      </div>
+      <ul class="nav nav-pills nav-pills-primary flex-column" id="sidebarNav">
+        <li class="nav-item"><a class="nav-link active" routerLink="/students" data-toggle="tab"><img src="../assets/sidebar-icon/student.png">Studenti</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab"><img src="../assets/sidebar-icon/course.png">Corsi</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab"><img src="../assets/sidebar-icon/module.png">Moduli</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab"><img src="../assets/sidebar-icon/offert.png">Formazione</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab"><img src="../assets/sidebar-icon/semester.png">Semestre</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab"><img src="../assets/sidebar-icon/certificate.png">Certificazione</a></li>
+      </ul>
+    </div>
+    <div class="offset-md-2 col-md-10" id="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
