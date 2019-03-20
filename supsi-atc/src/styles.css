@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   min-height: 100%;
+  background-color: #343a40 !important;
 }
 
 @media (min-width:768px) {
@@ -10,8 +11,3 @@ body {
   }
 }
 
-@media (min-width:768px) {
-  body {
-    margin-left: 232px
-  }
-}
