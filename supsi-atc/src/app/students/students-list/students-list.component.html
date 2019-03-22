@@ -3,7 +3,7 @@
     <h2 class="text-center mt-3 text-white">Studenti</h2>
     <div class="row">
       <div class="col text-center">
-          <a class="btn btn-info btn-sm" href="#" role="button">Aggiungi</a>
+        <a class="btn btn-info btn-sm" href="#" role="button">Aggiungi</a>
       </div>
     </div>
     <form>
@@ -14,7 +14,7 @@
       </div>
     </form>
     <ul class="list-group mt-3">
-      <li class="list-group-item list-group-item-action">Agnola Tommaso</li>
+      <li class="list-group-item list-group-item-action"  [routerLink]="[2]">Agnola Tommaso</li>
       <li class="list-group-item list-group-item-action active">Gionas Bonardi</li>
       <li class="list-group-item list-group-item-action">Olmo Barberis</li>
       <li class="list-group-item list-group-item-action">Ivan Pavic</li>
@@ -41,5 +41,6 @@
     </ul>
   </div>
   <div class="col-md-9">
+      <router-outlet></router-outlet>
   </div>
 </div>
