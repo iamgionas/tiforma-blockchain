@@ -86,5 +86,4 @@ export class DataService<Type> {
     private extractData(res: Response): any {
         return res.json();
     }
-
 }
