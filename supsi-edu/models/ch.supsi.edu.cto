@@ -1,0 +1,180 @@
+namespace ch.supsi.edu
+
+/********************************************
+* PARTICIPANTS RELATED ASSETS
+********************************************/
+asset Address identified by addressID{
+  o String addressID
+  o String street
+  o String number
+  o String cap
+  o String city
+  o String country
+  o String addressType
+  o String email
+  o String telephoneNumber
+}
+
+/********************************************
+* PARTECIPANT
+********************************************/
+abstract participant Contact identified by contactID {
+  o String contactID
+  o String name
+  o String surname
+  o Address[] addresses
+  o DateTime birthday
+  o String nationality
+  //Account infos might be added
+}
+
+participant Student extends Contact{
+  o String statute // 'mai immatricolato' / 'immatricolando' / 'immatricolato' / 'exmatricolato' / 'ospite'
+  o String serialNumber //nr matricola
+  optional o String comment
+  --> StudyPlan studyPlan
+  //o Diplome[] diplomas    // Diplomas a student has
+}
+
+transaction CreateStudent{
+  o String contactID
+  o String name
+  o String surname
+  o Address[] addresses	
+  o DateTime birthday
+  o String nationality
+  o String statute
+  o String serialNumber
+  o String comment
+  --> StudyPlan studyPlan
+}
+
+participant Collaborator extends Contact {
+
+}
+
+/********************************************
+* TRAINING
+********************************************/
+
+asset Department identified by name {
+  o String name
+}
+
+transaction CreateDepartment{
+  o String name
+}
+
+asset Course identified by courseCode {
+  o String courseCode
+  o String name
+}
+
+transaction CreateCourse {
+  o String courseCode
+  o String name
+}
+
+asset Module identified by moduleCode {
+    o String moduleCode
+    o String name
+    o Integer duration
+    o Integer ETCS
+    --> Department department
+    o String state
+    --> Collaborator[] responsables
+    o String englishName
+    optional o String comment
+    --> Course[] courses
+ }
+
+ transaction CreateModule{
+  o String moduleCode
+  o String name
+  o Integer duration
+  o Integer ETCS
+  --> Department department
+  o String state
+  --> Collaborator[] responsables
+  o String englishName
+  o String comment
+  --> Course[] courses
+}
+
+asset StudyPlan identified by name {
+  o String name
+  --> Department departement
+  o String state
+  o String comment
+  --> Module[] modules
+}
+
+transaction CreateStudyPlan {
+  o String name
+  --> Department departement
+  o String state
+  o String comment
+  --> Module[] modules
+}
+
+asset Semester identified by name {
+  o String name
+  o String description
+  --> StudentModule[] modules
+}
+
+transaction CreateSemester {
+  o String name
+  o String description
+  --> StudentModule[] modules
+}
+
+asset StudentModule identified by studentModuleID {
+  o String studentModuleID
+  --> Module module
+  --> Student[] students
+}
+
+transaction CreateStudentModule {
+  o String studentModuleID
+  --> Module module
+  --> Student[] students
+}
+
+asset Certification identified by certificationID {
+  o String certificationID
+  --> Module module
+  --> Student student
+  o Double grade
+}
+
+transaction CreateCertification {
+   o String certificationID
+  --> Module module
+  --> Student student
+  o Double grade
+}
+
+asset CertificationSession identified by name {
+  o String name
+  --> Department department
+  --> Semester semester
+  o String title
+  o DateTime date
+  --> Certification[] subscribers
+}
+
+
+transaction CreateCertificationSession {
+  o String name
+  --> Department department
+  --> Semester semester
+  o String title
+  o DateTime date
+  --> Certification[] subscribers
+}
+
+transaction SubscriptionToSemester {
+  -->Student student
+  -->Semester semester
+}

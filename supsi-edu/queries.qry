@@ -1,0 +1,26 @@
+/**
+ * In Composer there exists only 2 kinds of Queries: Named and Dynamic.
+ * Named queries are defined in the business network definition and are exposed in the composer-rest-api.
+ * Dynamic queries can be defined at runtime by client or by a Transaction Processor function
+ */
+
+query findStudentByID {
+    description: "Find a student by its ID."
+    statement:
+        SELECT ch.supsi.edu.Student
+            WHERE (_$idParam == contactID)
+}
+
+query findStudentBySerialNumber{
+ 	description: "Find a student by its serial number."
+ 	statement:
+  		SELECT ch.supsi.edu.Student
+  			WHERE(_$serialnumberParam == serialNumber)
+}
+
+query findStudentsByModule{
+	description: "Find all students that have a given module in their study plan."
+  	statement:
+  		SELECT ch.supsi.edu.Student
+  		WHERE(studyPlan.modules CONTAINS [_$moduleParam])
+}
