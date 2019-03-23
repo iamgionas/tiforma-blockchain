@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       {
         path: ':id',
-        component: StudentDetailComponent,}]
+        component: StudentDetailComponent,
+      }]
   }];
 
 @NgModule({
