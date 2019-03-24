@@ -7,6 +7,11 @@ import { StudentsComponent } from './students/students.component';
 import { CoursesComponent } from './courses/courses.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContainerComponent } from './container/container.component';
+import { TestAPIComponent } from './test-api/test-api.component';
+
+
+import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -14,11 +19,14 @@ import { ContainerComponent } from './container/container.component';
     StudentsComponent,
     CoursesComponent,
     NavbarComponent,
-    ContainerComponent
+    ContainerComponent,
+    TestAPIComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
