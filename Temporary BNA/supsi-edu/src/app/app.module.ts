@@ -11,6 +11,7 @@ import { TestAPIComponent } from './test-api/test-api.component';
 
 
 import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClient, HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
