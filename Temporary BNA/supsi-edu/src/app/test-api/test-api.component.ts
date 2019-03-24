@@ -12,16 +12,13 @@ import { httpFactory } from '@angular/http/src/http_module';
   providers: [DataService]
 })
 export class TestAPIComponent implements OnInit {
-
-
-  //Bisogna imparare ad usare il DATASERVICE
   
   constructor(private dataService : DataService<any>) {
 
      }
 
   ngOnInit() {
-    this.dataService.getSingle('Student','1').subscribe(s => this.student = s);    
+    this.dataService.getSingle('system/identities','').subscribe(s => this.student = s[0].name);    
   }
 
   student : String
