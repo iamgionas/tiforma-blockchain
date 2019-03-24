@@ -14,33 +14,10 @@
       </div>
     </form>
     <ul class="list-group mt-3">
-      <li class="list-group-item list-group-item-action"  routerLink="2">Agnola Tommaso</li>
-      <li class="list-group-item list-group-item-action active">Gionas Bonardi</li>
-      <li class="list-group-item list-group-item-action">Olmo Barberis</li>
-      <li class="list-group-item list-group-item-action">Ivan Pavic</li>
-      <li class="list-group-item list-group-item-action">Brian Pulfer</li>
-      <li class="list-group-item list-group-item-action">Agnola Tommaso</li>
-      <li class="list-group-item list-group-item-action">Gionas Bonardi</li>
-      <li class="list-group-item list-group-item-action">Olmo Barberis</li>
-      <li class="list-group-item list-group-item-action">Brian Pulfer</li>
-      <li class="list-group-item list-group-item-action">Agnola Tommaso</li>
-      <li class="list-group-item list-group-item-action">Gionas Bonardi</li>
-      <li class="list-group-item list-group-item-action">Olmo Barberis</li>
-      <li class="list-group-item list-group-item-action">Brian Pulfer</li>
-      <li class="list-group-item list-group-item-action">Agnola Tommaso</li>
-      <li class="list-group-item list-group-item-action">Gionas Bonardi</li>
-      <li class="list-group-item list-group-item-action">Olmo Barberis</li>
-      <li class="list-group-item list-group-item-action">Brian Pulfer</li>
-      <li class="list-group-item list-group-item-action">Agnola Tommaso</li>
-      <li class="list-group-item list-group-item-action">Gionas Bonardi</li>
-      <li class="list-group-item list-group-item-action">Olmo Barberis</li>
-      <li class="list-group-item list-group-item-action">Brian Pulfer</li>
-      <li class="list-group-item list-group-item-action">Agnola Tommaso</li>
-      <li class="list-group-item list-group-item-action">Gionas Bonardi</li>
-      <li class="list-group-item list-group-item-action">Olmo Barberis</li>
+      <li *ngFor="let p of students;" class="list-group-item list-group-item-action" routerLink="{{p.contactID}}">{{p.name + " " + p.surname}}</li>
     </ul>
   </div>
   <div class="col-md-9">
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </div>

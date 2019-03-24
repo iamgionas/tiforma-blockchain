@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RestService } from '../../rest.service';
 
 @Component({
   selector: 'app-student-detail',
@@ -8,11 +9,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  student: any;
+  statuteValues = [
+    "Mai immatricolato",
+    "Immatricolato",
+    "Exmatricolato",
+    "Ospite"
+  ]
+
+  constructor(public rest: RestService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    this.rest.getStudent(this.route.snapshot.params['id']).subscribe((data: {}) => {
+      console.log(data);
+      this.student = data;
+    });
   }
 
 }
