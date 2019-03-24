@@ -18,8 +18,8 @@ export class TestAPIComponent implements OnInit {
      }
 
   ngOnInit() {
-    this.dataService.getSingle('system/identities','').subscribe(s => this.student = s[0].name);    
+    this.dataService.getSingle('system/identities','').subscribe(identities => this.identity = identities[0].name);    
   }
 
-  student : String
+  identity : String
 }
