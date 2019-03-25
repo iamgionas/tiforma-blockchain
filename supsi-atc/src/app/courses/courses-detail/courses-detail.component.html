@@ -1,3 +1,17 @@
-<p>
-  courses-detail works!
-</p>
+<div class="bg-light rounded p-3 mt-5" *ngIf="course">
+  <h1>{{course.name}}</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-6">
+      <label for="courseCode">Codice del corso</label>
+      <input value="{{course.courseCode}}" type="text" class="form-control" id="courseCode"
+        placeholder="Codice corso">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Nome corso</label>
+      <input type="text" class="form-control" id="name" value="{{course.name}}">
+    </div>
+  </div>
+  <button (click)="updateObject()" class="btn btn-primary">Salva</button>
+</div>
