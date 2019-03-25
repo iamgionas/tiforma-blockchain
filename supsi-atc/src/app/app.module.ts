@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContainerComponent } from './container/container.component';
+import { CoursesListComponent } from './courses-list/courses-list.component';
+import { CoursesDetailComponent } from './courses-detail/courses-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ContainerComponent
+    ContainerComponent,
+    CoursesListComponent,
+    CoursesDetailComponent
   ],
   imports: [
     BrowserModule,
