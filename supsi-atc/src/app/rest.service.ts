@@ -19,49 +19,47 @@ export class RestService {
 
   private extractData(res: Response) {
     let body = res;
-    return body || { };
+    return body || {};
   }
 
-  getAlls(): Observable<any> {
-    return this.http.get(this.endpoint + 'Student').pipe(
+  getAlls(baseType): Observable<any> {
+    return this.http.get(this.endpoint + baseType).pipe(
       map(this.extractData));
   }
-  
-  getStudent(id): Observable<any> {
-    return this.http.get(this.endpoint + 'Student/' + id).pipe(
+
+  getObject(baseType, id): Observable<any> {
+    return this.http.get(this.endpoint + baseType + '/' + id).pipe(
       map(this.extractData));
   }
-  
-  addStudent (student): Observable<any> {
-    console.log(student);
-    return this.http.post<any>(this.endpoint + 'Student', JSON.stringify(student), this.httpOptions).pipe(
-      tap((product) => console.log(`added product w/ id=${product.id}`)),
-      catchError(this.handleError<any>('addProduct'))
+
+  addObject(baseType, obj): Observable<any> {
+    console.log(obj);
+    return this.http.post<any>(this.endpoint + baseType, JSON.stringify(obj), this.httpOptions).pipe(
+      catchError(this.handleError<any>('addObject'))
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-  
+
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
-  
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
-  
-  /*updateProduct (id, product): Observable<any> {
-    return this.http.put(thiendpoint + 'products/' + id, JSON.stringify(product), httpOptions).pipe(
-      tap(_ => console.log(`updated product id=${id}`)),
-      catchError(this.handleError<any>('updateProduct'))
+
+  updateObject (baseType, id, object): Observable<any> {
+    return this.http.put(this.endpoint + baseType + '/' + id, JSON.stringify(object), this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateObject'))
     );
   }
   
-  deleteProduct (id): Observable<any> {
+  /*deleteProduct (id): Observable<any> {
     return this.http.delete<any>(endpoint + 'products/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted product id=${id}`)),
       catchError(this.handleError<any>('deleteProduct'))

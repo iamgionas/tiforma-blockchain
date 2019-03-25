@@ -8,16 +8,16 @@ import { RestService } from '../../rest.service';
 })
 export class StudentsListComponent implements OnInit {
 
-  students:any = [];
+  students: any = [];
 
-  constructor(public rest:RestService) { }
+  constructor(public rest: RestService) { }
 
   ngOnInit() {
     this.getStudents();
   }
+
   getStudents(): any {
-    this.students = [];
-    this.rest.getAlls().subscribe((data: {}) => {
+    this.rest.getAlls('Student').subscribe((data: {}) => {
       console.log(data);
       this.students = data;
     });

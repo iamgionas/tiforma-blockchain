@@ -1,35 +1,35 @@
-<form class="bg-light rounded p-3 mt-5" *ngIf="student">
+<div class="bg-light rounded p-3 mt-5" *ngIf="student">
   <h1>{{student.name + " " + student.surname}}</h1>
   <div class="form-row ">
     <div class="form-group col-md-6">
-      <label for="inputSerialNumber">Numero Matricola</label>
-      <input value="{{student.serialNumber}}" type="text" class="form-control" id="inputSerialNumber"
+      <label for="serialNumber">Numero Matricola</label>
+      <input value="{{student.serialNumber}}" type="text" class="form-control" id="serialNumber"
         placeholder="Nr. Matricola">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputStatue">Statuto</label>
-      <select class="form-control" id="inputStatue">
+      <label for="statute">Statuto</label>
+      <select class="form-control" id="statute" value="{{student.statute}}">
         <option *ngFor="let v of statuteValues">{{v}}</option>
       </select>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" value="{{student.name}}">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" value="{{student.name}}">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputSurname">Surname</label>
-      <input type="text" class="form-control" id="inputSurname" value="{{student.surname}}">
+      <label for="surname">Surname</label>
+      <input type="text" class="form-control" id="surname" value="{{student.surname}}">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputBirthday">Anno di Nascita</label>
-      <input type="date" value="{{student.birthday | date: 'd.MM.yyyy'}}" class="form-control" id="inputBirthday">
+      <label for="birthday">Anno di Nascita</label>
+      <input type="date" value="{{student.birthday | date: 'd.MM.yyyy'}}" class="form-control" id="birthday">
     </div>
     <div class="form-group col-md-6">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Salva</button>
-</form>
+  <button (click)="updateObject()" class="btn btn-primary">Salva</button>
+</div>
