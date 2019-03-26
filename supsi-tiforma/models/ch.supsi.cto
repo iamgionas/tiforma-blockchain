@@ -1,0 +1,53 @@
+
+namespace ch.supsi
+/********************************************
+* PARTECIPANT
+********************************************/
+abstract participant Contact identified by contactID {
+  o String contactID
+  o String name
+  o String surname
+  //o Address[] addresses
+  o DateTime birthday
+  o String nationality
+}
+
+participant Student extends Contact{
+  o String statute
+  o String serialNumber //nr matricola
+  optional o String comment
+  //optional --> StudyPlan studyPlan
+}
+
+transaction CreateStudent{
+  o String contactID
+  o String name
+  o String surname
+  o DateTime birthday
+  o String nationality
+  o String statute
+  o String serialNumber
+  optional o String comment
+}
+
+/********************************************
+* TRAINING
+********************************************/
+
+asset Department identified by name {
+  o String name
+}
+
+transaction CreateDepartment{
+  o String name
+}
+
+asset Course identified by courseCode {
+  o String courseCode
+  o String name
+}
+
+transaction CreateCourse {
+  o String courseCode
+  o String name
+}
