@@ -22,7 +22,7 @@ export class RestService {
     return body || {};
   }
 
-  getAlls(baseType): Observable<any> {
+  getAll(baseType): Observable<any> {
     return this.http.get(this.endpoint + baseType).pipe(
       map(this.extractData));
   }
@@ -59,12 +59,12 @@ export class RestService {
     );
   }
   
-  /*deleteProduct (id): Observable<any> {
-    return this.http.delete<any>(endpoint + 'products/' + id, httpOptions).pipe(
-      tap(_ => console.log(`deleted product id=${id}`)),
+  deleteObject (baseType, id): Observable<any> {
+    return this.http.delete<any>(this.endpoint + baseType + '/' + id, this.httpOptions).pipe(
+      //tap(_ => console.log(`deleted product id=${id}`)),
       catchError(this.handleError<any>('deleteProduct'))
     );
-  }*/
+  }
 
 
 }
