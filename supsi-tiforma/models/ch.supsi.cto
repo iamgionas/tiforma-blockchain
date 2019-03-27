@@ -1,4 +1,4 @@
-namespace ch.supsi.edu
+namespace ch.supsi
 
 /********************************************
 * PARTICIPANTS RELATED ASSETS
@@ -49,6 +49,15 @@ transaction CreateStudent{
   --> StudyPlan studyPlan
 }
 
+transaction UpdateStudent{
+ --> Student oldStudent
+ o Student newStudent
+}
+
+transaction DeleteStudent{
+  --> Student student
+}
+
 participant Collaborator extends Contact {
 
 }
@@ -65,6 +74,15 @@ transaction CreateDepartment{
   o String name
 }
 
+transaction UpdateDepartment{
+  --> Department oldDepartment
+  o Department newDepartment
+}
+
+transaction DeleteDepartment{
+  --> Department department
+}
+
 asset Course identified by courseCode {
   o String courseCode
   o String name
@@ -73,6 +91,15 @@ asset Course identified by courseCode {
 transaction CreateCourse {
   o String courseCode
   o String name
+}
+
+transaction UpdateCourse{
+ --> Course oldCourse
+ o Course newCourse
+}
+
+transaction DeleteCourse{
+ --> Course course 
 }
 
 asset Module identified by moduleCode {
@@ -101,6 +128,15 @@ asset Module identified by moduleCode {
   --> Course[] courses
 }
 
+transaction UpdateModule{
+ -->Module oldModule
+ o Module newModule
+}
+
+transaction DeleteModule{
+  -->Module module
+}
+
 asset StudyPlan identified by name {
   o String name
   --> Department departement
@@ -117,6 +153,15 @@ transaction CreateStudyPlan {
   --> Module[] modules
 }
 
+transaction UpdateStudyPlan{
+  -->StudyPlan oldStudyPlan
+  o StudyPlan newStudyPlan
+}
+
+transaction DeleteStudyPlan{
+  -->StudyPlan studyplan
+}
+
 asset Semester identified by name {
   o String name
   o String description
@@ -127,6 +172,15 @@ transaction CreateSemester {
   o String name
   o String description
   --> StudentModule[] modules
+}
+
+transaction UpdateSemester{
+  --> Semester oldSemester
+  o Semester newSemester
+}
+
+transaction DeleteSemester{
+  --> Semester semester
 }
 
 asset StudentModule identified by studentModuleID {
@@ -141,6 +195,15 @@ transaction CreateStudentModule {
   --> Student[] students
 }
 
+transaction UpdateStudentModule{
+  --> StudentModule oldStudentModule
+  o StudentModule newStudentModule
+}
+
+transaction DeleteStudentModule{
+  --> StudentModule studentmodule
+}
+
 asset Certification identified by certificationID {
   o String certificationID
   --> Module module
@@ -153,6 +216,15 @@ transaction CreateCertification {
   --> Module module
   --> Student student
   o Double grade
+}
+
+transaction UpdateCertification{
+  --> Certification oldCertification
+  o	Certification newCertification
+}
+
+transaction DeleteCertification{
+  --> Certification certification
 }
 
 asset CertificationSession identified by name {
@@ -172,6 +244,15 @@ transaction CreateCertificationSession {
   o String title
   o DateTime date
   --> Certification[] subscribers
+}
+
+transaction UpdateCertificationSession{
+  --> CertificationSession oldCertificationSession
+  o CertificationSession newCertificationSession
+}
+
+transaction DeleteCertificationSession{
+  --> CertificationSession certificationsession
 }
 
 transaction SubscriptionToSemester {

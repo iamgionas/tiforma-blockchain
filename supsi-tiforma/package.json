@@ -2,11 +2,11 @@
   "engines": {
     "composer": "^0.20.7"
   },
-  "name": "supsi-edu",
-  "version": "0.0.1",
-  "description": "SUPSI private blockchain network to manage modules, semesters, students and grades across every department.",
+  "name": "supsi-tiforma",
+  "version": "0.0.3",
+  "description": "This is a test",
   "scripts": {
-    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/supsi-edu.bna",
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/supsi-tiforma.bna",
     "pretest": "npm run lint",
     "lint": "eslint .",
     "test": "nyc mocha -t 0 test/*.js && cucumber-js"
@@ -15,8 +15,8 @@
     "composer",
     "composer-network"
   ],
-  "author": "Gionas Bonardi &amp; Brian Pulfer",
-  "email": "gionas.bonardi@student.supsi.ch &amp; brian.pulfer@student.supsi.ch",
+  "author": "Gionas e Brian",
+  "email": "gionas.bonardi@student.supsi.ch, brian.pulfer@student.supsi.ch",
   "license": "Apache-2.0",
   "devDependencies": {
     "composer-admin": "^0.20.7",

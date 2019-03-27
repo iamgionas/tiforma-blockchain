@@ -12,18 +12,17 @@
  * limitations under the License.
  */
 
-rule NetworkAdminUser {
-    description: "Grant business network administrators full access to user resources"
-    participant: "org.hyperledger.composer.system.NetworkAdmin"
-    operation: ALL
-    resource: "**"
-    action: ALLOW
-}
+'use strict';
 
-rule NetworkAdminSystem {
-    description: "Grant business network administrators full access to system resources"
-    participant: "org.hyperledger.composer.system.NetworkAdmin"
-    operation: ALL
-    resource: "org.hyperledger.composer.system.**"
-    action: ALLOW
+const composerSteps = require('composer-cucumber-steps');
+const cucumber = require('cucumber');
+
+module.exports = function () {
+    composerSteps.call(this);
+};
+
+if (cucumber.defineSupportCode) {
+    cucumber.defineSupportCode((context) => {
+        module.exports.call(context);
+    });
 }
