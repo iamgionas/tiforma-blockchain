@@ -137,6 +137,16 @@ transaction DeleteModule{
   -->Module module
 }
 
+transaction AddCourseToModule{
+  -->Course course
+  -->Module module
+}
+
+transaction RemoveCourseFromModule{
+  -->Course course
+  -->Module module
+}
+
 asset StudyPlan identified by name {
   o String name
   --> Department departement
@@ -162,6 +172,16 @@ transaction DeleteStudyPlan{
   -->StudyPlan studyplan
 }
 
+transaction AddModuleToStudyPlan{
+  -->Module module
+  -->StudyPlan studyplan
+}
+
+transaction RemoveModuleFromStudyPlan{
+  --> Module module
+  --> StudyPlan studyplan
+}
+
 asset Semester identified by name {
   o String name
   o String description
@@ -183,6 +203,16 @@ transaction DeleteSemester{
   --> Semester semester
 }
 
+transaction AddStudentModuleToSemester{
+  --> StudentModule studentModule
+  --> Semester semester
+}
+
+transaction RemoveStudentModuleFromSemester{
+  --> StudentModule studentmodule
+  --> Semester semester
+}
+
 asset StudentModule identified by studentModuleID {
   o String studentModuleID
   --> Module module
@@ -201,6 +231,16 @@ transaction UpdateStudentModule{
 }
 
 transaction DeleteStudentModule{
+  --> StudentModule studentmodule
+}
+
+transaction AddStudentToStudentModule{
+  -->Student student
+  -->StudentModule studentmodule
+}
+
+transaction RemoveStudentFromStudentModule{
+  --> Student student
   --> StudentModule studentmodule
 }
 
@@ -255,7 +295,17 @@ transaction DeleteCertificationSession{
   --> CertificationSession certificationsession
 }
 
+transaction AddCertificationToCertificationSession{
+  --> Certification certification
+  --> CertificationSession certificationsession
+}
+
+transaction RemoveCertificationFromCertificationSession{
+  --> Certification certification
+  --> CertificationSession certificationsession
+}
+
 transaction SubscriptionToSemester {
-  -->Student student
-  -->Semester semester
+  --> Student student
+  --> Semester semester
 }

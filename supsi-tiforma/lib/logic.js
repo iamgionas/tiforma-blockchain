@@ -184,6 +184,32 @@ async function deleteModule(parameters){
 }
 
 /**
+* Addition of a course to a module
+*@param {ch.supsi.AddCourseToModule} parameters
+*@transaction
+*/
+async function addCourseToModule(parameters){
+  parameters.module.courses.push(parameters.course);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.Module');
+  await assetRegistry.update(parameters.module);
+}
+
+/**
+* Deletion of a course from a module
+*@param {ch.supsi.RemoveCourseFromModule} parameters
+*@transaction
+*/
+async function removeCourseFromModule(parameters){
+  let courseIndex = parameters.module.courses.indexOf(parameters.course);
+  parameters.module.courses.splice(courseIndex,1);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.Module');
+  await assetRegistry.update(parameters.module);
+}
+
+
+/**
 * Creation of a Study Plan
 *@param {ch.supsi.CreateStudyPlan} parameters
 *@transaction
@@ -222,8 +248,33 @@ async function updateStudyPlan(parameters){
 *@transaction
 */
 async function deleteStudyPlan(parameters){
-   let assetRegistry = await getAssetRegistry('ch.supsi.StudyPlan');
+  let assetRegistry = await getAssetRegistry('ch.supsi.StudyPlan');
   await assetRegistry.remove(parameters.studyplan);
+}
+
+/**
+* Addition of a Module to a StudyPlan
+*@param {ch.supsi.AddModuleToStudyPlan} parameters
+*@transaction
+*/
+async function addModuleToStudyPlan(parameters){
+  parameters.studyplan.modules.push(parameters.module);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.StudyPlan');
+  await assetRegistry.update(parameters.studyplan);
+}
+
+/**
+* Deletion of a Module from a StudyPlan
+*@param {ch.supsi.RemoveModuleFromStudyPlan} parameters
+*@transaction
+*/
+async function removeModuleFromStudyPlan(parameters){
+  let moduleIndex = parameters.studyplan.modules.indexOf(parameters.module);
+  parameters.studyplan.modules.splice(moduleIndex,1);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.StudyPlan');
+  await assetRegistry.update(parameters.studyplan);
 }
 
 /**
@@ -266,6 +317,30 @@ async function deleteSemester(parameters){
 }
 
 /**
+* Addition of a student module (classroom) to a semester 
+*@param {ch.supsi.AddStudentModuleToSemester} parameters
+*@transaction
+*/
+async function addStudentModuleToSemester(parameters){
+  parameters.semester.modules.push(parameters.studentModule);
+  let assetRegistry = await getAssetRegistry('ch.supsi.Semester');
+  await assetRegistry.update(parameters.semester);
+}
+
+/**
+* Deletion of a student module (classroom) from a semester 
+*@param {ch.supsi.RemoveStudentModuleFromSemester} parameters
+*@transaction
+*/
+async function removeStudentModuleFromSemester(parameters){
+  let indexStudentModule = parameters.semester.modules.indexOf(parameters.studentmodule);
+  parameters.semester.modules.splice(indexStudentModule, 1);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.Semester');
+  await assetRegistry.update(parameters.semester);
+}
+
+/**
 * Creation of a Student Module (classroom)
 *@param {ch.supsi.CreateStudentModule} parameters
 *@transaction
@@ -301,6 +376,31 @@ async function updateStudentModule(parameters){
 async function deleteStudentModule(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.StudentModule');
   await assetRegistry.remove(parameters.studentmodule);
+}
+
+/**
+* Addition of a student to a studentmodule (classroom)
+*@param {ch.supsi.AddStudentToStudentModule} parameters
+*@transaction
+*/
+async function addStudentToStudentModule(parameters){
+  parameters.studentmodule.students.push(parameters.student);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.StudentModule');
+  await assetRegistry.update(parameters.studentmodule);
+}
+
+/**
+* Deletion of a student from a studentmodule (classroom)
+*@param {ch.supsi.RemoveStudentFromStudentModule} parameters
+*@transaction
+*/
+async function removeStudentFromStudentModule(parameters){
+  let indexStudent = parameters.studentmodule.students.indexOf(parameters.student);
+  parameters.studentmodule.students.splice(indexStudent, 1);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.StudentModule');
+  await assetRegistry.update(parameters.studentmodule);
 }
 
 /**
@@ -424,6 +524,31 @@ async function updateCertificationSession(parameters){
 async function deleteCertificationSession(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.CertificationSession');
   await assetRegistry.remove(parameters.certificationsession);
+}
+
+/**
+* Adds a certification to a certification session.
+*@param {ch.supsi.AddCertificationToCertificationSession} parameters
+*@transaction
+*/
+async function addCertificationToCertificationSession(parameters){
+  parameters.certificationsession.subscribers.push(parameters.certification);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.CertificationSession');
+  await assetRegistry.update(parameters.certificationsession);
+}
+
+/**
+* Deletion of a certification from a certification session.
+*@param {ch.supsi.RemoveCertificationFromCertificationSession} parameters
+*@transaction
+*/
+async function removeCertificationToCertificationSession(parameters){
+  let indexCertification = parameters.certificationsession.subscribers.indexOf(parameters.certification);
+  parameters.certificationsession.subscribers.splice(indexCertification, 1);
+  
+  let assetRegistry = await getAssetRegistry('ch.supsi.CertificationSession');
+  await assetRegistry.update(parameters.certificationsession);
 }
 
 /**
