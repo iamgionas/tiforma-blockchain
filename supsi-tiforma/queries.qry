@@ -1,3 +1,4 @@
+//STUDENT related queries
 query selectStudentByID {
   description: "Selects a student given its ID"
   statement:
@@ -6,8 +7,94 @@ query selectStudentByID {
 }
 
 query selectStudentsBySurname {
-  description: "Selects a student given its Surname"
+  description: "Selects students given a Surname"
   statement:
       SELECT ch.supsi.Student
   		WHERE (surname == _$paramSurname)
+}
+
+
+
+//COURSE related queries
+query selectCoursesByName {
+  description: "Selects courses given a Name"
+  statement:
+  	SELECT ch.supsi.Course
+  	WHERE (name == _$paramName)
+}
+
+
+
+//MODULE related queries
+query selectModulesByName{
+ description: "Selects Modules given a Name"
+  statement: 
+  	SELECT ch.supsi.Module
+ 	WHERE (name == _$paramName)
+}
+
+
+
+//STUDENTMODULE (classroom) related queries
+query selectStudentModulesByModule{
+ description: "selects studentmodules given a module"
+  statement:
+  SELECT ch.supsi.StudentModule
+  WHERE (module == _$paramModule)
+}
+
+query selectStudentModulesByModuleName{
+ description: "selects studentmodules given a module name"
+  statement:
+  SELECT ch.supsi.StudentModule
+  WHERE (module.name == _$paramModuleName)
+}
+
+
+//SEMESTER related queries
+query selectSemestersByName{
+ description: "Selects Semesters given a Name" 
+  statement:
+  SELECT ch.supsi.Semester
+  WHERE (name == _$paramName)
+}
+
+
+
+//STUDYPLAN related queries
+query selectStudyPlanByName{
+ description: "selects studyplans given a name"
+  statement:
+  SELECT ch.supsi.StudyPlan
+  WHERE (name == _$paramName)
+}
+
+
+
+//CERTIFICATION related queries
+query selectCertificationsByStudent{
+ description: "Selects all certifications obtained by the specified student."
+  statement: 
+  SELECT ch.supsi.Certification
+  WHERE (student == _$paramStudent)
+}
+
+
+
+//CERTIFICATIONSESSION related queries
+query selectCertificationSessionsByName{
+ description: "Selects certification session given a name"
+  statement:
+  SELECT ch.supsi.CertificationSession
+  WHERE (name == _$paramName)
+}
+
+
+
+//DEPARTMENT related queries
+query selectDepartmentByName {
+ description: "Selects a departments given its Name"
+  statement:
+  SELECT ch.supsi.Department
+  WHERE (name == _$paramName)
 }
