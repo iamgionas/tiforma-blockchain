@@ -1,0 +1,13 @@
+query selectStudentByID {
+  description: "Selects a student given its ID"
+  statement:
+      SELECT ch.supsi.Student
+  		WHERE (contactID == _$paramID)
+}
+
+query selectStudentsBySurname {
+  description: "Selects a student given its Surname"
+  statement:
+      SELECT ch.supsi.Student
+  		WHERE (surname == _$paramSurname)
+}
