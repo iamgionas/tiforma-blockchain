@@ -8,6 +8,7 @@ import { RestService } from '../../rest.service';
 })
 export class StudentsListComponent implements OnInit {
 
+  obj: String = 'Student';
   students: any = [];
 
   constructor(public rest: RestService) { }
@@ -17,7 +18,7 @@ export class StudentsListComponent implements OnInit {
   }
 
   getStudents(): any {
-    this.rest.getAlls('Student').subscribe((data: {}) => {
+    this.rest.getAll(this.obj).subscribe((data: {}) => {
       console.log(data);
       this.students = data;
     });

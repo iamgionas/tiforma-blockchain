@@ -1,20 +1,15 @@
 <div class="row">
   <div class="col-md-3" id="studentsColumn">
-    <h2 class="text-center mt-3 text-white">Studenti</h2>
-    <div class="row">
-      <div class="col text-center">
-        <a class="btn btn-info btn-sm" href="#" role="button">Aggiungi</a>
+    <div class="input-group mt-3">
+      <input type="text" class="form-control" placeholder="Cerca studente" aria-label="Cerca studente"
+        aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon1"><i class="material-icons">add_circle</i></span>
       </div>
     </div>
-    <!-- <form>
-      <div class="form-row mt-3">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Cerca studente">
-        </div>
-      </div>
-    </form> -->
     <ul class="list-group mt-3">
-      <li *ngFor="let p of students;" class="list-group-item list-group-item-action" [routerLink]="[p.contactID]">{{p.name + " " + p.surname}}</li>
+      <li *ngFor="let p of students;" class="list-group-item list-group-item-action" [routerLinkActive]="['active']"
+        [routerLink]="[p.contactID]">{{p.name + " " + p.surname}}</li>
     </ul>
   </div>
   <div class="col-md-9">
