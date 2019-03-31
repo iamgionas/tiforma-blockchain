@@ -1,8 +1,0 @@
-.list-group {
-  max-height: 500px;
-  overflow: scroll;
-}
-
-studentsColumn a{
-  border: 1px solid black !important;
-}
