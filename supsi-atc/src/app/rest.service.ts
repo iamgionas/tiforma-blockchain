@@ -9,6 +9,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 export class RestService {
 
   endpoint = 'http://localhost:3000/api/ch.supsi.';
+  queriesEndpoint = 'http://localhost:3000/api/queries/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -28,12 +29,28 @@ export class RestService {
   }
 
   getStudentsBySurname(surname): Observable<any>{
-    return this.http.get('http://localhost:3000/api/queries/selectStudentsBySurname?paramSurname='+surname).pipe(
+    return this.http.get(this.queriesEndpoint+'selectStudentsBySurname?paramSurname='+surname).pipe(
       map(this.extractData));
   }
 
   createStudent(student): Observable<any>{
     return this.http.post(this.endpoint+"CreateStudent",student).pipe(map(this.extractData));
+  }
+
+  getCoursesByName(courseName) : Observable<any>{
+    return this.http.get(this.queriesEndpoint+'selectCoursesByName?paramName='+courseName);
+  }
+
+  getModulesByName(moduleName) : Observable <any>{
+    return this.http.get(this.queriesEndpoint+'selectModulesByName?paramName='+moduleName);
+  }
+
+  getStudentModulesByName(studentModuleName) : Observable<any>{
+    return this.http.get(this.queriesEndpoint+'selectStudyPlanByName?paramName='+studentModuleName);
+  }
+
+  getSemestersByName(semesterName) : Observable<any>{
+    return this.http.get(this.queriesEndpoint+'selectSemestersByName?paramName='+semesterName);
   }
 
   getObject(baseType, id): Observable<any> {

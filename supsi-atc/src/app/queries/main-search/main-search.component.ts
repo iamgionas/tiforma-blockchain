@@ -37,13 +37,17 @@ export class MainSearchComponent implements OnInit {
   }
 
   find(){
+    this.getType();
+    this.getFilter();
+    this.getSearchValue();
+    
     console.log("Type: "+this.type+".\nFilter: "+this.filter+".\nSearch Value: "+this.searchValue+".");
 
     switch(this.type){
       case "Studenti": {
         switch(this.filter){
           case "Name":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
           case "Surname":{
@@ -52,7 +56,7 @@ export class MainSearchComponent implements OnInit {
             break;
           }
           case "SerialNumber":{
-
+            //Query not yet implemented back-end side.
             break;
           }
         }
@@ -61,11 +65,11 @@ export class MainSearchComponent implements OnInit {
       case "Corsi": {
         switch(this.filter){
           case "Name":{
-
+            this.rest.getCoursesByName(this.searchValue).subscribe(data => this.found = data);
             break;
           }
           case "CourseCode":{
-
+            //Query not yet implemented back-end side.
             break;
           }
         }
@@ -74,11 +78,11 @@ export class MainSearchComponent implements OnInit {
       case "Moduli": {
         switch(this.filter){
           case "Name":{
-
+            this.rest.getModulesByName(this.searchValue).subscribe(data => this.found = data);
             break;
           }
           case "ModuleCode":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
         }
@@ -87,11 +91,11 @@ export class MainSearchComponent implements OnInit {
       case "Formazioni": {
         switch(this.filter){
           case "Name":{
-
+            this.rest.getStudentModulesByName(this.searchValue).subscribe(data => this.found = data);
             break;
           }
           case "StudyPlanContainsModule":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
         }
@@ -100,11 +104,11 @@ export class MainSearchComponent implements OnInit {
       case "Semestri": {
         switch(this.filter){
           case "Name":{
-
+            this.rest.getSemestersByName(this.searchValue).subscribe(data => this.found = data);
             break;
           }
           case "SemesterContainsModule":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
         }
@@ -112,20 +116,16 @@ export class MainSearchComponent implements OnInit {
       }
       case "Certificazioni": {
         switch(this.filter){
-          case "Name":{
-
-            break;
-          }
           case "CertificationStudentName":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
           case "CertificationStudentSurname":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
           case "CertificationModule":{
-            
+            //Query not yet implemented back-end side.
             break;
           }
         }

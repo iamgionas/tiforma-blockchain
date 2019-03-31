@@ -18,7 +18,7 @@
   </div>
   <div class="row">
     <select class="col-md-4 offset-md-4" name="Filtro" id="Filter" (change)="getFilter()">
-      <option value="Name">Nome</option>
+      <option *ngIf="[type] != 'Certificazioni'" value="Name">Nome</option>
 
       <option *ngIf="[type] == 'Studenti'" value="Surname">Cognome</option>
       <option *ngIf="[type] == 'Studenti'" value="SerialNumber">Numero Matricola</option>
@@ -48,7 +48,12 @@
   <div *ngFor="let f of found" class="row">
     <div class="col-md-8 offset-2">
       <div class="resultDiv">
-        <h2 id="headingResult" class="h2 text-center">{{f.name}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Studenti'" routerLink="/students/{{f.contactID}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Corsi'" routerLink="/courses/{{f.courseCode}}">{{f.name +" "+f.courseCode}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Moduli'" routerLink="/modules/{{f.moduleCode}}">{{f.name +" "+f.moduleCode}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Formazioni'" routerLink="/formations/{{f.contactID}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Semestri'" routerLink="/semesters/{{f.name}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Certificazioni'" routerLink="/certifications/{{f.certificationID}}">{{f.name +" "+f.department}}</h2>
       </div>
     </div>
   </div>
