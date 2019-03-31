@@ -32,6 +32,10 @@ export class RestService {
       map(this.extractData));
   }
 
+  createStudent(student): Observable<any>{
+    return this.http.post(this.endpoint+"CreateStudent",student).pipe(map(this.extractData));
+  }
+
   getObject(baseType, id): Observable<any> {
     return this.http.get(this.endpoint + baseType + '/' + id).pipe(
       map(this.extractData));
@@ -70,6 +74,4 @@ export class RestService {
       catchError(this.handleError<any>('deleteProduct'))
     );
   }
-
-
 }

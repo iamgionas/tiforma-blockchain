@@ -3,14 +3,13 @@
     <h3 class="h3 col-md-4 offset-md-4 text-center">Tipo</h3>
   </div>
   <div class="row">
-    <select class="col-md-4 offset-md-4" name="Tipo" id="Tipo" (change)="getType()">
-      <option value="Studente">Studenti</option>
-      <option value="Corso">Corsi</option>
-      <option value="Modulo">Moduli</option>
-      <option value="Formazione">Formazioni</option>
-      <option value="Semestre">Semestri</option>
-      <option value="Certificazione">Certificazioni</option>
-      <option value="Dipartimento">Dipartimenti</option>
+    <select class="col-md-4 offset-md-4" name="Tipo" id="Type" (change)="getType()">
+      <option value="Studenti">Studenti</option>
+      <option value="Corsi">Corsi</option>
+      <option value="Moduli">Moduli</option>
+      <option value="Formazioni">Formazioni</option>
+      <option value="Semestri">Semestri</option>
+      <option value="Certificazioni">Certificazioni</option>
     </select>
   </div>
 
@@ -18,25 +17,39 @@
       <h3 class="h3 col-md-4 offset-md-4 text-center">Filtro</h3>
   </div>
   <div class="row">
-    <select class="col-md-4 offset-md-4" name="Filtro" id="Filtro">
+    <select class="col-md-4 offset-md-4" name="Filtro" id="Filter" (change)="getFilter()">
       <option value="Name">Nome</option>
 
-      <option *ngIf="[type] == 'Studente'" value="Surname">Cognome</option>
-      <option *ngIf="[type] == 'Studente'" value="SerialNumber">Numero Matricola</option>
+      <option *ngIf="[type] == 'Studenti'" value="Surname">Cognome</option>
+      <option *ngIf="[type] == 'Studenti'" value="SerialNumber">Numero Matricola</option>
 
-      <option *ngIf="[type] == 'Corso'" value="CourseCode">Codice corso</option>
+      <option *ngIf="[type] == 'Corsi'" value="CourseCode">Codice corso</option>
 
-      <option *ngIf="[type] == 'Modulo'" value="ModuleCode">Codice modulo</option>
+      <option *ngIf="[type] == 'Moduli'" value="ModuleCode">Codice modulo</option>
 
-      <option *ngIf="[type] == 'Semestre'" value="Module">Modulo presente</option>
+      <option *ngIf="[type] == 'Formazioni'" value="StudyPlanContainsModule">Modulo presente</option>
+
+      <option *ngIf="[type] == 'Semestri'" value="SemesterContainsModule">Modulo presente</option>
+
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationStudentName">Nome Studente</option>
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationStudentSurname">Cognome Studente</option>
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationModule">Nome Modulo certificato</option>
     </select>
   </div>
 
   <div class="row">
     <h3 class="h3 col-md-4 offset-md-4 text-center">Valore</h3>
   </div>
-  <div class="row">
-    <input class="col-md-3 offset-4" type="text">
-    <button class="btn btn-primary col-md-1">Cerca</button>
+  <div class="row mb-3">
+    <input class="col-md-3 offset-4" type="text" id="searchValue" (change)="getSearchValue()">
+    <button class="btn btn-primary col-md-1" (click)="find()">Cerca</button>
+  </div>
+
+  <div *ngFor="let f of found" class="row">
+    <div class="col-md-8 offset-2">
+      <div class="resultDiv">
+        <h2 id="headingResult" class="h2 text-center">{{f.name}}</h2>
+      </div>
+    </div>
   </div>
 </div>

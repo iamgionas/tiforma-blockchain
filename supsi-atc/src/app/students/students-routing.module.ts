@@ -15,9 +15,10 @@ const routes: Routes = [
         component: StudentDetailComponent,
       },
       {
-        path: ':create',
-        component: StudentFormComponent,
-      }]
+        path: 'create',
+        component: StudentFormComponent
+      }
+    ]
   }];
 
 @NgModule({
