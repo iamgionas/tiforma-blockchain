@@ -8,7 +8,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class RestService {
 
-  endpoint = 'http://localhost:3000/api/';
+  endpoint = 'http://localhost:3000/api/ch.supsi.';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -24,6 +24,11 @@ export class RestService {
 
   getAll(baseType): Observable<any> {
     return this.http.get(this.endpoint + baseType).pipe(
+      map(this.extractData));
+  }
+
+  getStudentsBySurname(surname): Observable<any>{
+    return this.http.get('http://localhost:3000/api/queries/selectStudentsBySurname?paramSurname='+surname).pipe(
       map(this.extractData));
   }
 

@@ -15,7 +15,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   private getCourses(){
-    this.rest.getAll('Courses').subscribe(cs => this.courses = cs);
+    this.rest.getAll('Course').subscribe(cs => this.courses = cs);
   }
 
   courses : any[];

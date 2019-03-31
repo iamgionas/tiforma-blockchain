@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col-md-3" id="studentsColumn">
     <div class="input-group mt-3">
-      <input type="text" class="form-control" placeholder="Cerca studente" aria-label="Cerca studente"
-        aria-describedby="basic-addon2">
+      <input id="studentSearch" type="text" class="form-control" placeholder="Cerca studente" aria-label="Cerca studente"
+        aria-describedby="basic-addon2" (keyup)="getStudentsBySurname()">
       <div class="input-group-append">
-        <span class="input-group-text" id="basic-addon1"><i class="material-icons">add_circle</i></span>
+        <span class="input-group-text" id="basic-addon1">
+          <i [routerLinkActive]="['active']" routerLink="create" class="material-icons">add_circle</i>
+        </span>
       </div>
     </div>
     <ul class="list-group mt-3">

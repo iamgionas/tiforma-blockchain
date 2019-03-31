@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../rest.service';
 
+import * as $ from 'jquery';
+
+
 @Component({
   selector: 'app-students-list',
   templateUrl: './students-list.component.html',
@@ -11,7 +14,8 @@ export class StudentsListComponent implements OnInit {
   obj: String = 'Student';
   students: any = [];
 
-  constructor(public rest: RestService) { }
+  constructor(public rest: RestService) { 
+  }
 
   ngOnInit() {
     this.getStudents();
@@ -24,4 +28,14 @@ export class StudentsListComponent implements OnInit {
     });
   }
 
+  getStudentsBySurname() : any{
+    let surname = $("#studentSearch").val();
+    if(surname === ""){
+      this.getStudents();
+    } else {
+      this.rest.getStudentsBySurname(surname).subscribe((data : {}) =>{
+        this.students = data;
+      })
+    }
+  } 
 }
