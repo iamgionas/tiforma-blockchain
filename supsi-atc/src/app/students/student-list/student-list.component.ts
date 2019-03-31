@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Student } from 'src/app/ch.supsi';
 import { StudentsService } from '../students.service';
 
@@ -10,12 +9,12 @@ import { StudentsService } from '../students.service';
 })
 export class StudentListComponent implements OnInit {
 
-  private students : Student[]  = [];
-  constructor(private studentsService : StudentsService) { }
+  private students: Student[] = [];
+  constructor(private studentsService: StudentsService) { }
 
   ngOnInit() {
-    this.studentsService.getStudents().subscribe((res : Student[])=>{
+    this.studentsService.getStudents().subscribe((res: Student[]) => {
       this.students = res;
-  });
+    });
   }
 }

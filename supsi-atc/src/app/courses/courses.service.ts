@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http/';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentsService {
+export class CoursesService {
 
-  baseUrl : string = "http://localhost:3000/api/Student";
+  baseUrl : string = "http://localhost:3000/api/Course";
 
   constructor(private httpClient : HttpClient) { }
 
-  getStudents(){
+  getCourses(){
     return this.httpClient.get(this.baseUrl);
   }
 
-  getStudent(id : number){
+  getCourse(id : number){
     return this.httpClient.get(this.baseUrl + '/' + id);
   }
 
-  updateStudent(id, studentData){
-    return this.httpClient.put(this.baseUrl + '/' + id, studentData);
+  updateCourse(id, courseData){
+    return this.httpClient.put(this.baseUrl + '/' + id, courseData);
   }
 
-  deleteStudent(id : number) {
+  deleteCourse(id : number) {
     return this.httpClient.delete(this.baseUrl + '/' + id);
   }
 

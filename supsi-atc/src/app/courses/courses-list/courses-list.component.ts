@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from 'src/app/rest.service';
+import { CoursesService } from '../courses.service';
+import { Course } from 'src/app/ch.supsi';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,15 +9,12 @@ import { RestService } from 'src/app/rest.service';
 })
 export class CoursesListComponent implements OnInit {
 
-  constructor(private rest : RestService) { }
+  private courses: Course[] = [];
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.getCourses();
+    this.coursesService.getCourses().subscribe((res: Course[]) => {
+      this.courses = res;
+    });
   }
-
-  private getCourses(){
-    this.rest.getAll('Courses').subscribe(cs => this.courses = cs);
-  }
-
-  courses : any[];
 }

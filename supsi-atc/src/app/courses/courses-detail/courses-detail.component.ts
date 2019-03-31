@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RestService } from 'src/app/rest.service';
-import { Route, ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CoursesService } from '../courses.service';
+import { Course } from 'src/app/ch.supsi';
 
 @Component({
   selector: 'app-courses-detail',
@@ -9,23 +10,44 @@ import { Route, ActivatedRoute, Router } from '@angular/router';
 })
 export class CoursesDetailComponent implements OnInit {
 
-  @Input() courseData: any = { courseCode: '', name: ''};
+  private course: Course;
 
-  constructor(private rest : RestService, private route : ActivatedRoute, private router : Router) { }
+  @Input() courseData: any = {
+    $class: 'ch.supsi.Course',
+    courseCode: '',
+    name: ''
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private coursesService: CoursesService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params : any) => {
-      if(params.id){
-        this.rest.getObject('Courses',params.id).subscribe((c) => this.course = c);
+    this.route.params.subscribe((params: any) => {
+      if (params.id) {
+        this.coursesService.getCourse(this.route.snapshot.params['id']).subscribe((data: Course) => {
+          console.log(data);
+          this.course = data;
+
+          this.courseData.courseCode = this.course.courseCode;
+          this.courseData.name = this.course.name;
+        });
       }
     })
   }
 
-  course : any;
+  updateCourse() {
+    this.coursesService.updateCourse(this.route.snapshot.params['id'], this.courseData).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
-  modifyCourse(){
-    this.rest.updateObject('Courses', this.route.snapshot.params['id'], this.courseData).subscribe((result) => {
-      this.router.navigate([result.courseCode]);
+  deleteCourse() {
+    this.coursesService.deleteCourse(this.route.snapshot.params['id']).subscribe((result) => {
+      window.location.reload();
     }, (err) => {
       console.log(err);
     });
