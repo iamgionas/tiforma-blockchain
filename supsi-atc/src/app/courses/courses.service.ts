@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http/';
 export class CoursesService {
 
   baseUrl : string = "http://localhost:3000/api/Course";
+  createUrl : string = "http://localhost:3000/api/CreateCourse";
 
   constructor(private httpClient : HttpClient) { }
 
@@ -24,6 +25,10 @@ export class CoursesService {
 
   deleteCourse(id : number) {
     return this.httpClient.delete(this.baseUrl + '/' + id);
+  }
+
+  createCourse(courseData){
+    return this.httpClient.post(this.createUrl, courseData);
   }
 
 }

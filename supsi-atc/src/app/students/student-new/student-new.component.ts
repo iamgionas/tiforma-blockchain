@@ -1,0 +1,49 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { StudentsService } from '../students.service';
+
+@Component({
+  selector: 'app-student-new',
+  templateUrl: './student-new.component.html',
+  styleUrls: ['./student-new.component.css']
+})
+export class StudentNewComponent implements OnInit {
+
+  statuteValues = [
+    "Mai immatricolato",
+    "Immatricolato",
+    "Exmatricolato",
+    "Ospite"
+  ]
+
+  @Input() studentData: any = {
+    $class: 'ch.supsi.CreateStudent',
+    contactID: '',
+    statute: '',
+    serialNumber: '',
+    name: '',
+    surname: '',
+    birthday: new Date(),
+    nationality: '',
+    comment: '',
+    transactionId: ''
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private studentsService: StudentsService) { }
+
+  ngOnInit() {
+
+  }
+
+  createStudent(){
+    this.studentData.contactID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    this.studentsService.createStudent(this.studentData).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+}

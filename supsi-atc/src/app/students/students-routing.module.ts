@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { StudentNewComponent } from './student-new/student-new.component';
 
 const routes: Routes = [
   {
@@ -10,9 +11,14 @@ const routes: Routes = [
     component: StudentListComponent,
     children: [
       {
+        path: 'new',
+        component: StudentNewComponent
+      },
+      {
         path: ':id',
         component: StudentDetailComponent,
-      }]
+      }
+      ]
   }];
 
 @NgModule({

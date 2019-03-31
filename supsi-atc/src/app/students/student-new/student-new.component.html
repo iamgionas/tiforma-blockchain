@@ -1,0 +1,45 @@
+<div class="bg-light rounded p-3 mt-5">
+  <h1>Nuovo Studente</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-6">
+      <label for="serialNumber">Numero Matricola</label>
+      <input [(ngModel)]="studentData.serialNumber" type="text" class="form-control" id="serialNumber"
+        placeholder="Nr. Matricola">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="statute">Statuto</label>
+      <select [(ngModel)]="studentData.statute" class="form-control" id="statute">
+        <option *ngFor="let v of statuteValues" [ngValue]="v">{{v}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Name</label>
+      <input [(ngModel)]="studentData.name" type="text" class="form-control" id="name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="surname">Surname</label>
+      <input [(ngModel)]="studentData.surname" type="text" class="form-control" id="surname">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="birthday">Anno di Nascita</label>
+      <input [(ngModel)]="studentData.birthday" type="date" class="form-control" id="birthday">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="nationality">Nazionalità</label>
+      <input [(ngModel)]="studentData.nationality" type="date" class="form-control" id="birthday">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="comment">Commento</label>
+      <textarea [(ngModel)]="studentData.comment" class="form-control" id="comment"></textarea>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button (click)="createStudent()" type="button" class="btn btn-outline-success">Crea</button>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="bg-light rounded p-3 mt-5">
+  <h1>Nuovo Corso</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-6">
+      <label for="courseCode">Codice del corso</label>
+      <input disabled [(ngModel)]="courseData.courseCode" type="text" class="form-control" id="courseCode"
+        placeholder="Codice corso">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Nome corso</label>
+      <input [(ngModel)]="courseData.name" type="text" class="form-control" id="name">
+    </div>
+  </div>
+  <div class="btn-group">
+    <button (click)="createCourse()" type="button" class="btn btn-outline-success">Salva</button>
+  </div>
+</div>
