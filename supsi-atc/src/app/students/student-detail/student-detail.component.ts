@@ -33,8 +33,7 @@ export class StudentDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private studentsService: StudentsService
-    ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((parms: any) => {
