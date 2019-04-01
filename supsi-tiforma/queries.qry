@@ -6,11 +6,25 @@ query selectStudentByID {
   		WHERE (contactID == _$paramID)
 }
 
+query selectStudentByName {
+  description: "Selects students given a Name"
+  statement:
+  	SELECT ch.supsi.Student
+  	WHERE (name == _$paramName)
+}
+
 query selectStudentsBySurname {
   description: "Selects students given a Surname"
   statement:
       SELECT ch.supsi.Student
   		WHERE (surname == _$paramSurname)
+}
+
+query selectStudentBySerialNumber {
+ description: "Selects a student that has the given serial number. Note that SerialNumbers are unique (max 1 student is returned"
+  statement:
+  SELECT ch.supsi.Student
+  WHERE (serialNumber == _$paramSerialNumber)
 }
 
 
@@ -23,6 +37,13 @@ query selectCoursesByName {
   	WHERE (name == _$paramName)
 }
 
+query selectCoursesByCourseCode {
+  description: "Selects courses given a Code"
+  statement:
+  	SELECT ch.supsi.Course
+  	WHERE (courseCode == _$paramCourseCode)
+}
+
 
 
 //MODULE related queries
@@ -31,6 +52,13 @@ query selectModulesByName{
   statement: 
   	SELECT ch.supsi.Module
  	WHERE (name == _$paramName)
+}
+
+query selectModulesByModuleCode{
+ description: "Selects Modules given a Code"
+  statement: 
+  	SELECT ch.supsi.Module
+ 	WHERE (moduleCode == _$paramModuleCode)
 }
 
 
@@ -51,6 +79,7 @@ query selectStudentModulesByModuleName{
 }
 
 
+
 //SEMESTER related queries
 query selectSemestersByName{
  description: "Selects Semesters given a Name" 
@@ -60,6 +89,13 @@ query selectSemestersByName{
 }
 
 
+query selectSemestersByModule{
+ description: "Selects Semesters that contains the specified module" 
+  statement:
+  SELECT ch.supsi.Semester
+  WHERE (modules CONTAINS [_$paramModule])
+}
+
 
 //STUDYPLAN related queries
 query selectStudyPlanByName{
@@ -67,6 +103,13 @@ query selectStudyPlanByName{
   statement:
   SELECT ch.supsi.StudyPlan
   WHERE (name == _$paramName)
+}
+
+query selectStudyPlanByModule{
+ description: "Finds all studyplans that contain the specified module"
+  statement:
+  SELECT ch.supsi.StudyPlan
+  WHERE (modules CONTAINS [_$paramModule])
 }
 
 
@@ -79,6 +122,34 @@ query selectCertificationsByStudent{
   WHERE (student == _$paramStudent)
 }
 
+
+query selectCertificationsByStudentName{
+ description: "Selects all certifications obtained by any student with a certain name."
+  statement: 
+  SELECT ch.supsi.Certification
+  WHERE (student.name == _$paramStudentName)
+}
+
+query selectCertificationsByStudentSurame{
+ description: "Selects all certifications obtained by any student with a certain family name."
+  statement: 
+  SELECT ch.supsi.Certification
+  WHERE (student.surname == _$paramStudentSurname)
+}
+
+query selectCertificationsByModuleName{
+ description: "Selects all certifications in a specified module specified by the name."
+  statement: 
+  SELECT ch.supsi.Certification
+  WHERE (module.name == _$paramModuleName)
+}
+
+query selectCertificationsByModuleCode{
+ description: "Selects all certifications in a specified module specified by the module code."
+  statement: 
+  SELECT ch.supsi.Certification
+  WHERE (module.moduleCode == _$paramModuleCode)
+}
 
 
 //CERTIFICATIONSESSION related queries
