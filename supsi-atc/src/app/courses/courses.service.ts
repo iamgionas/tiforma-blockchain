@@ -15,7 +15,7 @@ export class CoursesService {
     return this.httpClient.get(this.baseUrl);
   }
 
-  getCourse(id : number){
+  getCourse(id){
     return this.httpClient.get(this.baseUrl + '/' + id);
   }
 
@@ -23,7 +23,7 @@ export class CoursesService {
     return this.httpClient.put(this.baseUrl + '/' + id, courseData);
   }
 
-  deleteCourse(id : number) {
+  deleteCourse(id) {
     return this.httpClient.delete(this.baseUrl + '/' + id);
   }
 

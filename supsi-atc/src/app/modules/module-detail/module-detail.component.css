@@ -1,0 +1,21 @@
+.deleteCourse {
+  right: 0;
+  position: absolute;
+  margin-right: 15px;
+  color: #ff0000 !important;
+}
+
+.deleteCourse:hover{
+  cursor: pointer;
+  color: #962222 !important;
+}
+
+#addCourse{
+  color: #17b41fc7;
+}
+
+#addCourse:hover{
+  cursor: pointer;
+  color: #128f18c7;
+}
+

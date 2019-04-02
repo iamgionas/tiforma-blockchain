@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CoursesService } from '../courses/courses.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,19 @@ export class ModulesService {
     return this.httpClient.get(this.baseUrl + '/' + id);
   }
 
+  updateModule(id, moduleData){
+    return this.httpClient.put(this.baseUrl + '/' + id, moduleData);
+  }
+
+  deleteModule(id) {
+    return this.httpClient.delete(this.baseUrl + '/' + id);
+  }
+
   getDepartments(){
     return this.httpClient.get('http://localhost:3000/api/Department');
   }
 
-  updateModule(id, moduleData){
-    return this.httpClient.put(this.baseUrl + '/' + id, moduleData);
+  deleteCourse(data){
+    return this.httpClient.post("http://localhost:3000/api/RemoveCourseFromModule", data);
   }
 }
