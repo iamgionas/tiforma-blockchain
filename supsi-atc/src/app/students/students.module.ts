@@ -6,7 +6,6 @@ import { StudentsRoutingModule } from './students-routing.module';
 
 import { StudentListComponent } from './student-list/student-list.component'
 import { StudentDetailComponent } from './student-detail/student-detail.component';
-<<<<<<< HEAD
 import { StudentNewComponent } from './student-new/student-new.component';
 
 @NgModule({
@@ -14,15 +13,6 @@ import { StudentNewComponent } from './student-new/student-new.component';
     StudentListComponent,
     StudentDetailComponent,
     StudentNewComponent
-=======
-import {StudentFormComponent} from './student-form/student-form.component';
-
-@NgModule({
-  declarations: [
-    StudentsListComponent,
-    StudentDetailComponent,
-    StudentFormComponent
->>>>>>> front-end-queries
   ],
   imports: [
     CommonModule,
