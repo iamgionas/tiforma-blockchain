@@ -14,7 +14,7 @@ export class ModuleDetailComponent implements OnInit {
   private departmentList : Department[];
   @Input() moduleData: any = {
     $class: 'ch.supsi.Module',
-    moduleCode: '',
+    //moduleCode: '',
     name: '',
     duration: '',
     ETCS: '',
@@ -23,7 +23,7 @@ export class ModuleDetailComponent implements OnInit {
     responsables: [''],
     englishName: '',
     comment: '',
-    course: [''],
+    courses: [''],
   };
 
   constructor(
@@ -39,17 +39,27 @@ export class ModuleDetailComponent implements OnInit {
         });
         this.modulesService.getModule(this.route.snapshot.params['id']).subscribe((data: Module) => {
           this.module = data;
-          this.moduleData.moduleCode = this.module.moduleCode;
+          //this.moduleData.moduleCode = this.module.moduleCode;
           this.moduleData.name = this.module.name;
           this.moduleData.duration = this.module.duration;
           this.moduleData.ETCS = this.module.ETCS;
           this.moduleData.department = this.module.department.toString().split('#')[1];
           this.moduleData.state = this.module.state;
           this.moduleData.comment = this.module.comment;
+          this.moduleData.responsables = this.module.responsables;
+          this.moduleData.courses = this.module.courses;
         });
         
       }
     })
+  }
+
+  updateModule() {
+    this.modulesService.updateModule(this.route.snapshot.params['id'], this.moduleData).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

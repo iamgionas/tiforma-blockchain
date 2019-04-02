@@ -15,11 +15,15 @@ export class ModulesService {
     return this.httpClient.get(this.baseUrl);
   }
 
-  getModule(id : number){
+  getModule(id){
     return this.httpClient.get(this.baseUrl + '/' + id);
   }
 
   getDepartments(){
     return this.httpClient.get('http://localhost:3000/api/Department');
+  }
+
+  updateModule(id, moduleData){
+    return this.httpClient.put(this.baseUrl + '/' + id, moduleData);
   }
 }
