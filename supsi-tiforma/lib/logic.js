@@ -53,7 +53,7 @@ async function updateStudent(parameters){
  */
 async function deleteStudent(parameters){
   let participantsRegistry = await getParticipantRegistry('ch.supsi.Student');
-  await participantsRegistry.remove(parameters.student);
+  await participantsRegistry.remove(parameters.student.contactID);
 }
 
 
@@ -90,7 +90,7 @@ async function updateDepartment(parameters){
 */
 async function deleteDepartment(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Department');
-  await assetRegistry.remove(parameters.department);
+  await assetRegistry.remove(parameters.department.name);
 }
 
 
@@ -128,7 +128,7 @@ async function updateCourse(parameters){
 */
 async function DeleteCourse(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Course');
-  await assetRegistry.remove(parameters.course);
+  await assetRegistry.remove(parameters.course.courseCode);
 }
 
 /**
@@ -180,7 +180,7 @@ async function updateModule(parameters){
 */
 async function deleteModule(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Module');
-  await assetRegistry.remove(parameters.module);
+  await assetRegistry.remove(parameters.module.moduleCode);
 }
 
 /**
@@ -249,7 +249,7 @@ async function updateStudyPlan(parameters){
 */
 async function deleteStudyPlan(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.StudyPlan');
-  await assetRegistry.remove(parameters.studyplan);
+  await assetRegistry.remove(parameters.studyplan.name);
 }
 
 /**
@@ -313,7 +313,7 @@ async function updateSemester(parameters){
 */
 async function deleteSemester(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Semester');
-  await assetRegistry.remove(parameters.semester);
+  await assetRegistry.remove(parameters.semester.name);
 }
 
 /**
@@ -375,7 +375,7 @@ async function updateStudentModule(parameters){
 */
 async function deleteStudentModule(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.StudentModule');
-  await assetRegistry.remove(parameters.studentmodule);
+  await assetRegistry.remove(parameters.studentmodule.studentModuleID);
 }
 
 /**
@@ -477,7 +477,7 @@ async function updateCertification(parameters){
 */
 async function deleteCertification(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Certification');
-  await assetRegistry.remove(parameters.certification);
+  await assetRegistry.remove(parameters.certification.certificationID);
 }
 
 /**
@@ -523,7 +523,7 @@ async function updateCertificationSession(parameters){
 */
 async function deleteCertificationSession(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.CertificationSession');
-  await assetRegistry.remove(parameters.certificationsession);
+  await assetRegistry.remove(parameters.certificationsession.name);
 }
 
 /**
