@@ -24,6 +24,7 @@ export class CoursesNewComponent implements OnInit {
 
   createCourse() {
     this.courseData.courseCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    console.log(this.courseData);
     this.coursesService.createCourse(this.courseData).subscribe((result) => {
       window.location.reload();
     }, (err) => {

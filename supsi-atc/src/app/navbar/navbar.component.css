@@ -71,10 +71,10 @@
 }
 
 #navbar-content-items a:hover {
-  background-color: #70a1ff;
+  background-color: #d8d8d860;
 }
 
 #navbar-content-items .active {
   background-color: white !important;
-  color: #007bff !important;
+  color: #000000 !important;
 }
