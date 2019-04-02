@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <h3 class="h3 col-md-4 offset-md-4 text-center">Tipo</h3>
+  </div>
+  <div class="row">
+    <select class="col-md-4 offset-md-4" name="Tipo" id="Type" (change)="getType()">
+      <option value="Studenti">Studenti</option>
+      <option value="Corsi">Corsi</option>
+      <option value="Moduli">Moduli</option>
+      <option value="Formazioni">Formazioni</option>
+      <option value="Semestri">Semestri</option>
+      <option value="Certificazioni">Certificazioni</option>
+    </select>
+  </div>
+
+  <div class="row">
+      <h3 class="h3 col-md-4 offset-md-4 text-center">Filtro</h3>
+  </div>
+  <div class="row">
+    <select class="col-md-4 offset-md-4" name="Filtro" id="Filter" (change)="getFilter()">
+      <option *ngIf="[type] != 'Certificazioni'" value="Name">Nome</option>
+
+      <option *ngIf="[type] == 'Studenti'" value="Surname">Cognome</option>
+      <option *ngIf="[type] == 'Studenti'" value="SerialNumber">Numero Matricola</option>
+
+      <option *ngIf="[type] == 'Corsi'" value="CourseCode">Codice corso</option>
+
+      <option *ngIf="[type] == 'Moduli'" value="ModuleCode">Codice modulo</option>
+
+      <option *ngIf="[type] == 'Formazioni'" value="StudyPlanContainsModule">Modulo presente</option>
+
+      <option *ngIf="[type] == 'Semestri'" value="SemesterContainsModule">Modulo presente</option>
+
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationStudentName">Nome Studente</option>
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationStudentSurname">Cognome Studente</option>
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationModule">Nome Modulo certificato</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <h3 class="h3 col-md-4 offset-md-4 text-center">Valore</h3>
+  </div>
+  <div class="row mb-3">
+    <input class="col-md-3 offset-4" type="text" id="searchValue" (change)="getSearchValue()">
+    <button class="btn btn-primary col-md-1" (click)="find()">Cerca</button>
+  </div>
+
+  <div *ngFor="let f of found" class="row">
+    <div class="col-md-8 offset-2">
+      <div class="resultDiv">
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Studenti'" routerLink="/students/{{f.contactID}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Corsi'" routerLink="/courses/{{f.courseCode}}">{{f.name +" "+f.courseCode}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Moduli'" routerLink="/modules/{{f.moduleCode}}">{{f.name +" "+f.moduleCode}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Formazioni'" routerLink="/formations/{{f.contactID}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Semestri'" routerLink="/semesters/{{f.name}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Certificazioni'" routerLink="/certifications/{{f.certificationID}}">{{f.name +" "+f.department}}</h2>
+      </div>
+    </div>
+  </div>
+</div>
