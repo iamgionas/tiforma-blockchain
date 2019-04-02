@@ -26,10 +26,7 @@ update_course_body(){
     cat <<EOF
 {
   "oldCourse": "resource:ch.supsi.Course#TEST-COURSE-CODE",
-  "newCourse": {
-      "courseCode" : "TEST-COURSE-CODE",
-      "name" : "TEST-COURSE-NAME-2"
-  }
+  "name" : "TEST-COURSE-NAME-2"
 }
 EOF
 }
