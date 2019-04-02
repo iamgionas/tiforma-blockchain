@@ -33,15 +33,14 @@ async function createStudent(parameters){
 async function updateStudent(parameters){
   let participantsRegistry = await getParticipantRegistry('ch.supsi.Student');
   
-  parameters.oldStudent.name = parameters.newStudent.name;
-  parameters.oldStudent.surname = parameters.newStudent.surname;
-  parameters.oldStudent.birthday = parameters.newStudent.birthday;
-  parameters.oldStudent.nationality = parameters.newStudent.nationality;
-  parameters.oldStudent.addresses = parameters.newStudent.addresses;
-  parameters.oldStudent.statute = parameters.newStudent.statute; 
-  parameters.oldStudent.serialNumber = parameters.newStudent.serialNumber;
-  parameters.oldStudent.comment = parameters.newStudent.comment;
-  parameters.oldStudent.studyPlan = parameters.newStudent.studyPlan; 
+  parameters.oldStudent.surname = parameters.surname;
+  parameters.oldStudent.birthday = parameters.birthday;
+  parameters.oldStudent.nationality = parameters.nationality;
+  parameters.oldStudent.addresses = parameters.addresses;
+  parameters.oldStudent.statute = parameters.statute; 
+  parameters.oldStudent.serialNumber = parameters.serialNumber;
+  parameters.oldStudent.comment = parameters.comment;
+  parameters.oldStudent.studyPlan = parameters.studyPlan; 
   
   await participantsRegistry.update(parameters.oldStudent);
 }
@@ -70,11 +69,11 @@ async function createDepartment(parameters){
   await assetRegistry.add(newDepartment);
 }
 
-/**
+/*      NOT IMPLEMENTED ANYMORE since department has only it's ID as attribute and cannot be mutated.
 * Update of a department
 *@param {ch.supsi.UpdateDepartment} parameters
 *@transaction
-*/
+
 async function updateDepartment(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Department');
   
@@ -82,6 +81,8 @@ async function updateDepartment(parameters){
   
   await assetRegistry.update(parameters.oldDepartment);
 }
+*/
+
 
 /**
 * Deletion of a department
@@ -114,8 +115,8 @@ async function createCourse(parameters){
 *@transaction
 */
 async function updateCourse(parameters){
-  parameters.oldCourse.courseCode = parameters.newCourse.courseCode;
-  parameters.oldCourse.name = parameters.newCourse.name;
+  
+  parameters.oldCourse.name = parameters.name;
   
   let assetRegistry = await getAssetRegistry('ch.supsi.Course');
   await assetRegistry.update(parameters.oldCourse);
@@ -158,16 +159,16 @@ async function createModule(parameters){
 *@transaction
 */
 async function updateModule(parameters){
-  parameters.oldModule.moduleCode = parameters.newModule.moduleCode;
-  parameters.oldModule.name = parameters.newModule.name;
-  parameters.oldModule.duration = parameters.newModule.duration;
-  parameters.oldModule.ETCS = parameters.newModule.ETCS;
-  parameters.oldModule.department = parameters.newModule.department;
-  parameters.oldModule.responsables = parameters.newModule.responsables;
-  parameters.oldModule.englishName = parameters.newModule.englishName;
-  parameters.oldModule.comment = parameters.newModule.comment;
-  parameters.oldModule.courses = parameters.newModule.courses;
-  parameters.oldModule.state = parameters.newModule.state;
+  
+  parameters.oldModule.name = parameters.name;
+  parameters.oldModule.duration = parameters.duration;
+  parameters.oldModule.ETCS = parameters.ETCS;
+  parameters.oldModule.department = parameters.department;
+  parameters.oldModule.responsables = parameters.responsables;
+  parameters.oldModule.englishName = parameters.englishName;
+  parameters.oldModule.comment = parameters.comment;
+  parameters.oldModule.courses = parameters.courses;
+  parameters.oldModule.state = parameters.state;
   
   let assetRegistry = await getAssetRegistry('ch.supsi.Module');
   await assetRegistry.update(parameters.oldModule);
@@ -232,11 +233,11 @@ async function createStudyPlan(parameters){
 *@transaction
 */
 async function updateStudyPlan(parameters){
-  parameters.oldStudyPlan.name = parameters.newStudyPlan.name;
-  parameters.oldStudyPlan.departement = parameters.newStudyPlan.departement;
-  parameters.oldStudyPlan.state = parameters.newStudyPlan.state;
-  parameters.oldStudyPlan.comment = parameters.newStudyPlan.comment;
-  parameters.oldStudyPlan.modules = parameters.newStudyPlan.modules;
+  
+  parameters.oldStudyPlan.departement = parameters.departement;
+  parameters.oldStudyPlan.state = parameters.state;
+  parameters.oldStudyPlan.comment = parameters.comment;
+  parameters.oldStudyPlan.modules = parameters.modules;
   
   let assetRegistry = await getAssetRegistry('ch.supsi.StudyPlan');
   await assetRegistry.update(parameters.oldStudyPlan);
@@ -298,9 +299,9 @@ async function createSemester(parameters){
 *@transaction
 */
 async function updateSemester(parameters){
-  parameters.oldSemester.name = parameters.newSemester.name;
-  parameters.oldSemester.description = parameters.newSemester.description;
-  parameters.oldSemester.modules = parameters.newSemester.modules;
+  
+  parameters.oldSemester.description = parameters.description;
+  parameters.oldSemester.modules = parameters.modules;
   
   let assetRegistry = await getAssetRegistry('ch.supsi.Semester');
   await assetRegistry.update(parameters.oldSemester);
@@ -360,9 +361,9 @@ async function createStudentModule(parameters){
 *@transaction
 */
 async function updateStudentModule(parameters){
-  parameters.oldStudentModule.studentModuleID = parameters.newStudentModule.studentModuleID;
-  parameters.oldStudentModule.module = parameters.newStudentModule.module;
-  parameters.oldStudentModule.students = parameters.newStudentModule.students;
+  
+  parameters.oldStudentModule.module = parameters.module;
+  parameters.oldStudentModule.students = parameters.students;
   
   let assetRegistry = await getAssetRegistry('ch.supsi.StudentModule');
   await assetRegistry.update(parameters.oldStudentModule);
@@ -449,22 +450,23 @@ async function updateCertification(parameters){
   let subscribed = false;
   
   for(let sm of studentModules){
-    if(sm.module.$identifier == parameters.newCertification.module.$identifier){
+    if(sm.module.$identifier == parameters.module.$identifier){
       for(let i = 0; i<sm.students.length; i++){
-		if(sm.students[i].$identifier == parameters.newCertification.$identifier){
+		    if(sm.students[i].$identifier == parameters.student.$identifier){
            subscribed = true;
         }
       }
   	}
   }
   
-  if(!subscribed)
+  if(!subscribed){
+    console.log("NOT SUBSCRIBED");
     return;
-  
-  parameters.oldCertification.certificationID = parameters.newCertification.certificationID;
-  parameters.oldCertification.module = parameters.newCertification.module;
-  parameters.oldCertification.student = parameters.newCertification.student;
-  parameters.oldCertification.grade = parameters.newCertification.grade;
+  }
+    
+  parameters.oldCertification.module = parameters.module;
+  parameters.oldCertification.student = parameters.student;
+  parameters.oldCertification.grade = parameters.grade;
   
   let assetRegistry = await getAssetRegistry('ch.supsi.Certification');
   await assetRegistry.update(parameters.oldCertification);
@@ -472,7 +474,7 @@ async function updateCertification(parameters){
 
 /**
 * Deletion of a Certification
-*@param {ch.supsi.UpdateCertification} parameters
+*@param {ch.supsi.DeleteCertification} parameters
 *@transaction
 */
 async function deleteCertification(parameters){
@@ -504,12 +506,12 @@ async function createCertificationSession(parameters){
 *@transaction
 */
 async function updateCertificationSession(parameters){
-  parameters.oldCertificationSession.name = parameters.newCertificationSession.newCertificationSession.name;
-  parameters.oldCertificationSession.department = parameters.newCertificationSession.department;
-  parameters.oldCertificationSession.semester = parameters.newCertificationSession.semester;
-  parameters.oldCertificationSession.title = parameters.newCertificationSession.title;
-  parameters.oldCertificationSession.date = parameters.newCertificationSession.date;
-  parameters.oldCertificationSession.subscribers = parameters.newCertificationSession.subscribers;
+  
+  parameters.oldCertificationSession.department = parameters.department;
+  parameters.oldCertificationSession.semester = parameters.semester;
+  parameters.oldCertificationSession.title = parameters.title;
+  parameters.oldCertificationSession.date = parameters.date;
+  parameters.oldCertificationSession.subscribers = parameters.subscribers;
   
   
   let assetRegistry = await getAssetRegistry('ch.supsi.CertificationSession');

@@ -51,7 +51,15 @@ transaction CreateStudent{
 
 transaction UpdateStudent{
  --> Student oldStudent
- o Student newStudent
+  o String name
+  o String surname
+  o Address[] addresses	
+  o DateTime birthday
+  o String nationality
+  o String statute
+  o String serialNumber
+  o String comment
+  --> StudyPlan studyPlan
 }
 
 transaction DeleteStudent{
@@ -73,12 +81,12 @@ asset Department identified by name {
 transaction CreateDepartment{
   o String name
 }
-
+/*
 transaction UpdateDepartment{
   --> Department oldDepartment
-  o Department newDepartment
+  
 }
-
+*/
 transaction DeleteDepartment{
   --> Department department
 }
@@ -95,7 +103,7 @@ transaction CreateCourse {
 
 transaction UpdateCourse{
  --> Course oldCourse
- o Course newCourse
+ o String name
 }
 
 transaction DeleteCourse{
@@ -130,7 +138,15 @@ asset Module identified by moduleCode {
 
 transaction UpdateModule{
  -->Module oldModule
- o Module newModule
+  o String name
+  o Integer duration
+  o Integer ETCS
+  --> Department department
+  o String state
+  --> Collaborator[] responsables
+  o String englishName
+  o String comment
+  --> Course[] courses
 }
 
 transaction DeleteModule{
@@ -165,7 +181,10 @@ transaction CreateStudyPlan {
 
 transaction UpdateStudyPlan{
   -->StudyPlan oldStudyPlan
-  o StudyPlan newStudyPlan
+  --> Department departement
+  o String state
+  o String comment
+  --> Module[] modules
 }
 
 transaction DeleteStudyPlan{
@@ -196,7 +215,8 @@ transaction CreateSemester {
 
 transaction UpdateSemester{
   --> Semester oldSemester
-  o Semester newSemester
+  o String description
+  --> StudentModule[] modules
 }
 
 transaction DeleteSemester{
@@ -227,7 +247,8 @@ transaction CreateStudentModule {
 
 transaction UpdateStudentModule{
   --> StudentModule oldStudentModule
-  o StudentModule newStudentModule
+  --> Module module
+  --> Student[] students
 }
 
 transaction DeleteStudentModule{
@@ -260,7 +281,9 @@ transaction CreateCertification {
 
 transaction UpdateCertification{
   --> Certification oldCertification
-  o	Certification newCertification
+  --> Module module
+  --> Student student
+  o Double grade
 }
 
 transaction DeleteCertification{
@@ -288,7 +311,11 @@ transaction CreateCertificationSession {
 
 transaction UpdateCertificationSession{
   --> CertificationSession oldCertificationSession
-  o CertificationSession newCertificationSession
+  --> Department department
+  --> Semester semester
+  o String title
+  o DateTime date
+  --> Certification[] subscribers
 }
 
 transaction DeleteCertificationSession{

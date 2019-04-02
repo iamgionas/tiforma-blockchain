@@ -27,7 +27,7 @@ update_course_body(){
 {
   "oldCourse": "resource:ch.supsi.Course#TEST-COURSE-CODE",
   "newCourse": {
-      "courseCode" : "TEST-COURSE-MODIFIED",
+      "courseCode" : "TEST-COURSE-CODE",
       "name" : "TEST-COURSE-NAME-2"
   }
 }
@@ -37,7 +37,7 @@ EOF
 delete_course_body(){
     cat <<EOF
 {
-  "course": "resource:ch.supsi.Course#TEST-COURSE-MODIFIED"
+  "course": "resource:ch.supsi.Course#TEST-COURSE-CODE"
 }
 EOF
 }
