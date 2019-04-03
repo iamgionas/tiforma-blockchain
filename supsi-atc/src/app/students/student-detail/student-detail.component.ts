@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from 'src/app/ch.supsi';
 import { StudentsService } from '../students.service';
 
@@ -11,6 +11,7 @@ import { StudentsService } from '../students.service';
 export class StudentDetailComponent implements OnInit {
 
   private student: Student;
+  private birthday: string;
 
   statuteValues = [
     "Mai immatricolato",
@@ -27,11 +28,13 @@ export class StudentDetailComponent implements OnInit {
     surname: '',
     birthday: '',
     nationality: '',
-    comment: ''
+    comment: '',
+    studyPlan: 'resource:ch.supsi.StudyPlan#NULL'
   };
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private studentsService: StudentsService
   ) { }
 
@@ -55,6 +58,8 @@ export class StudentDetailComponent implements OnInit {
   }
 
   updateStudent() {
+    this.studentData.birthday = new Date(this.birthday);
+    
     this.studentsService.updateStudent(this.route.snapshot.params['id'], this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -68,6 +73,10 @@ export class StudentDetailComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+  updateData(event){
+    this.birthday = event;
   }
 
 }

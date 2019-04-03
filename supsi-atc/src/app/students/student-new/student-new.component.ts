@@ -9,6 +9,7 @@ import { StudentsService } from '../students.service';
 })
 export class StudentNewComponent implements OnInit {
 
+  private birthday: string;
   statuteValues = [
     "Mai immatricolato",
     "Immatricolato",
@@ -26,7 +27,8 @@ export class StudentNewComponent implements OnInit {
     birthday: new Date(),
     nationality: '',
     comment: '',
-    transactionId: ''
+    transactionId: '',
+    studyPlan: 'resource:ch.supsi.StudyPlan#NULL',
   };
 
   constructor(
@@ -39,11 +41,17 @@ export class StudentNewComponent implements OnInit {
 
   createStudent(){
     this.studentData.contactID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    this.studentData.birthday = new Date(this.birthday);
     this.studentsService.createStudent(this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
     });
   }
+
+  updateData(event){
+    this.birthday = event;
+  }
+
 
 }

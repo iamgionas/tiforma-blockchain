@@ -28,11 +28,19 @@ export class ModulesService {
     return this.httpClient.delete(this.baseUrl + '/' + id);
   }
 
+  createModule(moduleData){
+    return this.httpClient.post(this.createUrl, moduleData);
+  }
+
   getDepartments(){
     return this.httpClient.get('http://localhost:3000/api/Department');
   }
 
   deleteCourse(data){
     return this.httpClient.post("http://localhost:3000/api/RemoveCourseFromModule", data);
+  }
+
+  addCourse(data){
+    return this.httpClient.post("http://localhost:3000/api/AddCourseToModule", data);
   }
 }
