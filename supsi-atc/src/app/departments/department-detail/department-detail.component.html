@@ -1,0 +1,14 @@
+<div class="bg-light rounded p-3 mt-5" *ngIf="department">
+  <h1>{{department.name}}</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-12">
+      <label for="depName">Dipartimento</label>
+      <input disabled [(ngModel)]="departmentData.name" type="text" class="form-control" id="courseCode"
+        placeholder="Codice corso">
+    </div>
+  </div>
+  <div class="btn-group">
+    <button (click)="updateCourse()" type="button" class="btn btn-outline-success">Salva</button>
+    <button (click)="deleteCourse()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+  </div>
+</div>
