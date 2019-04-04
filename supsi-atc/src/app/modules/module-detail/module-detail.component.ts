@@ -13,9 +13,9 @@ import { element } from '@angular/core/src/render3';
 export class ModuleDetailComponent implements OnInit {
 
   private module: Module;
-  private departmentList: {};
-  private courseListAll: {};
-  private courseList: Course[];
+  private departmentList: {};       //Object list -> key: dept.name value: "resource:ch.supsi.Department#" + dept.name
+  private courseListAll: Course[];  //All Courses without module courses
+  private courseList: Course[];     //Module courses
 
   @Input() moduleData: any = {
     $class: 'ch.supsi.Module',
@@ -33,7 +33,6 @@ export class ModuleDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private modulesService: ModulesService,
     private coursesService: CoursesService
   ) { }
@@ -53,7 +52,6 @@ export class ModuleDetailComponent implements OnInit {
       res.forEach(dept => {
         this.departmentList[dept.name] = ("resource:ch.supsi.Department#" + dept.name);
       });
-
     });
 
     this.route.params.subscribe((params: any) => {
@@ -90,13 +88,19 @@ export class ModuleDetailComponent implements OnInit {
     }
   }
 
-  toListOfCourseAll(){
-    this.courseListAll = {};
+  toListOfCourseAll() {
+    this.courseListAll = [];
     this.coursesService.getCourses().subscribe((res: Course[]) => {
-      res.forEach(element =>{
-        //if(this.courseList.includes(element)!){
-          this.courseListAll["resource:ch.supsi.Course#"+element.courseCode] = element.name;
-        //}
+      res.forEach(element => {
+        let toAdd = true;
+        for(let i = 0; i < this.courseList.length; i++){
+          if(element.courseCode === this.courseList[i].courseCode){
+            toAdd = false;
+          }
+        }
+        if(toAdd){
+          this.courseListAll.push(element);
+        }
       })
     });
   }
@@ -137,13 +141,12 @@ export class ModuleDetailComponent implements OnInit {
 
   }
 
-  addCourse(course){
+  addCourse(course: Course) {
     var data = {
       "$class": "ch.supsi.AddCourseToModule",
-      "course": course,
+      "course": "resource:ch.supsi.Course#" + course.courseCode,
       "module": "resource:ch.supsi.Module#" + this.module.moduleCode,
     }
-
     this.modulesService.addCourse(data).subscribe((result) => {
       window.location.reload();
     }, (err) => {
