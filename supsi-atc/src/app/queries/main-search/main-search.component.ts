@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {RestService} from '../../rest.service';
 
+import *  as $ from 'jquery';
 
 @Component({
   selector: 'app-main-search',
