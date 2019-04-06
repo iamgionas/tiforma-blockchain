@@ -59,6 +59,9 @@ export class StudentDetailComponent implements OnInit {
           this.studentData.comment = this.student.comment;
 
           this.studentDataToDelete.student += this.route.snapshot.params['id'];
+          
+          console.log(this.student.birthday);
+          console.log(this.studentData.birthday);
         });
       }
     });
