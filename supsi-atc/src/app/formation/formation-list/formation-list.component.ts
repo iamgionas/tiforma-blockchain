@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StudyPlan } from 'src/app/ch.supsi';
+import { FormationsService } from '../formations.service'; 
 
 @Component({
   selector: 'app-formation-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormationListComponent implements OnInit {
 
-  constructor() { }
+
+  private studyPlans : StudyPlan[] = [];
+
+  constructor(private formationsService: FormationsService) { }
 
   ngOnInit() {
+    this.formationsService.getStudyPlans().subscribe((res: StudyPlan[]) => {
+      this.studyPlans = res;
+    });
   }
 
 }
