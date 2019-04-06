@@ -77,7 +77,7 @@ async function createDepartment(parameters){
 *@transaction
 */
 async function updateDepartment(parameters){
-  parameters.oldDepartment.name = parameters.newName;
+  parameters.oldDepartment.name = parameters.name;
 
   let assetRegistry = await getAssetRegistry('ch.supsi.Department');
   await assetRegistry.update(parameters.oldDepartment);
@@ -91,7 +91,7 @@ async function updateDepartment(parameters){
 */
 async function deleteDepartment(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Department');
-  await assetRegistry.remove(parameters.department.name);
+  await assetRegistry.remove(parameters.department.departmentID);
 }
 
 
