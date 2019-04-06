@@ -19,8 +19,8 @@ export class DepartmentDetailComponent implements OnInit {
   };
 
   private departmentDataToDelete = {
-    $class: "ch.supsi.DeleteDepartment",
-    department: "resource:ch.supsi.Department#"
+    $class: 'ch.supsi.DeleteDepartment',
+    department: 'resource:ch.supsi.Department#'
   }
 
   constructor(

@@ -21,7 +21,8 @@ export class ModuleNewComponent implements OnInit {
     department: '',
     state: '',
     englishName: '',
-    comment: ''
+    comment: '',
+    courses: []
   };
 
   constructor(
@@ -41,8 +42,6 @@ export class ModuleNewComponent implements OnInit {
 
   createModule() {
     this.moduleData.moduleCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    console.log(this.moduleData);
-    
     this.modulesService.createModule(this.moduleData).subscribe((result) => {
       window.location.reload();
     }, (err) => {

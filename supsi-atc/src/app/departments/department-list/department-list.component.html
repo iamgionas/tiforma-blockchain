@@ -9,7 +9,7 @@
     </div>
     <ul class="list-group mt-3">
     <li *ngFor="let d of departments" class="list-group-item list-group-item-action" [routerLinkActive]="['active']"
-        routerLink="{{d.name}}">
+        routerLink="{{d.departmentID}}">
         {{d.name}}</li>
     </ul>
   </div>

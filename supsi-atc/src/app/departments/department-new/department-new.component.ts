@@ -10,7 +10,7 @@ import { DepartmentsService } from '../departments.service';
 export class DepartmentNewComponent implements OnInit {
 
   @Input() departmentData: any = {
-    $class: 'ch.supsi.DepartmentCourse',
+    $class: 'ch.supsi.CreateDepartment',
     departmentID: '',
     name: ''
   };
@@ -20,6 +20,10 @@ export class DepartmentNewComponent implements OnInit {
     private departmentsService: DepartmentsService) { }
 
   ngOnInit() {
+    
+  }
+
+  createDepartment() {
     this.departmentData.departmentID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.departmentsService.createDepartment(this.departmentData).subscribe((result) => {
       window.location.reload();

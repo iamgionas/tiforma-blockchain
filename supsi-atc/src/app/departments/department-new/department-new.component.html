@@ -1,3 +1,12 @@
-<p>
-  department-new works!
-</p>
+<div class="bg-light rounded p-3 mt-5">
+  <h1>Crea Dipartimento</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-12">
+      <label for="depName">Dipartimento</label>
+      <input [(ngModel)]="departmentData.name" type="text" class="form-control" id="depName">
+    </div>
+  </div>
+  <div class="btn-group">
+    <button (click)="createDepartment()" type="button" class="btn btn-outline-success">Crea</button>
+  </div>
+</div>

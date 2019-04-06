@@ -18,8 +18,8 @@ export class ModuleDetailComponent implements OnInit {
   private courseList: Course[];     //Module courses
 
   @Input() moduleData: any = {
-    $class: 'ch.supsi.Module',
-    moduleCode: '',
+    $class: 'ch.supsi.UpdateModule',
+    oldModule: 'resource:ch.supsi.Module#',
     name: '',
     duration: '',
     ETCS: '',
@@ -30,6 +30,11 @@ export class ModuleDetailComponent implements OnInit {
     comment: '',
     courses: []
   };
+
+  private moduleDataToDelete = {
+    $class: "ch.supsi.DeleteModule",
+    module: "resource:ch.supsi.Module#"
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -60,7 +65,8 @@ export class ModuleDetailComponent implements OnInit {
         this.modulesService.getModule(this.route.snapshot.params['id']).subscribe((data: Module) => {
           this.courseList = [];
           this.module = data;
-          this.moduleData.moduleCode = this.module.moduleCode;
+
+          this.moduleData.oldModule += this.route.snapshot.params['id'];
           this.moduleData.name = this.module.name;
           this.moduleData.duration = this.module.duration;
           this.moduleData.ETCS = this.module.ETCS;
@@ -68,8 +74,11 @@ export class ModuleDetailComponent implements OnInit {
           this.moduleData.state = this.module.state;
           this.moduleData.comment = this.module.comment;
           this.moduleData.responsables = this.module.responsables;
+
           this.toListOfCourse(this.module, this.module.courses);
           this.toListOfCourseAll();
+
+          this.moduleDataToDelete.module += this.route.snapshot.params['id'];
         });
       }
     })
@@ -93,12 +102,12 @@ export class ModuleDetailComponent implements OnInit {
     this.coursesService.getCourses().subscribe((res: Course[]) => {
       res.forEach(element => {
         let toAdd = true;
-        for(let i = 0; i < this.courseList.length; i++){
-          if(element.courseCode === this.courseList[i].courseCode){
+        for (let i = 0; i < this.courseList.length; i++) {
+          if (element.courseCode === this.courseList[i].courseCode) {
             toAdd = false;
           }
         }
-        if(toAdd){
+        if (toAdd) {
           this.courseListAll.push(element);
         }
       })
@@ -111,7 +120,7 @@ export class ModuleDetailComponent implements OnInit {
       this.moduleData.courses.push(str + element.courseCode);
     });
     console.log(this.moduleData);
-    this.modulesService.updateModule(this.route.snapshot.params['id'], this.moduleData).subscribe((result) => {
+    this.modulesService.updateModule(this.moduleData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -119,7 +128,7 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   deleteModule() {
-    this.modulesService.deleteModule(this.route.snapshot.params['id']).subscribe((result) => {
+    this.modulesService.deleteModule(this.moduleDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -142,11 +151,13 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   addCourse(course: Course) {
+    console.log(course);
     var data = {
       "$class": "ch.supsi.AddCourseToModule",
       "course": "resource:ch.supsi.Course#" + course.courseCode,
       "module": "resource:ch.supsi.Module#" + this.module.moduleCode,
     }
+
     this.modulesService.addCourse(data).subscribe((result) => {
       window.location.reload();
     }, (err) => {
