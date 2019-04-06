@@ -33,6 +33,7 @@ async function createStudent(parameters){
 async function updateStudent(parameters){
   let participantsRegistry = await getParticipantRegistry('ch.supsi.Student');
   
+  parameters.oldStudent.name = parameters.name;
   parameters.oldStudent.surname = parameters.surname;
   parameters.oldStudent.birthday = parameters.birthday;
   parameters.oldStudent.nationality = parameters.nationality;
