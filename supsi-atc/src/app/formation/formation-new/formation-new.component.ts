@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormationsService } from '../formations.service';
+import { Department } from 'src/app/ch.supsi';
 
 @Component({
   selector: 'app-formation-new',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormationNewComponent implements OnInit {
 
-  constructor() { }
+  private departmentList: {};
+
+  @Input() formationData: any = {
+    $class: 'ch.supsi.UpdateStudyPlan',
+    name: '',
+    departement: '',
+    state: '',
+    comment: '',
+    modules: [],
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private formationsService: FormationsService
+  ) { }
 
   ngOnInit() {
+    this.departmentList = {};
+    this.formationsService.getDepartments().subscribe((res: Department[]) => {
+      res.forEach(dept => {
+        this.departmentList[dept.name] = ("resource:ch.supsi.Department#" + dept.name);
+      });
+
+    });
+  }
+
+  createStudyPlan() {
+    //this.formationData.studyPlanID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);   StudyPlan still has no ID.
+    this.formationsService.createStudyPlan(this.formationData).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }
