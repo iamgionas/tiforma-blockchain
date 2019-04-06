@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DepartmentsService } from '../departments.service';
 
 @Component({
   selector: 'app-department-new',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmentNewComponent implements OnInit {
 
-  constructor() { }
+  @Input() departmentData: any = {
+    $class: 'ch.supsi.DepartmentCourse',
+    departmentID: '',
+    name: ''
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private departmentsService: DepartmentsService) { }
 
   ngOnInit() {
+    this.departmentData.departmentID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    this.departmentsService.createDepartment(this.departmentData).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

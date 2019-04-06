@@ -13,14 +13,18 @@ export class CoursesDetailComponent implements OnInit {
   private course: Course;
 
   @Input() courseData: any = {
-    $class: 'ch.supsi.Course',
-    courseCode: '',
+    $class: 'ch.supsi.UpdateCourse',
+    oldCourse: 'resource:ch.supsi.Course#',
     name: ''
   };
 
+  private courseDataToDelete = {
+    $class: "ch.supsi.DeleteCourse",
+    course: "resource:ch.supsi.Course#"
+  }
+
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private coursesService: CoursesService
   ) { }
 
@@ -28,18 +32,19 @@ export class CoursesDetailComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       if (params.id) {
         this.coursesService.getCourse(this.route.snapshot.params['id']).subscribe((data: Course) => {
-          console.log(data);
           this.course = data;
-
-          this.courseData.courseCode = this.course.courseCode;
+          
+          this.courseData.oldCourse += this.route.snapshot.params['id'];
           this.courseData.name = this.course.name;
+
+          this.courseDataToDelete.course += this.route.snapshot.params['id'];
         });
       }
     })
   }
 
   updateCourse() {
-    this.coursesService.updateCourse(this.route.snapshot.params['id'], this.courseData).subscribe((result) => {
+    this.coursesService.updateCourse(this.courseData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -47,7 +52,7 @@ export class CoursesDetailComponent implements OnInit {
   }
 
   deleteCourse() {
-    this.coursesService.deleteCourse(this.route.snapshot.params['id']).subscribe((result) => {
+    this.coursesService.deleteCourse(this.courseDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);

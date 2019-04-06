@@ -3,12 +3,11 @@
   <div class="form-row ">
     <div class="form-group col-md-12">
       <label for="depName">Dipartimento</label>
-      <input [(ngModel)]="departmentData.name" type="text" class="form-control" id="courseCode"
-        placeholder="Codice corso">
+      <input [(ngModel)]="departmentData.name" type="text" class="form-control" id="depName">
     </div>
   </div>
   <div class="btn-group">
-    <button (click)="updateCourse()" type="button" class="btn btn-outline-success">Salva</button>
-    <button (click)="deleteCourse()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+    <button (click)="updateDepartment()" type="button" class="btn btn-outline-success">Salva</button>
+    <button (click)="deleteDepartment()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
   </div>
 </div>

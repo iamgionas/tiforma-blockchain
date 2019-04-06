@@ -13,8 +13,8 @@ export class MainSearchComponent implements OnInit {
   constructor(private rest : RestService) { }
 
   ngOnInit() {
-    this.getType();
-    this.getFilter();
+   // this.getType();
+    //this.getFilter();
   }
 
   type : String;
@@ -24,7 +24,7 @@ export class MainSearchComponent implements OnInit {
   found : any = [];
 
 
-  getType(){
+  /*getType(){
     this.type = (String)($("#Type").val());
   }
 
@@ -34,12 +34,12 @@ export class MainSearchComponent implements OnInit {
 
   getSearchValue(){
     this.searchValue = (String)($("#searchValue").val());
-  }
+  }*/
 
   find(){
-    this.getType();
-    this.getFilter();
-    this.getSearchValue();
+    //this.getType();
+    //this.getFilter();
+    //this.getSearchValue();
     
     console.log("Type: "+this.type+".\nFilter: "+this.filter+".\nSearch Value: "+this.searchValue+".");
 

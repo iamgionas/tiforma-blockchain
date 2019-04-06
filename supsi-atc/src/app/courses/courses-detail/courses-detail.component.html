@@ -1,10 +1,10 @@
 <div class="bg-light rounded p-3 mt-5" *ngIf="course">
-  <h1 [(ngModel)]="courseData.courseCode"></h1>
+  <h1>{{course.name}}</h1>
   <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="courseCode">Codice del corso</label>
-      <input disabled [(ngModel)]="courseData.courseCode" type="text" class="form-control" id="courseCode"
-        placeholder="Codice corso">
+      <input disabled type="text" class="form-control" id="courseCode"
+        placeholder="Codice corso" value="{{course.courseCode}}">
     </div>
   </div>
   <div class="form-row">

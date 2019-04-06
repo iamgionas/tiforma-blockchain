@@ -10,27 +10,53 @@ import { DepartmentsService } from '../departments.service';
 })
 export class DepartmentDetailComponent implements OnInit {
 
-  private department : Department;
+  private department: Department;
 
   @Input() departmentData: any = {
-    $class: 'ch.supsi.Department',
+    $class: 'ch.supsi.UpdateDepartment',
+    oldDepartment: 'resource:ch.supsi.Department#',
     name: ''
   };
+
+  private departmentDataToDelete = {
+    $class: "ch.supsi.DeleteDepartment",
+    department: "resource:ch.supsi.Department#"
+  }
 
   constructor(
     private route: ActivatedRoute,
     private departmentsService: DepartmentsService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: any) => {
       if (params.id) {
         this.departmentsService.getDepartment(this.route.snapshot.params['id']).subscribe((data: Department) => {
           this.department = data;
+
+          this.departmentData.oldDepartment += this.route.snapshot.params['id'];
           this.departmentData.name = this.department.name;
+
+          this.departmentDataToDelete.department += this.route.snapshot.params['id'];
         });
       }
     })
+  }
+
+  updateDepartment() {
+    this.departmentsService.updateDepartment(this.departmentData).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  deleteDepartment() {
+    this.departmentsService.deleteDepartment(this.departmentDataToDelete).subscribe((result) => {
+      window.location.reload();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }
