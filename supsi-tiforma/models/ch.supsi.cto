@@ -22,7 +22,7 @@ abstract participant Contact identified by contactID {
   o String contactID
   o String name
   o String surname
-  optional o Address[] addresses
+  o Address[] addresses optional
   o DateTime birthday
   o String nationality
   //Account infos might be added
@@ -31,8 +31,8 @@ abstract participant Contact identified by contactID {
 participant Student extends Contact{
   o String statute // 'mai immatricolato' / 'immatricolando' / 'immatricolato' / 'exmatricolato' / 'ospite'
   o String serialNumber //nr matricola
-  optional o String comment
-  optional --> StudyPlan studyPlan
+  o String comment optional
+  --> StudyPlan studyPlan optional
   //o Diplome[] diplomas    // Diplomas a student has
 }
 
@@ -40,26 +40,26 @@ transaction CreateStudent{
   o String contactID
   o String name
   o String surname
-  optional o  Address[] addresses	
+  o  Address[] addresses optional
   o DateTime birthday
   o String nationality
   o String statute
   o String serialNumber
-  o String comment
-  optional --> StudyPlan studyPlan
+  o String comment optional
+  --> StudyPlan studyPlan optional
 }
 
 transaction UpdateStudent{
  --> Student oldStudent
   o String name
   o String surname
-  optional o Address[] addresses	
+  o Address[] addresses	optional
   o DateTime birthday
   o String nationality
   o String statute
   o String serialNumber
-  o String comment
-  optional --> StudyPlan studyPlan
+  o String comment optional
+  --> StudyPlan studyPlan optional
 }
 
 transaction DeleteStudent{
@@ -74,19 +74,21 @@ participant Collaborator extends Contact {
 * TRAINING
 ********************************************/
 
-asset Department identified by name {
+asset Department identified by departmentID {
+  o String departmentID
   o String name
 }
 
 transaction CreateDepartment{
+  o String departmentID
   o String name
 }
-/*
+
 transaction UpdateDepartment{
   --> Department oldDepartment
-  
+  o String newName
 }
-*/
+
 transaction DeleteDepartment{
   --> Department department
 }
@@ -117,11 +119,12 @@ asset Module identified by moduleCode {
     o Integer ETCS
     --> Department department
     o String state
-    optional --> Collaborator[] responsables
-    optional o String englishName
-    optional o String comment
-    optional --> Course[] courses
+    --> Collaborator[] responsables optional
+    o String englishName optional
+    o String comment optional
+    --> Course[] courses optional
  }
+
 
  transaction CreateModule{
   o String moduleCode
@@ -130,10 +133,10 @@ asset Module identified by moduleCode {
   o Integer ETCS
   --> Department department
   o String state
-  optional --> Collaborator[] responsables
-  optional o String englishName
-  optional o String comment
-  optional --> Course[] courses
+  --> Collaborator[] responsables optional
+  o String englishName optional
+  o String comment optional
+  --> Course[] courses optional
 }
 
 transaction UpdateModule{
@@ -143,10 +146,10 @@ transaction UpdateModule{
   o Integer ETCS
   --> Department department
   o String state
-  optional --> Collaborator[] responsables
-  optional o String englishName
-  optional o String comment
-  optional --> Course[] courses
+  --> Collaborator[] responsables optional
+  o String englishName optional
+  o String comment optional
+  --> Course[] courses optional
 }
 
 transaction DeleteModule{
@@ -168,7 +171,7 @@ asset StudyPlan identified by name {
   --> Department departement
   o String state
   o String comment
-  optional --> Module[] modules
+  --> Module[] modules optional
 }
 
 transaction CreateStudyPlan {
@@ -176,7 +179,7 @@ transaction CreateStudyPlan {
   --> Department departement
   o String state
   o String comment
-  optional --> Module[] modules
+  --> Module[] modules optional
 }
 
 transaction UpdateStudyPlan{
@@ -184,7 +187,7 @@ transaction UpdateStudyPlan{
   --> Department departement
   o String state
   o String comment
-  --> Module[] modules
+  --> Module[] modules optional
 }
 
 transaction DeleteStudyPlan{
@@ -204,13 +207,13 @@ transaction RemoveModuleFromStudyPlan{
 asset Semester identified by name {
   o String name
   o String description
-  optional --> StudentModule[] modules
+  --> StudentModule[] modules optional
 }
 
 transaction CreateSemester {
   o String name
   o String description
-  optional --> StudentModule[] modules
+  --> StudentModule[] modules optional
 }
 
 transaction UpdateSemester{

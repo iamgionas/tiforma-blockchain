@@ -63,25 +63,24 @@ async function deleteStudent(parameters){
 */
 async function createDepartment(parameters){
   let factory = getFactory();
-  let newDepartment = factory.newResource('ch.supsi', 'Department', parameters.name);
-  
+  let newDepartment = factory.newResource('ch.supsi', 'Department', parameters.departmentID);
+  newDepartment.name = parameters.name
+
   let assetRegistry = await getAssetRegistry('ch.supsi.Department');
   await assetRegistry.add(newDepartment);
 }
 
-/*      NOT IMPLEMENTED ANYMORE since department has only it's ID as attribute and cannot be mutated.
+/**
 * Update of a department
 *@param {ch.supsi.UpdateDepartment} parameters
 *@transaction
-
+*/
 async function updateDepartment(parameters){
+  parameters.oldDepartment.name = parameters.newName;
+
   let assetRegistry = await getAssetRegistry('ch.supsi.Department');
-  
-  parameters.oldDepartment.name = parameters.newDepartment.name;
-  
   await assetRegistry.update(parameters.oldDepartment);
 }
-*/
 
 
 /**
