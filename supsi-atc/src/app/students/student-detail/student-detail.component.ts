@@ -52,7 +52,7 @@ export class StudentDetailComponent implements OnInit {
           this.studentData.oldStudent += this.route.snapshot.params['id'];
           this.studentData.name = this.student.name;
           this.studentData.surname = this.student.surname;
-          this.studentData.birthday = new Date(this.student.birthday);
+          this.studentData.birthday = this.student.birthday;  //new Date()
           this.studentData.nationality = this.student.nationality;
           this.studentData.statute = this.student.statute;
           this.studentData.serialNumber = this.student.serialNumber;
@@ -68,7 +68,7 @@ export class StudentDetailComponent implements OnInit {
   }
 
   updateStudent() {
-    this.studentData.birthday = new Date(this.birthday);
+    console.log(this.studentData.birthday);
 
     this.studentsService.updateStudent(this.studentData).subscribe((result) => {
       window.location.reload();
@@ -85,8 +85,8 @@ export class StudentDetailComponent implements OnInit {
     });
   }
 
-  updateData(event) {
-    this.birthday = event;
+  setBirthday(event){
+    this.studentData.birthday = $("#birthday").val();
   }
 
 }

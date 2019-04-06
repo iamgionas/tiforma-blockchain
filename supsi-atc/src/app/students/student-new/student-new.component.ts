@@ -41,7 +41,6 @@ export class StudentNewComponent implements OnInit {
 
   createStudent(){
     this.studentData.contactID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    console.log(Date.parse(this.studentData.birthday));
     
     this.studentsService.createStudent(this.studentData).subscribe((result) => {
       window.location.reload();
