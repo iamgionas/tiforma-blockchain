@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SUPSIService } from '../supsi.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
 
-  baseUrl : string = "http://localhost:3000/api/Student";
-  createUrl : string = "http://localhost:3000/api/CreateStudent";
+  private base = "Student";
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private supsiService: SUPSIService) { }
 
-  getStudents(){
-    return this.httpClient.get(this.baseUrl);
+  getStudents() {
+    return this.supsiService.getElements(this.base);
   }
 
-  getStudent(id : number){
-    return this.httpClient.get(this.baseUrl + '/' + id);
+  getStudent(id) {
+    return this.supsiService.getElement(this.base, id);
   }
 
-  updateStudent(id, studentData){
-    return this.httpClient.put(this.baseUrl + '/' + id, studentData);
+  createStudent(studentData) {
+    return this.supsiService.operationToElement("Create" + this.base, studentData);
   }
 
-  deleteStudent(id : number) {
-    return this.httpClient.delete(this.baseUrl + '/' + id);
+  deleteStudent(studentData) {
+    return this.supsiService.operationToElement("Delete" + this.base, studentData);
   }
 
-  createStudent(studentData){
-    return this.httpClient.post(this.createUrl, studentData);
+  updateStudent(studentData) {
+    return this.supsiService.operationToElement("Update" + this.base, studentData);
   }
+
 
 }

@@ -16,8 +16,8 @@ import { StudentNewComponent } from './student-new/student-new.component';
   ],
   imports: [
     CommonModule,
-    StudentsRoutingModule,
-    FormsModule
+    FormsModule,
+    StudentsRoutingModule
   ]
 })
 export class StudentsModule { }

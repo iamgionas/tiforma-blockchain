@@ -3,12 +3,12 @@
   <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="serialNumber">Numero Matricola</label>
-      <input [(ngModel)]="studentData.serialNumber" type="text" class="form-control" id="serialNumber"
+      <input required [(ngModel)]="studentData.serialNumber" type="text" class="form-control" id="serialNumber"
         placeholder="Nr. Matricola">
     </div>
     <div class="form-group col-md-6">
       <label for="statute">Statuto</label>
-      <select [(ngModel)]="studentData.statute" class="form-control" id="statute">
+      <select required [(ngModel)]="studentData.statute" class="form-control" id="statute">
         <option *ngFor="let v of statuteValues" [ngValue]="v">{{v}}</option>
       </select>
     </div>
@@ -16,21 +16,21 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="name">Name</label>
-      <input [(ngModel)]="studentData.name" type="text" class="form-control" id="name">
+      <input required [(ngModel)]="studentData.name" type="text" class="form-control" id="name">
     </div>
     <div class="form-group col-md-6">
       <label for="surname">Surname</label>
-      <input [(ngModel)]="studentData.surname" type="text" class="form-control" id="surname">
+      <input required [(ngModel)]="studentData.surname" type="text" class="form-control" id="surname">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="birthday">Anno di Nascita</label>
-      <input [ngModel]="studentData.birthday | date: 'dd/MM/yyyy'" (ngModelChange)="updateData($event)" type="date" class="form-control" id="birthday">
+      <input required [(ngModel)]="studentData.birthday" type="date" class="form-control" id="birthday">
     </div>
     <div class="form-group col-md-6">
       <label for="nationality">Nazionalità</label>
-      <input [(ngModel)]="studentData.nationality" type="date" class="form-control" id="birthday">
+      <input required [(ngModel)]="studentData.nationality" type="date" class="form-control" id="birthday">
     </div>
   </div>
   <div class="form-row">

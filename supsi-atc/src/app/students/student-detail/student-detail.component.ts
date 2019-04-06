@@ -13,7 +13,7 @@ export class StudentDetailComponent implements OnInit {
   private student: Student;
   private birthday: string;
 
-  statuteValues = [
+  private statuteValues = [
     "Mai immatricolato",
     "Immatricolato",
     "Exmatricolato",
@@ -21,20 +21,25 @@ export class StudentDetailComponent implements OnInit {
   ]
 
   @Input() studentData: any = {
-    $class: 'ch.supsi.Student',
-    statute: '',
-    serialNumber: '',
+    $class: 'ch.supsi.UpdateStudent',
+    oldStudent: 'resource:ch.supsi.Student#',
     name: '',
     surname: '',
     birthday: '',
     nationality: '',
+    statute: '',
+    serialNumber: '',
     comment: '',
     studyPlan: 'resource:ch.supsi.StudyPlan#NULL'
   };
 
+  private studentDataToDelete = {
+    $class: "ch.supsi.DeleteStudent",
+    student: "resource:ch.supsi.Student#"
+  }
+
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private studentsService: StudentsService
   ) { }
 
@@ -42,16 +47,18 @@ export class StudentDetailComponent implements OnInit {
     this.route.params.subscribe((parms: any) => {
       if (parms.id) {
         this.studentsService.getStudent(this.route.snapshot.params['id']).subscribe((data: Student) => {
-          console.log(data);
           this.student = data;
 
-          this.studentData.statute = this.student["statute"];
-          this.studentData.serialNumber = this.student["serialNumber"];
-          this.studentData.name = this.student["name"];
-          this.studentData.surname = this.student["surname"];
-          this.studentData.birthday = new Date(this.student["birthday"]);
-          this.studentData.nationality = this.student["nationality"];
-          this.studentData.comment = this.student["comment"];
+          this.studentData.oldStudent += this.route.snapshot.params['id'];
+          this.studentData.name = this.student.name;
+          this.studentData.surname = this.student.surname;
+          this.studentData.birthday = new Date(this.student.birthday);
+          this.studentData.nationality = this.student.nationality;
+          this.studentData.statute = this.student.statute;
+          this.studentData.serialNumber = this.student.serialNumber;
+          this.studentData.comment = this.student.comment;
+
+          this.studentDataToDelete.student += this.route.snapshot.params['id'];
         });
       }
     });
@@ -59,8 +66,8 @@ export class StudentDetailComponent implements OnInit {
 
   updateStudent() {
     this.studentData.birthday = new Date(this.birthday);
-    
-    this.studentsService.updateStudent(this.route.snapshot.params['id'], this.studentData).subscribe((result) => {
+
+    this.studentsService.updateStudent(this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -68,14 +75,14 @@ export class StudentDetailComponent implements OnInit {
   }
 
   deleteStudent() {
-    this.studentsService.deleteStudent(this.route.snapshot.params['id']).subscribe((result) => {
+    this.studentsService.deleteStudent(this.studentDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
     });
   }
 
-  updateData(event){
+  updateData(event) {
     this.birthday = event;
   }
 

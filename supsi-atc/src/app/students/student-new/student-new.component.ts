@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentsService } from '../students.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-student-new',
@@ -9,7 +10,6 @@ import { StudentsService } from '../students.service';
 })
 export class StudentNewComponent implements OnInit {
 
-  private birthday: string;
   statuteValues = [
     "Mai immatricolato",
     "Immatricolato",
@@ -24,7 +24,7 @@ export class StudentNewComponent implements OnInit {
     serialNumber: '',
     name: '',
     surname: '',
-    birthday: new Date(),
+    birthday: '',
     nationality: '',
     comment: '',
     transactionId: '',
@@ -41,16 +41,13 @@ export class StudentNewComponent implements OnInit {
 
   createStudent(){
     this.studentData.contactID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    this.studentData.birthday = new Date(this.birthday);
+    console.log(Date.parse(this.studentData.birthday));
+    
     this.studentsService.createStudent(this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
     });
-  }
-
-  updateData(event){
-    this.birthday = event;
   }
 
 
