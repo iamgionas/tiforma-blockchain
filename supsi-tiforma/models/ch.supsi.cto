@@ -86,7 +86,7 @@ transaction CreateDepartment{
 
 transaction UpdateDepartment{
   --> Department oldDepartment
-  o String newName
+  o String name
 }
 
 transaction DeleteDepartment{
