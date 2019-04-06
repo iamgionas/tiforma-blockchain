@@ -1,0 +1,19 @@
+<div class="bg-light rounded p-3 mt-5" *ngIf="semester">
+  <h1>{{semester.name}}</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-12">
+      <label for="semesterCode">Name</label>
+      <input disabled value="{{semester.name}}" type="text" class="form-control" id="semesterCode">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="description">Descrizione</label>
+      <input [(ngModel)]="semesterData.description" type="text" class="form-control" id="description">
+    </div>
+  </div>
+  <div class="btn-group">
+    <button (click)="updateSemester()" type="button" class="btn btn-outline-success">Salva</button>
+    <button (click)="deleteSemester()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+  </div>
+</div>
