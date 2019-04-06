@@ -1,0 +1,20 @@
+.deleteModule {
+    right: 0;
+    position: absolute;
+    margin-right: 15px;
+    color: #ff0000 !important;
+  }
+  
+  .deleteModule:hover{
+    cursor: pointer;
+    color: #962222 !important;
+  }
+  
+  #addModule{
+    color: #17b41fc7;
+  }
+  
+  #addModule:hover{
+    cursor: pointer;
+    color: #128f18c7;
+  }

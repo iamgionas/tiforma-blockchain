@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'departments', loadChildren: './departments/departments.module#DepartmentsModule' },
   { path: 'courses', loadChildren: './courses/courses.module#CoursesModule' },
   { path: 'modules', loadChildren: './modules/modules.module#ModulesModule' },
+  { path: 'formations', loadChildren: './formation/formation.module#FormationModule'},
   { path: 'semesters', loadChildren: './semesters/semesters.module#SemestersModule' },
   { path: 'search', loadChildren: './queries/queries.module#QueriesModule' }
 ];

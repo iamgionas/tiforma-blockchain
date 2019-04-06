@@ -1,0 +1,31 @@
+<div class="bg-light rounded p-3 mt-5">
+  <h1>Creazione piano di studio</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-6">
+      <label for="studyPlanName">Nome</label>
+      <input disabled [(ngModel)]="formationData.name" type="text" class="form-control" id="studyPlanName"
+        placeholder="Nome piano di studio">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="department">Dipartimento</label>
+      <select class="form-control" id="department" [(ngModel)]="formationData.department">
+        <option>Seleziona</option>
+        <option *ngFor="let d of departmentList | keyvalue" [ngValue]="d.value">{{d.key}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="state">Stato</label>
+      <input [(ngModel)]="formationData.state" type="text" class="form-control" id="state">
+    </div>
+    <div class="form-group col-md-12">
+      <label for="comment">Commento</label>
+      <textarea [(ngModel)]="formationData.comment" class="form-control" id="comment"></textarea>
+    </div>
+  </div>
+ 
+  <div class="btn-group">
+    <button (click)="createStudyPlan()" type="button" class="btn btn-outline-success">Crea</button>
+  </div>
+</div>
