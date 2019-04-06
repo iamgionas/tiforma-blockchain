@@ -103,6 +103,7 @@ export class FormationDetailComponent implements OnInit {
 
 
   updateStudyPlan() {
+    this.formationData.modules = [];
     this.moduleList.forEach(element => {
       var str = "resource:ch.supsi.Module#";
       this.formationData.modules.push(str + element.moduleCode);
