@@ -125,12 +125,12 @@ export class FormationDetailComponent implements OnInit {
 
   deleteModule(id) {
     var data = {
-      "$class": "ch.supsi.RemoveCourseFromModule",
-      "course": "resource:ch.supsi.Module#" + id,
-      "module": "resource:ch.supsi.StudyPlan#" + this.studyPlan.name,
+      "$class": "ch.supsi.RemoveModuleFromStudyPlan",
+      "module": "resource:ch.supsi.Module#" + id,
+      "studyplan": "resource:ch.supsi.StudyPlan#" + this.studyPlan.name,
     };
 
-    this.modulesService.deleteCourse(data).subscribe((result) => {
+    this.formationService.removeModule(data).subscribe((result) => {
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -141,9 +141,9 @@ export class FormationDetailComponent implements OnInit {
   addModule(module: Module) {
     console.log(module);
     var data = {
-      "$class": "ch.supsi.AddCourseToModule",
-      "course": "resource:ch.supsi.Module#" + module.moduleCode,
-      "module": "resource:ch.supsi.StudyPlan#" + this.studyPlan.name,
+      "$class": "ch.supsi.AddModuleToStudyPlan",
+      "module": "resource:ch.supsi.Module#" + module.moduleCode,
+      "studyplan": "resource:ch.supsi.StudyPlan#" + this.studyPlan.name,
     }
 
     this.formationService.addModule(data).subscribe((result) => {
