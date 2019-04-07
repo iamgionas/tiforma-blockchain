@@ -27,7 +27,7 @@ export class FormationDetailComponent implements OnInit {
   @Input() formationData: any = {
     $class: 'ch.supsi.UpdateStudyPlan',
     oldStudyPlan: 'resource:ch.supsi.StudyPlan#',
-    departement: '',
+    department: '',
     state: '',
     comment: '',
     modules: [],
@@ -56,7 +56,7 @@ export class FormationDetailComponent implements OnInit {
           this.studyPlan = data;
 
           this.formationData.oldStudyPlan += this.route.snapshot.params['id'];
-          this.formationData.departement = this.studyPlan.departement;
+          this.formationData.department = this.studyPlan.departement;
           this.formationData.state = this.studyPlan.state;
           this.formationData.comment = this.studyPlan.comment;
           this.formationData.modules = this.studyPlan.modules;
