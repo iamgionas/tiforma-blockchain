@@ -13,9 +13,9 @@ export class FormationNewComponent implements OnInit {
   private departmentList: {};
 
   @Input() formationData: any = {
-    $class: 'ch.supsi.UpdateStudyPlan',
+    $class: 'ch.supsi.CreateStudyPlan',
     name: '',
-    departement: '',
+    department: '',
     state: '',
     comment: '',
     modules: [],
@@ -38,6 +38,7 @@ export class FormationNewComponent implements OnInit {
 
   createStudyPlan() {
     //this.formationData.studyPlanID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);   StudyPlan still has no ID.
+    console.log(this.formationData);
     this.formationsService.createStudyPlan(this.formationData).subscribe((result) => {
       window.location.reload();
     }, (err) => {

@@ -21,13 +21,13 @@ export class FormationDetailComponent implements OnInit {
 
   private formationDataToDelete = {
     $class: "ch.supsi.DeleteStudyPlan",
-    studyPlan: "resource:ch.supsi.StudyPlan#"
+    studyPlan: 'resource:ch.supsi.StudyPlan#'
   }
 
   @Input() formationData: any = {
     $class: 'ch.supsi.UpdateStudyPlan',
     oldStudyPlan: 'resource:ch.supsi.StudyPlan#',
-    departement: '',
+    department: '',
     state: '',
     comment: '',
     modules: [],
@@ -54,9 +54,9 @@ export class FormationDetailComponent implements OnInit {
         this.formationService.getStudyPlan(this.route.snapshot.params['id']).subscribe((data: StudyPlan) => {
           this.moduleList = [];
           this.studyPlan = data;
-
-          this.formationData.oldStudyPlan += this.route.snapshot.params['id'];
-          this.formationData.departement = this.studyPlan.departement;
+          
+          this.formationData.oldStudyPlan = 'resource:ch.supsi.StudyPlan#' + params.id;
+          this.formationData.department = this.studyPlan.department;
           this.formationData.state = this.studyPlan.state;
           this.formationData.comment = this.studyPlan.comment;
           this.formationData.modules = this.studyPlan.modules;
@@ -64,7 +64,7 @@ export class FormationDetailComponent implements OnInit {
           this.toListOfModule(this.studyPlan, this.studyPlan.modules);
           this.toListOfModuleAll();
 
-          this.formationDataToDelete.studyPlan += this.route.snapshot.params['id'];
+          this.formationDataToDelete.studyPlan = this.formationData.oldStudyPlan;
         });
       }
     })
@@ -140,7 +140,6 @@ export class FormationDetailComponent implements OnInit {
   }
 
   addModule(module: Module) {
-    console.log(module);
     var data = {
       "$class": "ch.supsi.AddModuleToStudyPlan",
       "module": "resource:ch.supsi.Module#" + module.moduleCode,
