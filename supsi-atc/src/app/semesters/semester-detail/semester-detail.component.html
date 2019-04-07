@@ -17,3 +17,5 @@
     <button (click)="deleteSemester()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
   </div>
 </div>
+
+<app-semester-enrollment  *ngIf="semester" [semesterChild]="semester"></app-semester-enrollment>
