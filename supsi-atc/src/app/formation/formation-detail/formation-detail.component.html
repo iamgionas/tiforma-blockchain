@@ -3,7 +3,7 @@
   <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="department">Dipartimento</label>
-      <select class="form-control" id="department" [(ngModel)]="formationData.department">
+      <select class="form-control" id="department" [(ngModel)]="formationData.department" selected="formationData.department.split(#)[1]">
         <option *ngFor="let d of departmentList | keyvalue" [ngValue]="d.value">{{d.key}}</option>
       </select>
     </div>

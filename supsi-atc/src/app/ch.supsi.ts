@@ -110,7 +110,7 @@ export class DeleteModule extends Transaction {
 }
 export class StudyPlan extends Asset {
    name: string;
-   departement: Department;
+   department: Department;
    state: string;
    comment: string;
    modules: Module[];

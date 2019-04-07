@@ -56,7 +56,7 @@ export class FormationDetailComponent implements OnInit {
           this.studyPlan = data;
 
           this.formationData.oldStudyPlan += this.route.snapshot.params['id'];
-          this.formationData.department = this.studyPlan.departement;
+          this.formationData.department = this.studyPlan.department;
           this.formationData.state = this.studyPlan.state;
           this.formationData.comment = this.studyPlan.comment;
           this.formationData.modules = this.studyPlan.modules;
@@ -68,6 +68,8 @@ export class FormationDetailComponent implements OnInit {
         });
       }
     })
+
+    console.log(this.formationData);
   }
 
   toListOfModule(studyPlan: StudyPlan, modules: Module[]) {
