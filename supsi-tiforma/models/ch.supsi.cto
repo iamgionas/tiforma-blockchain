@@ -168,7 +168,7 @@ transaction RemoveCourseFromModule{
 
 asset StudyPlan identified by name {
   o String name
-  --> Department departement
+  --> Department department
   o String state
   o String comment
   --> Module[] modules optional
@@ -176,7 +176,7 @@ asset StudyPlan identified by name {
 
 transaction CreateStudyPlan {
   o String name
-  --> Department departement
+  --> Department department
   o String state
   o String comment
   --> Module[] modules optional
@@ -184,7 +184,7 @@ transaction CreateStudyPlan {
 
 transaction UpdateStudyPlan{
   -->StudyPlan oldStudyPlan
-  --> Department departement
+  --> Department department
   o String state
   o String comment
   --> Module[] modules optional

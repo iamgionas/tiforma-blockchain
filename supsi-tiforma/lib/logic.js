@@ -218,7 +218,7 @@ async function removeCourseFromModule(parameters){
 async function createStudyPlan(parameters){
   let newStudyPlan = getFactory().newResource('ch.supsi', 'StudyPlan', parameters.name);
   newStudyPlan.name = parameters.name;
-  newStudyPlan.departement = parameters.departement;
+  newStudyPlan.department = parameters.department;
   newStudyPlan.state = parameters.state;
   newStudyPlan.comment = parameters.comment;
   newStudyPlan.modules = parameters.modules;
@@ -234,7 +234,7 @@ async function createStudyPlan(parameters){
 */
 async function updateStudyPlan(parameters){
   
-  parameters.oldStudyPlan.departement = parameters.departement;
+  parameters.oldStudyPlan.department = parameters.department;
   parameters.oldStudyPlan.state = parameters.state;
   parameters.oldStudyPlan.comment = parameters.comment;
   parameters.oldStudyPlan.modules = parameters.modules;
