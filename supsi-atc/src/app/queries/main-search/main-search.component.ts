@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {RestService} from '../../rest.service';
-
 import *  as $ from 'jquery';
+import { RestService } from 'src/app/rest.service';
+import { Student } from 'src/app/ch.supsi';
 
 @Component({
   selector: 'app-main-search',
@@ -11,21 +11,21 @@ import *  as $ from 'jquery';
 })
 export class MainSearchComponent implements OnInit {
 
-  constructor(private rest : RestService) { }
+  constructor(private restService : RestService) { }
 
   ngOnInit() {
-   // this.getType();
-    //this.getFilter();
+    this.getType();
+    this.getFilter();
   }
 
   type : String;
   filter: String;
-  searchValue: String;
+  searchValue: string;
 
   found : any = [];
 
 
-  /*getType(){
+  getType(){
     this.type = (String)($("#Type").val());
   }
 
@@ -35,12 +35,12 @@ export class MainSearchComponent implements OnInit {
 
   getSearchValue(){
     this.searchValue = (String)($("#searchValue").val());
-  }*/
+  }
 
   find(){
-    //this.getType();
-    //this.getFilter();
-    //this.getSearchValue();
+    this.getType();
+    this.getFilter();
+    this.getSearchValue();
     
     console.log("Type: "+this.type+".\nFilter: "+this.filter+".\nSearch Value: "+this.searchValue+".");
 
@@ -48,12 +48,11 @@ export class MainSearchComponent implements OnInit {
       case "Studenti": {
         switch(this.filter){
           case "Name":{
-            //Query not yet implemented back-end side.
+            this.findStudentsByName();
             break;
           }
           case "Surname":{
-            this.rest.getStudentsBySurname(this.searchValue).subscribe(data => this.found = data);
-            console.log(this.found);
+            
             break;
           }
           case "SerialNumber":{
@@ -66,7 +65,7 @@ export class MainSearchComponent implements OnInit {
       case "Corsi": {
         switch(this.filter){
           case "Name":{
-            this.rest.getCoursesByName(this.searchValue).subscribe(data => this.found = data);
+            
             break;
           }
           case "CourseCode":{
@@ -79,7 +78,7 @@ export class MainSearchComponent implements OnInit {
       case "Moduli": {
         switch(this.filter){
           case "Name":{
-            this.rest.getModulesByName(this.searchValue).subscribe(data => this.found = data);
+            
             break;
           }
           case "ModuleCode":{
@@ -92,7 +91,7 @@ export class MainSearchComponent implements OnInit {
       case "Formazioni": {
         switch(this.filter){
           case "Name":{
-            this.rest.getStudentModulesByName(this.searchValue).subscribe(data => this.found = data);
+            
             break;
           }
           case "StudyPlanContainsModule":{
@@ -105,7 +104,7 @@ export class MainSearchComponent implements OnInit {
       case "Semestri": {
         switch(this.filter){
           case "Name":{
-            this.rest.getSemestersByName(this.searchValue).subscribe(data => this.found = data);
+
             break;
           }
           case "SemesterContainsModule":{
@@ -133,5 +132,17 @@ export class MainSearchComponent implements OnInit {
         break;
       }
     }
+
+
+    console.log("FOUND: "+this.found);
   }
+
+  
+  findStudentsByName(){
+    this.found = [];
+    this.restService.getAll('Student').subscribe(s => this.found = s);
+
+    
+  }
+
 }

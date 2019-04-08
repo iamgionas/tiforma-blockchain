@@ -8,7 +8,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class RestService {
 
-  endpoint = 'http://localhost:3000/api/ch.supsi.';
+  endpoint = 'http://localhost:3000/api/';
   queriesEndpoint = 'http://localhost:3000/api/queries/';
   httpOptions = {
     headers: new HttpHeaders({
