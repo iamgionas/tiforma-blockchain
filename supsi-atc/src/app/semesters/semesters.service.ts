@@ -30,4 +30,17 @@ export class SemestersService {
   updateSemester(semesterData) {
     return this.supsiService.operationToElement("Update" + this.base, semesterData);
   }
+
+  getFormations(){
+    return this.httpClient.get('http://localhost:3000/api/StudyPlan');
+  }
+
+  createStudentModule(data){
+    return this.supsiService.operationToElement("CreateStudentModule", data);
+  }
+
+  addStudentModuleToSemester(data){
+    return this.supsiService.operationToElement("AddStudentModuleToSemester", data);
+  }
+
 }

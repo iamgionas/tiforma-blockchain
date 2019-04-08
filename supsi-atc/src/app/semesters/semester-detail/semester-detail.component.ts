@@ -10,7 +10,8 @@ import { Semester } from 'src/app/ch.supsi';
 })
 export class SemesterDetailComponent implements OnInit {
 
-  private semester: Semester;
+  public semester: Semester;
+  semesterToChild = this.route.snapshot.params['id'].toString();
 
   @Input() semesterData: any = {
     $class: 'ch.supsi.UpdateSemester',
