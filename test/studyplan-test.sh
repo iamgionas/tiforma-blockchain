@@ -16,7 +16,7 @@ create_studyplan_body(){
     cat <<EOF
 {
   "name": "TEST-STUDYPLAN-ID",
-  "departement": "resource:ch.supsi.Department#NULL",
+  "department": "resource:ch.supsi.Department#NULL",
   "state": "CREATION SUCCESSFUL",
   "comment": "CREATION SUCCESSFUL",
   "modules": [
@@ -31,7 +31,7 @@ update_studyplan_body(){
     cat <<EOF
 {
   "oldStudyPlan": "resource:ch.supsi.StudyPlan#TEST-STUDYPLAN-ID",
-  "departement": "resource:ch.supsi.Department#UPDATED",
+  "department": "resource:ch.supsi.Department#UPDATED",
   "state": "UPDATE SUCCESSFUL",
   "comment": "UPDATE SUCCESSFUL",
   "modules": [

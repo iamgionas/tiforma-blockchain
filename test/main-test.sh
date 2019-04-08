@@ -65,7 +65,7 @@ create_studyplan_1_body(){
     cat <<EOF
 {
   "name": "StudyPlan1",
-  "departement": "resource:ch.supsi.Department#NULL",
+  "department": "resource:ch.supsi.Department#NULL",
   "state": "so1",
   "comment": "sp1",
   "modules": [
@@ -79,7 +79,7 @@ create_studyplan_2_body(){
     cat <<EOF
 {
   "name": "StudyPlan2",
-  "departement": "resource:ch.supsi.Department#NULL",
+  "department": "resource:ch.supsi.Department#NULL",
   "state": "so2",
   "comment": "sp2",
   "modules": [
