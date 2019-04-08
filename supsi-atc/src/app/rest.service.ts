@@ -28,6 +28,11 @@ export class RestService {
       map(this.extractData));
   }
 
+  getStudentsByName(name): Observable<any>{
+    return this.http.get(this.queriesEndpoint+'selectStudentByName?paramName='+name).pipe(
+      map(this.extractData));
+  }
+
   getStudentsBySurname(surname): Observable<any>{
     return this.http.get(this.queriesEndpoint+'selectStudentsBySurname?paramSurname='+surname).pipe(
       map(this.extractData));

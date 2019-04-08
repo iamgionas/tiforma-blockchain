@@ -136,12 +136,9 @@ export class MainSearchComponent implements OnInit {
 
     console.log("FOUND: "+this.found);
   }
-
   
   findStudentsByName(){
-    this.found = [];
-    this.restService.getAll('Student').subscribe(s => this.found = s);
-
+   this.restService.getStudentsByName(this.searchValue).subscribe(students => this.found = students);
     
   }
 
