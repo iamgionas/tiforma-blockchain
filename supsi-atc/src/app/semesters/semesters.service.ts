@@ -43,4 +43,12 @@ export class SemestersService {
     return this.supsiService.operationToElement("AddStudentModuleToSemester", data);
   }
 
+  removeStudentModuleFromSemester(data){
+    return this.supsiService.operationToElement("RemoveStudentModuleFromSemester", data);
+  }
+
+  getStudentModule(id){
+    return this.httpClient.get('http://localhost:3000/api/StudentModule/'+id);
+  }
+
 }

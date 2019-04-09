@@ -38,6 +38,7 @@ export class SemesterDetailComponent implements OnInit {
           
           this.semesterData.oldSemester += this.route.snapshot.params['id'];
           this.semesterData.description = this.semester.description;
+          this.semesterData.modules = this.semester.modules;
 
           this.semesterDataToDelete.semester += this.route.snapshot.params['id'];
         });
