@@ -219,7 +219,7 @@ transaction CreateSemester {
 transaction UpdateSemester{
   --> Semester oldSemester
   o String description
-  --> StudentModule[] modules
+  --> StudentModule[] modules optional
 }
 
 transaction DeleteSemester{
@@ -245,13 +245,13 @@ asset StudentModule identified by studentModuleID {
 transaction CreateStudentModule {
   o String studentModuleID
   --> Module module
-  --> Student[] students
+  --> Student[] students optional
 }
 
 transaction UpdateStudentModule{
   --> StudentModule oldStudentModule
   --> Module module
-  --> Student[] students
+  --> Student[] students optional
 }
 
 transaction DeleteStudentModule{
