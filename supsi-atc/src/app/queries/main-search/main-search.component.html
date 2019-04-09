@@ -29,13 +29,13 @@
 
       <option *ngIf="[type] == 'Moduli'" value="ModuleCode">Codice modulo</option>
 
-      <option *ngIf="[type] == 'Formazioni'" value="StudyPlanContainsModule">Modulo presente</option>
+      <option *ngIf="[type] == 'Formazioni'" value="StudyPlanContainsModule">Codice di un Modulo presente</option>
 
-      <option *ngIf="[type] == 'Semestri'" value="SemesterContainsModule">Modulo presente</option>
+      <option *ngIf="[type] == 'Semestri'" value="SemesterContainsModule">Codice di un Modulo presente</option>
 
       <option *ngIf="[type] == 'Certificazioni'" value="CertificationStudentName">Nome Studente</option>
       <option *ngIf="[type] == 'Certificazioni'" value="CertificationStudentSurname">Cognome Studente</option>
-      <option *ngIf="[type] == 'Certificazioni'" value="CertificationModule">Nome Modulo certificato</option>
+      <option *ngIf="[type] == 'Certificazioni'" value="CertificationModule">Codice Modulo certificato</option>
     </select>
   </div>
 
@@ -51,10 +51,11 @@
     <div class="col-md-8 offset-2">
       <div class="resultDiv">
         <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Studenti'" routerLink="/students/{{f.contactID}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Dipartimenti'" routerLink="/departments/{{f.departmentID}}">{{f.name}}</h2>
         <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Corsi'" routerLink="/courses/{{f.courseCode}}">{{f.name +" "+f.courseCode}}</h2>
         <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Moduli'" routerLink="/modules/{{f.moduleCode}}">{{f.name +" "+f.moduleCode}}</h2>
-        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Formazioni'" routerLink="/formations/{{f.contactID}}">{{f.department.split('#')[1]+" - "+f.name}}</h2>
-        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Semestri'" routerLink="/semesters/{{f.name}}">{{f.name +" "+f.surname}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Formazioni'" routerLink="/formations/{{f.name}}">{{f.department.split('#')[1]+" - "+f.name}}</h2>
+        <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Semestri'" routerLink="/semesters/{{f.name}}">{{f.name}}</h2>
         <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Certificazioni'" routerLink="/certifications/{{f.certificationID}}">{{f.name +" "+f.department}}</h2>
       </div>
     </div>
