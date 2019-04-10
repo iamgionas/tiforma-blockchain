@@ -22,7 +22,7 @@
 ################################### DEFINING URL ###################################
 HOST="http://localhost:3000/api"
 
-if [[ $1 == -n ]] || [[ $1 == -namespaces ]]; then
+if [[ $2 == -n ]] || [[ $2 == -namespaces ]]; then
     HOST="http://localhost:3000/ch.supsi."
     echo "Using namespace."
     echo "New host is ${HOST}"
@@ -536,28 +536,46 @@ create_student_B
 create_student_C
 
 echo "All assets & participants created.\n\n"
-echo "You can check the assets on the browser (localhost:300). Press enter to continue.\n\n"
-read anything
+
+if [[ "$1" == "-s" ]] || [[ "$1" == "-steps" ]]; then
+  echo "You can check the assets on the browser (localhost:300). Press enter to continue.\n\n"
+  read anything
+fi
+
 
 echo "Subscribing student A to Semester1.\n\n"
 subscribe_student_a_to_semester1
-echo "Student A should be subscribed to studentmodule1. Press enter to continue.\n\n"
-read anything
+
+
+if [[ "$1" == "-s" ]] || [[ "$1" == "-steps" ]]; then
+  echo "Student A should be subscribed to studentmodule1. Press enter to continue.\n\n"
+  read anything
+fi
 
 echo "Trying to certificate students A, B, and C on module1.\n\n"
 certificate_all_students
-echo "Only Certification for student A should exist. Press enter to continue.\n\n"
-read anything
+
+
+if [[ "$1" == "-s" ]] || [[ "$1" == "-steps" ]]; then
+  echo "Only Certification for student A should exist. Press enter to continue.\n\n"
+  read anything
+fi
 
 echo "Subscribing students B and C to semester1.\n\n"
 subscribe_b_and_c_to_semester1
-echo "Only student b should be subscribed to studentmodule1. Press enter to continue.\n\n"
-read anything
+
+if [[ "$1" == "-s" ]] || [[ "$1" == "-steps" ]]; then
+  echo "Only student b should be subscribed to studentmodule1. Press enter to continue.\n\n"
+  read anything
+fi
 
 echo "Certificating all students once more.\n\n"
 certificate_b_and_c
 echo "Now, also student B should have a certification on Module1.\n\n"
-echo "Press enter to conclude main test."
-read anything
+
+if [[ "$1" == "-s" ]] || [[ "$1" == "-steps" ]]; then
+  echo "Press enter to conclude main test."
+  read anything
+fi
 
 delete_everything
