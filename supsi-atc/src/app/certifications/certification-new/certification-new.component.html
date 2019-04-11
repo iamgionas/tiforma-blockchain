@@ -1,0 +1,30 @@
+<div class="bg-light rounded p-3 mt-5">
+  <h1>Certificazione</h1>
+
+  <div class="form-row ">
+    <div class="form-group col-md-6">
+      <label for="module">Modulo</label>
+      <select class="form-control" name="moduleSelect" id="moduleSelect" [(ngModel)]="certificationData.module">
+        <option *ngFor="let m of modules" value="resource:ch.supsi.Module#{{m.moduleCode}}">{{m.moduleCode}} - {{m.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="student">Studente</label>
+      <select class="form-control" id="student" [(ngModel)]="certificationData.student">
+        <option *ngFor="let s of students" value="resource:ch.supsi.Student#{{s.contactID}}">{{s.contactID}} - {{s.name}} {{s.surname}}</option>
+       </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="state">Voto</label>
+      <input [(ngModel)]="certificationData.grade" type="number" class="form-control" id="grade">
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button (click)="createCertification()" type="button" class="btn btn-outline-success">Crea</button>
+  </div>
+</div>

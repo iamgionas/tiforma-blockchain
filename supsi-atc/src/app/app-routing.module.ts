@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'modules', loadChildren: './modules/modules.module#ModulesModule' },
   { path: 'formations', loadChildren: './formation/formation.module#FormationModule'},
   { path: 'semesters', loadChildren: './semesters/semesters.module#SemestersModule' },
-  { path: 'search', loadChildren: './queries/queries.module#QueriesModule' }
+  { path: 'search', loadChildren: './queries/queries.module#QueriesModule' },
+  { path: 'certifications', loadChildren: './certifications/certifications.module#CertificationsModule'}
 ];
 
 @NgModule({

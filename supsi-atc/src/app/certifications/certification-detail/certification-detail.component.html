@@ -1,0 +1,28 @@
+<div class="bg-light rounded p-3 mt-5" *ngIf="certification">
+  <h1>{{certification.certificationID}}</h1>
+  <div class="form-row ">
+    <div class="form-group col-md-6">
+      <label for="moduleName">Modulo</label>
+      <input disabled type="text" class="form-control" id="moduleCodeAndName"
+        placeholder="Codice modulo e nome" value="{{module.moduleCode+' - '+module.name}}">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Studente</label>
+      <input disabled type="text" class="form-control" id="student" 
+        placeholder="ContactID e nome e cognome studente" value="{{student.contactID+' - '+student.name+' '+student.surname}}">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name">Voto</label>
+      <input type="number" class="form-control" id="grade" 
+        placeholder="Voto" value="{{certification.grade}}">
+    </div>
+  </div>
+  <div class="btn-group">
+    <button (click)="updateCertification()" type="button" class="btn btn-outline-success">Salva</button>
+    <button (click)="deleteCertification()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+  </div>
+</div>
