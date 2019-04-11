@@ -8,52 +8,76 @@
           <option *ngFor="let s of studyPlanList | keyvalue" [ngValue]="s.value">{{s.key}}</option>
         </select>
         <div class="input-group-append">
-          <button (click)="toListModuleAll()" data-toggle="modal" data-target="#exampleModal"
+          <button (click)="toListModuleAll()" data-toggle="modal" data-target="#modulesModal"
             class="btn btn-outline-secondary" type="button">Aggiungi modulo</button>
         </div>
       </div>
       <ul class="list-group">
-        <li *ngFor="let m of semesterModules | keyvalue" class="list-group-item list-group-item-action">{{m.value}}
+        <li *ngFor="let m of semesterModules | keyvalue" (click)="mSelected(m.key)" class="list-group-item list-group-item-action">{{m.value}}
           <a (click)="deleteModule(m.key)" class="deleteCourse"><i class="material-icons">delete</i></a>
         </li>
       </ul>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Aggiunta di moduli</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <ul class="list-group">
-              <li class="list-group-item" *ngFor="let m of moduleAll | keyvalue">{{m.value}}<a (click)="addModule(m.key)"
-                  class="deleteCourse"><i class="material-icons">add</i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="col-md-6">
+    <div class="col-md-6" *ngIf="moduleSelected">
       <div class="input-group mb-3">
-        <select class="custom-select" id="department">
+        <select class="custom-select" [(ngModel)]="formationSelected2">
           <option>Selezione Formazione</option>
           <option *ngFor="let s of studyPlanList | keyvalue" [ngValue]="s.value">{{s.key}}</option>
         </select>
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button">Aggiungi studente</button>
+          <button (click)="toListStudentAll()" data-toggle="modal" data-target="#studentsModal"
+            class="btn btn-outline-secondary" type="button">Aggiungi studente</button>
         </div>
       </div>
       <ul class="list-group">
-          <li class="list-group-item list-group-item-action" >Studente 1</li>
-          <li class="list-group-item list-group-item-action ">Studente 2</li>
+        <li *ngFor="let s of semesterStudents | keyvalue" class="list-group-item list-group-item-action">{{s.value}}
+          <a (click)="deleteStudent(s.key)" class="deleteCourse"><i class="material-icons">delete</i></a>
+        </li>
       </ul>
-    </div> -->
+    </div>
+  </div>
+
+
+  <!-- Modals -->
+  <div class="modal fade" id="modulesModal" tabindex="-1" role="dialog" aria-labelledby="modulesModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modulesModalLabel">Aggiunta di moduli</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let m of moduleAll | keyvalue">{{m.value}}<a (click)="addModule(m.key)"
+                class="deleteCourse"><i class="material-icons">add</i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="studentsModal" tabindex="-1" role="dialog" aria-labelledby="studentsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentsModalLabel">Aggiunta di studenti</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let s of studentAll | keyvalue">{{s.value}}<a (click)="addStudent(s.key)"
+                class="deleteCourse"><i class="material-icons">add</i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
