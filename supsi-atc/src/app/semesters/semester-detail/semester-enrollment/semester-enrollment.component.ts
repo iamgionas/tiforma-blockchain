@@ -21,6 +21,7 @@ export class SemesterEnrollmentComponent implements OnInit {
   private semesterModules: {} = {};    //This is the module list contained in the semester
   private moduleAll: {};              //This list contains all the modules, is filled when in the page I click the button "Aggiungi modulo"
   private moduleSelected: string;
+  private moduleName: string;
   private studentAll: {};
   private semesterStudents: {};
 
@@ -43,7 +44,8 @@ export class SemesterEnrollmentComponent implements OnInit {
   }
 
   /************************************ STUDENTS */
-  mSelected(moduleSelected) {
+  mSelected(moduleSelected, mudoleName) {
+    this.moduleName = mudoleName;
     this.semesterStudents = {};
     this.moduleSelected = moduleSelected;
 

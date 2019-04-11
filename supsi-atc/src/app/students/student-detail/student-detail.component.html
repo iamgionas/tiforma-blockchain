@@ -26,11 +26,13 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="birthday">Anno di Nascita</label>
-      <input required [ngModel]="studentData.birthday | date: 'yyyy-MM-dd'" (ngModelChange)="setBirthday($event)" type="date" class="form-control" id="birthday">
+      <input required [ngModel]="studentData.birthday | date: 'yyyy-MM-dd'" (ngModelChange)="setBirthday($event)"
+        type="date" class="form-control" id="birthday">
     </div>
     <div class="form-group col-md-6">
       <label for="nationality">Nazionalità</label>
-      <select class="form-control select" name="nationality-select" id="nationality" required [(ngModel)]="studentData.nationality">
+      <select class="form-control select" name="nationality-select" id="nationality" required
+        [(ngModel)]="studentData.nationality">
         <option value="">-- select one --</option>
         <option value="afghan">Afghan</option>
         <option value="albanian">Albanian</option>
@@ -234,7 +236,7 @@
     </div>
   </div>
   <div class="btn-group">
-    <button (click)="updateStudent()" type="button" class="btn btn-outline-success">Salva</button>
+    <button (click)="updateStudent()" type="submit" class="btn btn-outline-success">Salva</button>
     <button (click)="deleteStudent()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
   </div>
 </div>

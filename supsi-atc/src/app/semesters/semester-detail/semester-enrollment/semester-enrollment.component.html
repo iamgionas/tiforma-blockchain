@@ -1,6 +1,5 @@
 <div class="bg-light rounded p-3 mt-5" *ngIf="semesterChild">
   <div class="row">
-
     <div class="col-md-6">
       <div class="input-group mb-3">
         <select class="custom-select" [(ngModel)]="formationSelected">
@@ -13,13 +12,14 @@
         </div>
       </div>
       <ul class="list-group">
-        <li *ngFor="let m of semesterModules | keyvalue" (click)="mSelected(m.key)" class="list-group-item list-group-item-action">{{m.value}}
+        <li *ngFor="let m of semesterModules | keyvalue" (click)="mSelected(m.key, m.value)" class="list-group-item list-group-item-action">{{m.value}}
           <a (click)="deleteModule(m.key)" class="deleteCourse"><i class="material-icons">delete</i></a>
         </li>
       </ul>
     </div>
 
     <div class="col-md-6" *ngIf="moduleSelected">
+        <h3 class="text-center">{{moduleName}}</h3>
       <div class="input-group mb-3">
         <select class="custom-select" [(ngModel)]="formationSelected2">
           <option>Selezione Formazione</option>
