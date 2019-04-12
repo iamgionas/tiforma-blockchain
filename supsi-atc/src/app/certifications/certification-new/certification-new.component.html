@@ -4,14 +4,14 @@
   <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="module">Modulo</label>
-      <select class="form-control" name="moduleSelect" id="moduleSelect" [(ngModel)]="certificationData.module">
+      <select required class="form-control" name="moduleSelect" id="moduleSelect" [(ngModel)]="certificationData.module">
         <option *ngFor="let m of modules" value="resource:ch.supsi.Module#{{m.moduleCode}}">{{m.moduleCode}} - {{m.name}}</option>
       </select>
     </div>
 
     <div class="form-group col-md-6">
       <label for="student">Studente</label>
-      <select class="form-control" id="student" [(ngModel)]="certificationData.student">
+      <select required class="form-control" id="student" [(ngModel)]="certificationData.student">
         <option *ngFor="let s of students" value="resource:ch.supsi.Student#{{s.contactID}}">{{s.contactID}} - {{s.name}} {{s.surname}}</option>
        </select>
     </div>
@@ -20,7 +20,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="state">Voto</label>
-      <input [(ngModel)]="certificationData.grade" type="number" class="form-control" id="grade">
+      <input required [(ngModel)]="certificationData.grade" type="number" step="0.1" min="1" max="6" class="form-control" id="grade">
     </div>
   </div>
 

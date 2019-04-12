@@ -40,16 +40,16 @@ export class CertificationDetailComponent implements OnInit {
         this.certificationService.getCertification(this.route.snapshot.params['id']).subscribe((data: Certification) => {
           this.certification = data;
           
-          this.certificationData.oldCertification += this.route.snapshot.params['id'];
+          this.getStudent();
+          this.getModule();
+
+          this.certificationData.oldCertification = 'resource:ch.supsi.Certification#' + this.route.snapshot.params['id'];
 
           this.certificationData.student = this.certification.student;
           this.certificationData.module = this.certification.module;
           this.certificationData.grade = this.certification.grade;
 
-          this.getStudent();
-          this.getModule();
-
-          this.certificationDataToDelete.certification += this.route.snapshot.params['id'];
+          this.certificationDataToDelete.certification =this.certificationData.oldCertification;
         });
       }
     })

@@ -17,8 +17,8 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="name">Voto</label>
-      <input type="number" class="form-control" id="grade" 
-        placeholder="Voto" value="{{certification.grade}}">
+      <input type="number" step="0.1" min="1" max="6" class="form-control" id="grade"
+        placeholder="Voto" value="{{certification.grade}}" [(ngModel)]="certificationData.grade">
     </div>
   </div>
   <div class="btn-group">

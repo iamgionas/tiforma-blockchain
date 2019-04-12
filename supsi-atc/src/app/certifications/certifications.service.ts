@@ -18,16 +18,16 @@ export class CertificationService {
     return this.supsiService.getElement(this.base, id);
   }
 
-  createCertification(courseData) {
-    return this.supsiService.operationToElement("Create" + this.base, courseData);
+  createCertification(certificationData) {
+    return this.supsiService.operationToElement("Create" + this.base, certificationData);
   }
 
-  deleteCertification(courseData) {
-    return this.supsiService.operationToElement("Delete" + this.base, courseData);
+  deleteCertification(certificationData) {
+    return this.supsiService.operationToElement("Delete" + this.base, certificationData);
   }
 
-  updateCertification(courseData) {
-    return this.supsiService.operationToElement("Update" + this.base, courseData);
+  updateCertification(certificationData) {
+    return this.supsiService.operationToElement("Update" + this.base, certificationData);
   }
 
 }
