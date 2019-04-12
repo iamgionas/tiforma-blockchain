@@ -1,5 +1,6 @@
-<div class="bg-light rounded p-3 mt-5" *ngIf="student">
-  <h1>{{student.name + " " + student.surname}}</h1>
+<div class="bg-light rounded p-3 mt-5" *ngIf="student" id="studentDetail">
+  <h1 class="col">{{student.name + " " + student.surname}}</h1>
+  
   <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="serialNumber">Numero Matricola</label>
@@ -16,7 +17,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="name">Name</label>
-      <input required [(ngModel)]="studentData.name" type="text" class="form-control" id="name">
+      <input required [(ngModel)]="studentData.name" value="{{studentData.name}}" type="text" class="form-control" id="name">
     </div>
     <div class="form-group col-md-6">
       <label for="surname">Surname</label>
@@ -235,8 +236,9 @@
       <textarea [(ngModel)]="studentData.comment" class="form-control" id="comment"></textarea>
     </div>
   </div>
-  <div class="btn-group">
-    <button (click)="updateStudent()" type="submit" class="btn btn-outline-success">Salva</button>
-    <button (click)="deleteStudent()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+  <div class="btn-group" id="buttonGroup">
+    <button (click)="updateStudent()" type="submit" class="btn btn-outline-success" id="saveButton">Salva</button>
+    <button (click)="deleteStudent()" type="button" class="btn btn-outline-danger mr-5" id="deleteButton">Elimina</button>
+    <div class="col material-icons" id="printIcon" (click)="printDetail()">print</div>
   </div>
 </div>

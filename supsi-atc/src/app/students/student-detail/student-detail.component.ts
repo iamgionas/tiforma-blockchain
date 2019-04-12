@@ -61,15 +61,12 @@ export class StudentDetailComponent implements OnInit {
           this.studentDataToDelete.student += this.route.snapshot.params['id'];
           
           console.log(this.student.birthday);
-          console.log(this.studentData.birthday);
         });
       }
     });
   }
 
   updateStudent() {
-    console.log(this.studentData.birthday);
-
     this.studentsService.updateStudent(this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -89,4 +86,51 @@ export class StudentDetailComponent implements OnInit {
     this.studentData.birthday = $("#birthday").val();
   }
 
+  printDetail(): void {
+    let printContents, popupWin;
+    let buttonGroup = document.querySelector('#buttonGroup');
+
+    let nationalityOption = document.createElement('option');
+    nationalityOption.setAttribute('selected','selected');
+    nationalityOption.setAttribute('value',this.student.nationality);
+    nationalityOption.innerHTML = this.student.nationality;
+
+    document.querySelector('#serialNumber').setAttribute('value',this.student.serialNumber);
+    document.querySelector('#statute').setAttribute('value',this.student.statute);
+    document.querySelector('#name').setAttribute('value',this.student.name);
+    document.querySelector('#surname').setAttribute('value',this.student.surname);
+    document.querySelector('#nationality').appendChild(nationalityOption);
+    document.querySelector('#birthday').setAttribute('value', this.formatDate());
+    document.querySelector('#comment').innerHTML =  this.student.comment;
+    
+    
+    printContents = document.getElementById('studentDetail');
+    printContents.removeChild(buttonGroup);
+    printContents = printContents.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    window.location.reload();
+  }
+
+  private formatDate() : string{
+    let date = this.student.birthday.toString().split('T')[0];
+    let day = date.split('-')[2];
+    let month = date.split('-')[1];
+    let year = date.split('-')[0];
+
+    return year+"-"+month+"-"+day;
+  }
 }
