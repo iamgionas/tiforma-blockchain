@@ -58,4 +58,32 @@ export class CoursesDetailComponent implements OnInit {
       console.log(err);
     });
   }
+
+  printDetail() : void{
+    let printContents, popupWin;
+    let buttonGroup = document.querySelector('#btn-group');
+
+    document.querySelector('#name').setAttribute('value',this.course.name);
+    document.querySelector('#courseCode').setAttribute('value', this.course.courseCode);
+    
+    printContents = document.querySelector('#courseDetail');
+    printContents.removeChild(buttonGroup);
+    printContents = printContents.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    window.location.reload();
+  }
 }

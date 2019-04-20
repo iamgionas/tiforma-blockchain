@@ -166,4 +166,45 @@ export class ModuleDetailComponent implements OnInit {
 
   }
 
+  printDetail() : void{
+    let printContents, popupWin;
+    let buttonGroup = document.querySelector('#btn-group');
+
+    document.querySelector('#moduleCode').setAttribute('value', this.module.moduleCode);
+    document.querySelector('#name').setAttribute('value', this.module.name);
+    document.querySelector('#duration').setAttribute('value', this.module.duration.toString());
+    document.querySelector('#ETCS').setAttribute('value', this.module.ETCS.toString());
+    document.querySelector('#department').setAttribute('value', this.module.department.name);
+    document.querySelector('#state').setAttribute('value', this.module.state);
+    document.querySelector('#comment').setAttribute('value', this.module.comment);
+
+    document.getElementById('addCourse').parentNode.removeChild(document.getElementById('addCourse'));
+
+    let allAs = document.querySelectorAll("#courseDeletionLink");
+
+    for(let i = 0; i<allAs.length ; i++){
+      allAs.item(i).parentNode.removeChild(allAs[i]);
+    }
+
+    printContents = document.querySelector('#moduleDetail');
+    printContents.removeChild(buttonGroup);
+    printContents = printContents.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    window.location.reload();
+  }
+
 }

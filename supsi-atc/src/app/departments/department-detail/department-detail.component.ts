@@ -59,4 +59,30 @@ export class DepartmentDetailComponent implements OnInit {
     });
   }
 
+  printDetail() : void{
+    let printContents, popupWin;
+    let buttonGroup = document.querySelector('#buttonGroup');
+
+    document.querySelector('#depName').setAttribute('value',this.department.name);
+    
+    printContents = document.querySelector('#departmentDetail');
+    printContents.removeChild(buttonGroup);
+    printContents = printContents.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    window.location.reload();
+  }
 }

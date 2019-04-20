@@ -1,20 +1,23 @@
 <div class="bg-light rounded p-3 mt-5" *ngIf="course">
-  <h1>{{course.name}}</h1>
-  <div class="form-row ">
-    <div class="form-group col-md-6">
-      <label for="courseCode">Codice del corso</label>
-      <input disabled type="text" class="form-control" id="courseCode"
-        placeholder="Codice corso" value="{{course.courseCode}}">
+  <div id="courseDetail">
+    <h1>{{course.name}}</h1>
+    <div class="form-row ">
+      <div class="form-group col-md-6">
+        <label for="courseCode">Codice del corso</label>
+        <input disabled type="text" class="form-control" id="courseCode"
+          placeholder="Codice corso" value="{{course.courseCode}}">
+      </div>
     </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="name">Nome corso</label>
-      <input [(ngModel)]="courseData.name" type="text" class="form-control" id="name">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name">Nome corso</label>
+        <input [(ngModel)]="courseData.name" type="text" class="form-control" id="name">
+      </div>
     </div>
-  </div>
-  <div class="btn-group">
-    <button (click)="updateCourse()" type="button" class="btn btn-outline-success">Salva</button>
-    <button (click)="deleteCourse()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+    <div class="btn-group" id="btn-group">
+      <button (click)="updateCourse()" type="button" class="btn btn-outline-success">Salva</button>
+      <button (click)="deleteCourse()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+      <div class="col material-icons" id="printIcon" (click)="printDetail()">print</div>
+    </div>
   </div>
 </div>
