@@ -85,4 +85,32 @@ export class CertificationDetailComponent implements OnInit {
     });
   }
 
+  printDetail() : void{
+    let printContents, popupWin;
+    let buttonGroup = document.querySelector('div.btn-group');
+
+    document.querySelector('#moduleCodeAndName').setAttribute('value',this.module.moduleCode+" - "+this.module.name);
+    document.querySelector('#student').setAttribute('value', this.student.contactID+' - '+this.student.name+' '+this.student.surname);
+    document.querySelector('#grade').setAttribute('value',this.certification.grade.toString());
+    
+    printContents = document.querySelector('#certificationDetail');
+    printContents.removeChild(buttonGroup);
+    printContents = printContents.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    window.location.reload();
+  }
 }
