@@ -152,4 +152,42 @@ export class FormationDetailComponent implements OnInit {
       console.log(err);
     });
   }
+
+  printDetail() : void{
+    let printContents, popupWin;
+    let buttonGroup = document.querySelector('#btn-group');
+
+    document.querySelector('#department').setAttribute('value', this.studyPlan.department.name);
+    document.querySelector('#state').setAttribute('value', this.studyPlan.state);
+    document.querySelector('#comment').setAttribute('value', this.studyPlan.comment);
+
+    document.getElementById('addModule').parentNode.removeChild(document.getElementById('addModule'));
+
+    let allAs = document.querySelectorAll("#moduleDeletionLink");
+
+    for(let i = 0; i<allAs.length ; i++){
+      allAs.item(i).parentNode.removeChild(allAs[i]);
+    }
+
+    buttonGroup.remove();
+
+    printContents = document.querySelector('#formationDetail');
+    printContents = printContents.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+
+    window.location.reload();
+  }
 }

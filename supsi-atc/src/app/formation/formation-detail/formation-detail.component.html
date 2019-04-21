@@ -1,3 +1,4 @@
+<div id="formationDetail">
 <div class="bg-light rounded p-3 mt-5" *ngIf="studyPlan">
   <h1>{{studyPlan.name}}</h1>
   <div class="form-row ">
@@ -18,9 +19,10 @@
       <input [(ngModel)]="formationData.comment" type="text" class="form-control" id="comment">
     </div>
   </div>
-  <div class="btn-group">
+  <div class="btn-group" id="btn-group">
     <button (click)="updateStudyPlan()" type="button" class="btn btn-outline-success">Salva</button>
     <button (click)="deleteStudyPlan()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+    <div class="col material-icons" id="printIcon" (click)="printDetail()">print</div>
   </div>
 </div>
 
@@ -33,7 +35,7 @@
           class="material-icons">add_circle_outline</i></a></div>
   </div>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let m of moduleList">{{m.name}}<a (click)="deleteModule(m.moduleCode)"
+    <li class="list-group-item" *ngFor="let m of moduleList">{{m.name}}<a (click)="deleteModule(m.moduleCode)" id="moduleDeletionLink"
         class="deleteModule"><i class="material-icons">delete</i></a></li>
   </ul>
 </div>
@@ -56,4 +58,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
