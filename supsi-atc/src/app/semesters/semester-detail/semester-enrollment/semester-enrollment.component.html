@@ -12,24 +12,25 @@
         </div>
       </div>
       <ul class="list-group">
-        <li *ngFor="let m of semesterModules | keyvalue" (click)="mSelected(m.key, m.value)" class="list-group-item list-group-item-action">{{m.value}}
+        <li *ngFor="let m of semesterModules | keyvalue" (click)="mSelected(m.key, m.value)"
+          class="list-group-item list-group-item-action">{{m.value}}
           <a (click)="deleteModule(m.key)" class="deleteCourse"><i class="material-icons">delete</i></a>
         </li>
       </ul>
     </div>
 
     <div class="col-md-6" *ngIf="moduleSelected">
-        <h3 class="text-center">{{moduleName}}</h3>
-      <div class="input-group mb-3">
+      <h3 class="text-center">{{moduleName}}</h3>
+      <!--<div class="input-group mb-3">
         <select class="custom-select" [(ngModel)]="formationSelected2">
           <option>Selezione Formazione</option>
           <option *ngFor="let s of studyPlanList | keyvalue" [ngValue]="s.value">{{s.key}}</option>
         </select>
-        <div class="input-group-append">
-          <button (click)="toListStudentAll()" data-toggle="modal" data-target="#studentsModal"
-            class="btn btn-outline-secondary" type="button">Aggiungi studente</button>
-        </div>
-      </div>
+      <div class="input-group-append">-->
+      <button  (click)="toListStudentAll()" data-toggle="modal" data-target="#studentsModal"
+        class="btn btn-outline-secondary mb-2" type="button">Aggiungi studente</button>
+      <!--</div>
+      </div>-->
       <ul class="list-group">
         <li *ngFor="let s of semesterStudents | keyvalue" class="list-group-item list-group-item-action">{{s.value}}
           <a (click)="deleteStudent(s.key)" class="deleteCourse"><i class="material-icons">delete</i></a>
@@ -72,8 +73,8 @@
         </div>
         <div class="modal-body">
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let s of studentAll | keyvalue">{{s.value}}<a (click)="addStudent(s.key)"
-                class="deleteCourse"><i class="material-icons">add</i></a></li>
+            <li class="list-group-item" *ngFor="let s of studentAll | keyvalue">{{s.value}}<a
+                (click)="addStudent(s.key)" class="deleteCourse"><i class="material-icons">add</i></a></li>
           </ul>
         </div>
       </div>
