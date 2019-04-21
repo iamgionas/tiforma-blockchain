@@ -6,13 +6,15 @@ import { CertificationsRoutingModule } from './certifications-routing.module';
 import { CertificationListComponent } from './certification-list/certification-list.component';
 import { CertificationDetailComponent } from './certification-detail/certification-detail.component';
 import { CertificationNewComponent } from './certification-new/certification-new.component';
+import { LoadingModule } from '../loading/loading.module';
 
 @NgModule({
   declarations: [CertificationListComponent, CertificationDetailComponent, CertificationNewComponent],
   imports: [
     CommonModule,
     CertificationsRoutingModule,
-    FormsModule
+    FormsModule,
+    LoadingModule
   ]
 })
 export class CertificationsModule { }

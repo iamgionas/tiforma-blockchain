@@ -6,6 +6,7 @@ import { SemesterDetailComponent } from './semester-detail/semester-detail.compo
 import { FormsModule } from '@angular/forms';
 import { SemesterNewComponent } from './semester-new/semester-new.component';
 import { SemesterEnrollmentComponent } from './semester-detail/semester-enrollment/semester-enrollment.component';
+import { LoadingModule } from '../loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SemesterEnrollmentComponent } from './semester-detail/semester-enrollme
   imports: [
     CommonModule,
     SemestersRoutingModule,
-    FormsModule
+    FormsModule,
+    LoadingModule
   ]
 })
 export class SemestersModule { }

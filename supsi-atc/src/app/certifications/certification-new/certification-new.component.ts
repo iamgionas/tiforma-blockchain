@@ -15,6 +15,7 @@ export class CertificationNewComponent implements OnInit {
   private certifications : Certification[] = [];
   private students : Student[] = [];
   private modules : Module[] = [];
+  private loading: boolean;
 
   @Input() certificationData: any = {
     $class: 'ch.supsi.CreateCertification',
@@ -32,6 +33,7 @@ export class CertificationNewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.certificationService.getCertifications().subscribe((res: Certification[]) => {
       this.certifications = res;
     });
@@ -46,6 +48,7 @@ export class CertificationNewComponent implements OnInit {
   }
 
   createCertification() {
+    this.loading = true;
     this.certificationData.certificationID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
     this.certificationService.createCertification(this.certificationData).subscribe((result) => {

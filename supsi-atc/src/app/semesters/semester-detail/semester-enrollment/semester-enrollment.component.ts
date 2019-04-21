@@ -24,6 +24,7 @@ export class SemesterEnrollmentComponent implements OnInit {
   private moduleName: string;
   private studentAll: {};
   private semesterStudents: {};
+  private loading: boolean;
 
 
   constructor(
@@ -34,6 +35,7 @@ export class SemesterEnrollmentComponent implements OnInit {
 
 
   ngOnInit() {
+    this.loading = false;
     //This fills the formation list, it make a request to API to receive the formations
     this.semestersService.getFormations().subscribe((res: StudyPlan[]) => {
       res.forEach(sp => { this.studyPlanList[sp.name] = sp.name; });
@@ -73,6 +75,7 @@ export class SemesterEnrollmentComponent implements OnInit {
 
   //Mehtod that adds a student to  a studentMoule
   addStudent(student) {
+    this.loading = true;
     var studentModule = {
       "$class": "ch.supsi.AddStudentToStudentModule",
       "student": "resource:ch.supsi.Student#" + student,
@@ -87,6 +90,7 @@ export class SemesterEnrollmentComponent implements OnInit {
   }
 
   deleteStudent(student){
+    this.loading = true;
     var studentToDelete = {
       "$class": "ch.supsi.RemoveStudentFromStudentModule",
       "student": "resource:ch.supsi.Student#" + student,
@@ -141,6 +145,7 @@ export class SemesterEnrollmentComponent implements OnInit {
 
   //Mehtod that creates a studentMoule and adds this one in a semesters
   addModule(module) {
+    this.loading = true;
     var studentModuleID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
     var studentModule = {
@@ -168,6 +173,7 @@ export class SemesterEnrollmentComponent implements OnInit {
 
   //Mehtod that removes a studentMoule from a semester
   deleteModule(module) {
+    this.loading = true;
     var studentModuleToDelete = {
       "$class": "ch.supsi.RemoveStudentModuleFromSemester",
       "studentmodule": "resource:ch.supsi.StudentModule#" + module,

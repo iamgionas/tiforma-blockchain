@@ -16,6 +16,7 @@ export class ModuleDetailComponent implements OnInit {
   private departmentList: {};       //Object list -> key: dept.name value: "resource:ch.supsi.Department#" + dept.name
   private courseListAll: Course[];  //All Courses without module courses
   private courseList: Course[];     //Module courses
+  private loading: boolean;
 
   @Input() moduleData: any = {
     $class: 'ch.supsi.UpdateModule',
@@ -43,7 +44,7 @@ export class ModuleDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.loading = false;
     /*THIS MANAGE THE DEMPARTEMENT SELECT LIST
       I call the service to get the list of all Departement, this return a list of Departement object
       but we want the string -> "resource:ch.supsi.Departement#" + departement name to insert in the
@@ -115,6 +116,7 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   updateModule() {
+    this.loading = true;
     this.courseList.forEach(element => {
       var str = "resource:ch.supsi.Course#";
       this.moduleData.courses.push(str + element.courseCode);
@@ -128,6 +130,7 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   deleteModule() {
+    this.loading = true;
     this.modulesService.deleteModule(this.moduleDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -136,6 +139,7 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   deleteCourse(id) {
+    this.loading = true;
     var data = {
       "$class": "ch.supsi.RemoveCourseFromModule",
       "course": "resource:ch.supsi.Course#" + id,
@@ -151,6 +155,7 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   addCourse(course: Course) {
+    this.loading = true;
     console.log(course);
     var data = {
       "$class": "ch.supsi.AddCourseToModule",

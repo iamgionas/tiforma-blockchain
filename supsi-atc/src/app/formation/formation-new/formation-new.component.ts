@@ -11,6 +11,7 @@ import { Department } from 'src/app/ch.supsi';
 export class FormationNewComponent implements OnInit {
 
   private departmentList: {};
+  private loading: boolean;
 
   @Input() formationData: any = {
     $class: 'ch.supsi.CreateStudyPlan',
@@ -27,6 +28,7 @@ export class FormationNewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.departmentList = {};
     this.formationsService.getDepartments().subscribe((res: Department[]) => {
       res.forEach(dept => {
@@ -37,6 +39,7 @@ export class FormationNewComponent implements OnInit {
   }
 
   createStudyPlan() {
+    this.loading = true;
     //this.formationData.studyPlanID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);   StudyPlan still has no ID.
     console.log(this.formationData);
     this.formationsService.createStudyPlan(this.formationData).subscribe((result) => {

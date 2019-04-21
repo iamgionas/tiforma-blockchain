@@ -11,6 +11,7 @@ import { Course } from 'src/app/ch.supsi';
 export class CoursesDetailComponent implements OnInit {
 
   private course: Course;
+  private loading: boolean;
 
   @Input() courseData: any = {
     $class: 'ch.supsi.UpdateCourse',
@@ -29,6 +30,7 @@ export class CoursesDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.route.params.subscribe((params: any) => {
       if (params.id) {
         this.coursesService.getCourse(this.route.snapshot.params['id']).subscribe((data: Course) => {
@@ -44,6 +46,7 @@ export class CoursesDetailComponent implements OnInit {
   }
 
   updateCourse() {
+    this.loading = true;
     this.coursesService.updateCourse(this.courseData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -52,6 +55,7 @@ export class CoursesDetailComponent implements OnInit {
   }
 
   deleteCourse() {
+    this.loading = true;
     this.coursesService.deleteCourse(this.courseDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {

@@ -15,6 +15,7 @@ export class CertificationDetailComponent implements OnInit {
   private certification : Certification;
   private student : Student;
   private module : Module;
+  private loading: boolean;
 
   @Input() certificationData: any = {
     $class: 'ch.supsi.UpdateCertification',
@@ -35,6 +36,7 @@ export class CertificationDetailComponent implements OnInit {
               private modulesService : ModulesService) { }
 
   ngOnInit() {
+    this.loading = false;
     this.route.params.subscribe((params: any) => {
       if (params.id) {
         this.certificationService.getCertification(this.route.snapshot.params['id']).subscribe((data: Certification) => {
@@ -70,6 +72,7 @@ export class CertificationDetailComponent implements OnInit {
   }
 
   updateCertification() {
+    this.loading = true;
     this.certificationService.updateCertification(this.certificationData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -78,6 +81,7 @@ export class CertificationDetailComponent implements OnInit {
   }
 
   deleteCertification() {
+    this.loading = true;
     this.certificationService.deleteCertification(this.certificationDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {

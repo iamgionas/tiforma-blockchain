@@ -8,6 +8,8 @@ import { SemestersService } from '../semesters.service';
 })
 export class SemesterNewComponent implements OnInit {
 
+  private loading: boolean;
+
   @Input() semesterData: any = {
     $class: 'ch.supsi.CreateSemester',
     name: '',
@@ -18,9 +20,11 @@ export class SemesterNewComponent implements OnInit {
   constructor(private semestersService: SemestersService) { }
 
   ngOnInit() {
+    this.loading = false;
   }
 
   createSemester() {
+    this.loading = true;
     this.semestersService.createSemester(this.semesterData).subscribe((result) => {
       window.location.reload();
     }, (err) => {

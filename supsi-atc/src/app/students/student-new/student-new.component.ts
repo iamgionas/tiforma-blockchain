@@ -10,6 +10,8 @@ import { DatePipe } from '@angular/common';
 })
 export class StudentNewComponent implements OnInit {
 
+  private loading: boolean;
+
   statuteValues = [
     "Mai immatricolato",
     "Immatricolato",
@@ -36,12 +38,12 @@ export class StudentNewComponent implements OnInit {
     private studentsService: StudentsService) { }
 
   ngOnInit() {
-
+    this.loading = false;
   }
 
   createStudent(){
     this.studentData.contactID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    
+    this.loading = true;
     this.studentsService.createStudent(this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {

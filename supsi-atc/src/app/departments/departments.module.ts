@@ -5,16 +5,19 @@ import { DepartmentDetailComponent } from './department-detail/department-detail
 import { DepartmentNewComponent } from './department-new/department-new.component';
 import { DepartmentsRoutingModule } from './departments-routing.module';
 import { FormsModule } from '@angular/forms';
+import { LoadingModule } from '../loading/loading.module';
 
 @NgModule({
   declarations: [
     DepartmentListComponent, 
     DepartmentDetailComponent, 
-    DepartmentNewComponent],
+    DepartmentNewComponent
+  ],
   imports: [
     CommonModule,
     DepartmentsRoutingModule,
-    FormsModule
+    FormsModule,
+    LoadingModule
   ]
 })
 export class DepartmentsModule { }

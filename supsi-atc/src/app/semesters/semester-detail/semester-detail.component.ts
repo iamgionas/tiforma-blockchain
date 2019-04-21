@@ -12,6 +12,7 @@ export class SemesterDetailComponent implements OnInit {
 
   public semester: Semester;
   semesterToChild = this.route.snapshot.params['id'].toString();
+  private loading: boolean;
 
   @Input() semesterData: any = {
     $class: 'ch.supsi.UpdateSemester',
@@ -31,6 +32,7 @@ export class SemesterDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.route.params.subscribe((params: any) => {
       if (params.id) {
         this.semestersService.getSemester(this.route.snapshot.params['id']).subscribe((data: Semester) => {
@@ -47,6 +49,7 @@ export class SemesterDetailComponent implements OnInit {
   }
 
   updateSemester() {
+    this.loading = true;
     this.semestersService.updateSemester(this.semesterData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -55,6 +58,7 @@ export class SemesterDetailComponent implements OnInit {
   }
 
   deleteSemester() {
+    this.loading = true;
     this.semestersService.deleteSemester(this.semesterDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {

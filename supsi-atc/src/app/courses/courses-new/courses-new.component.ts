@@ -9,6 +9,8 @@ import { CoursesService } from '../courses.service';
 })
 export class CoursesNewComponent implements OnInit {
 
+  private loading: boolean;
+
   @Input() courseData: any = {
     $class: 'ch.supsi.CreateCourse',
     courseCode: '',
@@ -20,9 +22,11 @@ export class CoursesNewComponent implements OnInit {
     private coursesService: CoursesService) { }
 
   ngOnInit() {
+    this.loading = false;
   }
 
   createCourse() {
+    this.loading = true;
     this.courseData.courseCode = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.coursesService.createCourse(this.courseData).subscribe((result) => {
       window.location.reload();

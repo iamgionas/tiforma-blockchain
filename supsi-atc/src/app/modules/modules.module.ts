@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ModuleListComponent } from './module-list/module-list.component';
 import { ModuleDetailComponent } from './module-detail/module-detail.component';
 import { ModuleNewComponent } from './module-new/module-new.component';
+import { LoadingModule } from '../loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ModuleNewComponent } from './module-new/module-new.component';
   imports: [
     CommonModule,
     ModulesRoutingModule,
-    FormsModule
+    FormsModule,
+    LoadingModule
   ]
 })
 export class ModulesModule { }

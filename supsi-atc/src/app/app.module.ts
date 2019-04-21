@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContainerComponent } from './container/container.component';
+import { LoadingModule } from './loading/loading.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ContainerComponent } from './container/container.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LoadingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

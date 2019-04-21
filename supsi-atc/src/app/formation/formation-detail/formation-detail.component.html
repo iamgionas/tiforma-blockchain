@@ -1,62 +1,63 @@
 <div id="formationDetail">
-<div class="bg-light rounded p-3 mt-5" *ngIf="studyPlan">
-  <h1>{{studyPlan.name}}</h1>
-  <div class="form-row ">
-    <div class="form-group col-md-6">
-      <label for="department">Dipartimento</label>
-      <select class="form-control" id="department" [(ngModel)]="formationData.department">
-        <option *ngFor="let d of departmentList | keyvalue" [ngValue]="d.value">{{d.key}}</option>
-      </select>
+  <div class="bg-light rounded p-3 mt-5" *ngIf="studyPlan">
+    <h1>{{studyPlan.name}}</h1>
+    <div class="form-row ">
+      <div class="form-group col-md-6">
+        <label for="department">Dipartimento</label>
+        <select class="form-control" id="department" [(ngModel)]="formationData.department">
+          <option *ngFor="let d of departmentList | keyvalue" [ngValue]="d.value">{{d.key}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="name">Stato</label>
+        <input [(ngModel)]="formationData.state" type="text" class="form-control" id="state">
+      </div>
     </div>
-    <div class="form-group col-md-6">
-      <label for="name">Stato</label>
-      <input [(ngModel)]="formationData.state" type="text" class="form-control" id="state">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="duration">Commento</label>
+        <input [(ngModel)]="formationData.comment" type="text" class="form-control" id="comment">
+      </div>
+    </div>
+    <div class="btn-group" id="btn-group">
+      <button (click)="updateStudyPlan()" type="button" class="btn btn-outline-success">Salva</button>
+      <button (click)="deleteStudyPlan()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
+      <div class="col material-icons" id="printIcon" (click)="printDetail()">print</div>
     </div>
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="duration">Commento</label>
-      <input [(ngModel)]="formationData.comment" type="text" class="form-control" id="comment">
-    </div>
-  </div>
-  <div class="btn-group" id="btn-group">
-    <button (click)="updateStudyPlan()" type="button" class="btn btn-outline-success">Salva</button>
-    <button (click)="deleteStudyPlan()" type="button" class="btn btn-outline-danger mr-5">Elimina</button>
-    <div class="col material-icons" id="printIcon" (click)="printDetail()">print</div>
-  </div>
-</div>
 
-<div class="bg-light rounded p-3 mt-5" *ngIf="studyPlan">
-  <div class="row">
-    <div class="col-md-11">
-      <h3>Moduli</h3>
-    </div>
-    <div class="col-md-1"><a (click)="toListOfModuleAll()" data-toggle="modal" data-target="#exampleModal" id="addModule"><i
-          class="material-icons">add_circle_outline</i></a></div>
-  </div>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let m of moduleList">{{m.name}}<a (click)="deleteModule(m.moduleCode)" id="moduleDeletionLink"
-        class="deleteModule"><i class="material-icons">delete</i></a></li>
-  </ul>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Aggiunta di moduli</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="bg-light rounded p-3 mt-5" *ngIf="studyPlan">
+    <div class="row">
+      <div class="col-md-11">
+        <h3>Moduli</h3>
       </div>
-      <div class="modal-body">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let m of moduleListAll">{{m.name}}<a (click)="addModule(m)"
-              class="deleteModule"><i class="material-icons">add</i></a></li>
-        </ul>
+      <div class="col-md-1"><a (click)="toListOfModuleAll()" data-toggle="modal" data-target="#exampleModal"
+          id="addModule"><i class="material-icons">add_circle_outline</i></a></div>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let m of moduleList">{{m.name}}<a (click)="deleteModule(m.moduleCode)"
+          id="moduleDeletionLink" class="deleteModule"><i class="material-icons">delete</i></a></li>
+    </ul>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Aggiunta di moduli</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let m of moduleListAll">{{m.name}}<a (click)="addModule(m)"
+                class="deleteModule"><i class="material-icons">add</i></a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
+<app-loading *ngIf="loading"></app-loading>

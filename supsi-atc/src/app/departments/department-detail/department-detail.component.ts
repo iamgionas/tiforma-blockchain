@@ -11,6 +11,7 @@ import { DepartmentsService } from '../departments.service';
 export class DepartmentDetailComponent implements OnInit {
 
   private department: Department;
+  private loading: boolean;
 
   @Input() departmentData: any = {
     $class: 'ch.supsi.UpdateDepartment',
@@ -29,6 +30,7 @@ export class DepartmentDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.route.params.subscribe((params: any) => {
       if (params.id) {
         this.departmentsService.getDepartment(this.route.snapshot.params['id']).subscribe((data: Department) => {
@@ -44,6 +46,7 @@ export class DepartmentDetailComponent implements OnInit {
   }
 
   updateDepartment() {
+    this.loading = true;
     this.departmentsService.updateDepartment(this.departmentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -52,6 +55,7 @@ export class DepartmentDetailComponent implements OnInit {
   }
 
   deleteDepartment() {
+    this.loading = true;
     this.departmentsService.deleteDepartment(this.departmentDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {

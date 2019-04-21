@@ -13,6 +13,8 @@ export class StudentDetailComponent implements OnInit {
   private student: Student;
   private birthday: string;
 
+  private loading: boolean;
+
   private statuteValues = [
     "Mai immatricolato",
     "Immatricolato",
@@ -44,6 +46,7 @@ export class StudentDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.route.params.subscribe((parms: any) => {
       if (parms.id) {
         this.studentsService.getStudent(this.route.snapshot.params['id']).subscribe((data: Student) => {
@@ -67,7 +70,9 @@ export class StudentDetailComponent implements OnInit {
   }
 
   updateStudent() {
+    this.loading = true;
     this.studentsService.updateStudent(this.studentData).subscribe((result) => {
+      
       window.location.reload();
     }, (err) => {
       console.log(err);
@@ -75,7 +80,9 @@ export class StudentDetailComponent implements OnInit {
   }
 
   deleteStudent() {
+    this.loading = true;
     this.studentsService.deleteStudent(this.studentDataToDelete).subscribe((result) => {
+      
       window.location.reload();
     }, (err) => {
       console.log(err);

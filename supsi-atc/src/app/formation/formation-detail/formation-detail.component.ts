@@ -12,11 +12,11 @@ import { StudyPlan, Module, Department } from 'src/app/ch.supsi';
 })
 export class FormationDetailComponent implements OnInit {
 
-
   private studyPlan: StudyPlan;
   private departmentList: {};       //Object list -> key: dept.name value: "resource:ch.supsi.Department#" + dept.name
   private moduleListAll: Module[];  //All Courses without module courses
   private moduleList: Module[];     //Module courses
+  private loading: boolean;
 
 
   private formationDataToDelete = {
@@ -40,6 +40,7 @@ export class FormationDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.departmentList = {};
     this.modulesService.getDepartments().subscribe((res: Department[]) => {
       res.forEach(dept => {
@@ -64,7 +65,7 @@ export class FormationDetailComponent implements OnInit {
           this.toListOfModule(this.studyPlan, this.studyPlan.modules);
           this.toListOfModuleAll();
 
-          this.formationDataToDelete.studyPlan = this.formationData.oldStudyPlan;
+          this.formationDataToDelete.studyPlan += params.id;
         });
       }
     })
@@ -103,6 +104,7 @@ export class FormationDetailComponent implements OnInit {
 
 
   updateStudyPlan() {
+    this.loading = true;
     this.formationData.modules = [];
     this.moduleList.forEach(element => {
       var str = "resource:ch.supsi.Module#";
@@ -117,6 +119,9 @@ export class FormationDetailComponent implements OnInit {
   }
 
   deleteStudyPlan() {
+    this.loading = true;
+    console.log(this.formationDataToDelete);
+    
     this.formationService.deleteStudyPlan(this.formationDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -125,11 +130,13 @@ export class FormationDetailComponent implements OnInit {
   }
 
   deleteModule(id) {
+    this.loading = true;
     var data = {
       "$class": "ch.supsi.RemoveModuleFromStudyPlan",
       "module": "resource:ch.supsi.Module#" + id,
       "studyplan": "resource:ch.supsi.StudyPlan#" + this.studyPlan.name,
     };
+    
 
     this.formationService.removeModule(data).subscribe((result) => {
       window.location.reload();
@@ -140,6 +147,7 @@ export class FormationDetailComponent implements OnInit {
   }
 
   addModule(module: Module) {
+    this.loading = true;
     var data = {
       "$class": "ch.supsi.AddModuleToStudyPlan",
       "module": "resource:ch.supsi.Module#" + module.moduleCode,
