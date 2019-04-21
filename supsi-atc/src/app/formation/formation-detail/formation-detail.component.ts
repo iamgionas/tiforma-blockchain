@@ -21,7 +21,7 @@ export class FormationDetailComponent implements OnInit {
 
   private formationDataToDelete = {
     $class: "ch.supsi.DeleteStudyPlan",
-    studyPlan: 'resource:ch.supsi.StudyPlan#'
+    studyplan: 'resource:ch.supsi.StudyPlan#'
   }
 
   @Input() formationData: any = {
@@ -65,7 +65,7 @@ export class FormationDetailComponent implements OnInit {
           this.toListOfModule(this.studyPlan, this.studyPlan.modules);
           this.toListOfModuleAll();
 
-          this.formationDataToDelete.studyPlan += params.id;
+          this.formationDataToDelete.studyplan += params.id;
         });
       }
     })
