@@ -31,5 +31,12 @@ export class StudentsService {
     return this.supsiService.operationToElement("Update" + this.base, studentData);
   }
 
+  getStudyPlans(){
+    return this.supsiService.getElements("StudyPlan");
+  }
+
+  getStudyPlan(id){
+    return this.supsiService.getElement("StudyPlan",id);
+  }
 
 }

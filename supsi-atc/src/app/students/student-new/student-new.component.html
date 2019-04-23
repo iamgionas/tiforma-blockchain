@@ -230,6 +230,14 @@
     </div>
   </div>
   <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="studyplan">Piano di studio</label>
+      <select class="form-control select" name="studyplanSelect" id="studyplanSelect" [(ngModel)]="studentData.studyPlan" required>
+        <option *ngFor="let sp of studyPlans" value="resource:ch.supsi.StudyPlan#{{sp.name}}">{{sp.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
     <div class="form-group col-md-12">
       <label for="comment">Commento</label>
       <textarea [(ngModel)]="studentData.comment" class="form-control" id="comment"></textarea>
