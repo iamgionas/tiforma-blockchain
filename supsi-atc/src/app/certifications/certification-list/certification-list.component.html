@@ -3,7 +3,7 @@
     <button routerLink="new" type="button" class="btn btn-secondary">
       Aggiungi Certificazione
     </button>
-    <ul class="list-group mt-3">
+    <ul class="list-group mt-3  text-left">
       <li *ngFor="let c of certifications" class="list-group-item list-group-item-action"
         [routerLinkActive]="['active']" routerLink="{{c.certificationID}}">
         {{c.module.toString().split('#')[1]}} - {{c.student.toString().split('#')[1]}}</li>

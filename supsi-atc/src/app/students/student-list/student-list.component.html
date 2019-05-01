@@ -3,7 +3,7 @@
     <button routerLink="new" type="button" class="btn btn-secondary">
       Aggiungi Studente
     </button>
-    <ul class="list-group mt-3" *ngIf="students">
+    <ul class="list-group mt-3 text-left" *ngIf="students">
       <li *ngFor="let p of students" class="list-group-item list-group-item-action" [routerLinkActive]="['active']"
         routerLink="{{p.contactID}}">{{p.name + " " + p.surname}}</li>
     </ul>

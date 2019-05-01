@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SUPSIService {
+
+  // Endpoint di base per tutti i link
   private endpoint = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient) { }

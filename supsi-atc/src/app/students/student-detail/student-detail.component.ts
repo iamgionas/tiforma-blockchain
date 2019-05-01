@@ -13,8 +13,7 @@ export class StudentDetailComponent implements OnInit {
   private student: Student;
   private birthday: string;
   
-  studyplans : StudyPlan[] = [];
-
+  private studyplans: {};
   private loading: boolean;
 
   private statuteValues = [
@@ -49,8 +48,17 @@ export class StudentDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+    this.studyplans = {};
     this.route.params.subscribe((parms: any) => {
       if (parms.id) {
+
+        this.studentsService.getStudyPlans().subscribe((sp : StudyPlan[]) => {
+          sp.forEach(plan => {
+            this.studyplans[plan.name] = ("resource:ch.supsi.StudyPlan#" + plan.name.toString().split(' ').join('%20'));
+          });
+        });
+
+
         this.studentsService.getStudent(this.route.snapshot.params['id']).subscribe((data: Student) => {
           this.student = data;
 
@@ -66,12 +74,10 @@ export class StudentDetailComponent implements OnInit {
           this.studentData.studyPlan = this.student.studyPlan;
 
           this.studentDataToDelete.student = 'resource:ch.supsi.Student#'+this.route.snapshot.params['id'];
+          console.log(this.studentData.studyPlan);
+          
         });
       }
-    });
-
-    this.studentsService.getStudyPlans().subscribe((sp : StudyPlan[]) => {
-      this.studyplans = sp;
     });
 
   }
