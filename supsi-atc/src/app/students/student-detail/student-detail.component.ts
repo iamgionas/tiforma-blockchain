@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Student } from 'src/app/ch.supsi';
+import { Student, StudyPlan } from 'src/app/ch.supsi';
 import { StudentsService } from '../students.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class StudentDetailComponent implements OnInit {
 
   private student: Student;
   private birthday: string;
+  
+  studyplans : StudyPlan[] = [];
 
   private loading: boolean;
 
@@ -52,7 +54,7 @@ export class StudentDetailComponent implements OnInit {
         this.studentsService.getStudent(this.route.snapshot.params['id']).subscribe((data: Student) => {
           this.student = data;
 
-          this.studentData.oldStudent += this.route.snapshot.params['id'];
+          this.studentData.oldStudent = 'resource:ch.supsi.Student#'+this.route.snapshot.params['id'];
           this.studentData.name = this.student.name;
           this.studentData.surname = this.student.surname;
           this.studentData.birthday = this.student.birthday;  //new Date()
@@ -61,15 +63,22 @@ export class StudentDetailComponent implements OnInit {
           this.studentData.serialNumber = this.student.serialNumber;
           this.studentData.comment = this.student.comment;
 
-          this.studentDataToDelete.student += this.route.snapshot.params['id'];
-          
-          console.log(this.student.birthday);
+          this.studentData.studyPlan = this.student.studyPlan;
+
+          this.studentDataToDelete.student = 'resource:ch.supsi.Student#'+this.route.snapshot.params['id'];
         });
       }
     });
+
+    this.studentsService.getStudyPlans().subscribe((sp : StudyPlan[]) => {
+      this.studyplans = sp;
+    });
+
   }
 
   updateStudent() {
+    this.studentData.studyPlan = this.studentData.studyPlan.split(' ').join('%20');
+
     this.loading = true;
     this.studentsService.updateStudent(this.studentData).subscribe((result) => {
       

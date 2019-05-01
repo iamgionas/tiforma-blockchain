@@ -231,6 +231,14 @@
     </div>
   </div>
   <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="studyplan">Piano di studi</label>
+      <select [(ngModel)]="studentData.studyPlan" class="form-control select" name="studyplanSelect" id="studyplan"  required>
+        <option  *ngFor="let sp of studyplans" [attr.selected]="studentData.studyPlan.toString().split('#')[1].split('%20').join(' ') === sp.name" value="resource:ch.supsi.StudyPlan#{{sp.name}}">{{sp.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
     <div class="form-group col-md-12">
       <label for="comment">Commento</label>
       <textarea [(ngModel)]="studentData.comment" class="form-control" id="comment"></textarea>

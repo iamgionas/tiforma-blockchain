@@ -117,56 +117,56 @@ create_module "M02055" "Realtà virtuale" 1 6 | grep Error
 create_module "M07007" "Economia aziendale 2" 1 6 | grep Error
 create_module "M08002" "Algoritmi avanzati e ottimizzazione" 1 6 | grep Error
 
-add_course_to_module "C08003" "M08002"
-add_course_to_module "C08004" "M08002"
-add_course_to_module "C02055" "M02043"
-add_course_to_module "C02057" "M02044"
-add_course_to_module "C02056" "M02043"
-add_course_to_module "C07013" "M07007"
+add_course_to_module "C08003" "M08002" | grep Error
+add_course_to_module "C08004" "M08002" | grep Error
+add_course_to_module "C02055" "M02043" | grep Error
+add_course_to_module "C02057" "M02044" | grep Error
+add_course_to_module "C02056" "M02043" | grep Error
+add_course_to_module "C07013" "M07007" | grep Error
 
-create_department "DTI"
-create_department "DEASS"
-create_department "DACD"
-create_department "DFA"
+create_department "DTI" | grep Error
+create_department "DEASS" | grep Error
+create_department "DACD" | grep Error
+create_department "DFA" | grep Error
 
-create_studyPlan "Ingegneria informatica TP" "DTI"
+create_studyPlan "Ingegneria informatica TP" "DTI" | grep Error
 
-add_module_to_studyPlan "M02043" "Ingegneria informatica TP"
-add_module_to_studyPlan "M02044" "Ingegneria informatica TP"
-add_module_to_studyPlan "M02055" "Ingegneria informatica TP"
-add_module_to_studyPlan "M07007" "Ingegneria informatica TP"
-add_module_to_studyPlan "M08002" "Ingegneria informatica TP"
+add_module_to_studyPlan "M02043" "Ingegneria informatica TP" | grep Error
+add_module_to_studyPlan "M02044" "Ingegneria informatica TP" | grep Error
+add_module_to_studyPlan "M02055" "Ingegneria informatica TP" | grep Error
+add_module_to_studyPlan "M07007" "Ingegneria informatica TP" | grep Error
+add_module_to_studyPlan "M08002" "Ingegneria informatica TP" | grep Error
 
-create_studentModule "SM03806" "M02043"
-create_studentModule "SM03807" "M02044"
-create_studentModule "SM03808" "M02055"
-create_studentModule "SM03809" "M07007"
-create_studentModule "SM03810" "M08002"
+create_studentModule "SM03806" "M02043" | grep Error
+create_studentModule "SM03807" "M02044" | grep Error
+create_studentModule "SM03808" "M02055" | grep Error
+create_studentModule "SM03809" "M07007" | grep Error
+create_studentModule "SM03810" "M08002" | grep Error
 
-create_semester "Semestre Primaverile 2019 - Informatica TP" "Semestre primaverile 2019 per gli studenti di ingegneria informatica a tempo pieno del terzo anno."
+create_semester "Semestre Primaverile 2019 - Informatica TP" "Semestre primaverile 2019 per gli studenti di ingegneria informatica a tempo pieno del terzo anno." | grep Error
 
-add_studentModule_to_semester "SM03806" "Semestre Primaverile 2019 - Informatica TP"
-add_studentModule_to_semester "SM03807" "Semestre Primaverile 2019 - Informatica TP"
-add_studentModule_to_semester "SM03808" "Semestre Primaverile 2019 - Informatica TP"
-add_studentModule_to_semester "SM03809" "Semestre Primaverile 2019 - Informatica TP"
-add_studentModule_to_semester "SM03810" "Semestre Primaverile 2019 - Informatica TP"
+add_studentModule_to_semester "SM03806" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+add_studentModule_to_semester "SM03807" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+add_studentModule_to_semester "SM03808" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+add_studentModule_to_semester "SM03809" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+add_studentModule_to_semester "SM03810" "Semestre Primaverile 2019 - Informatica TP" | grep Error
 
-create_student "S83934" "Brian" "Pulfer" "16-682-080"
-create_student "S06739" "Gionas" "Bonardi" "16-682-081"
-create_student "S09263" "Olmo" "Barberis" "16-682-082"
-create_student "S82916" "Patrick" "Valnegri" "16-682-083"
-create_student "S36890" "Kevin" "Dominguez" "16-682-084"
-create_student "S94739" "Nicholas" "Sala" "16-682-085"
-create_student "S02836" "Ivan" "Pavic" "16-682-086"
-create_student "S74666" "Tommaso" "Agnola" "16-682-087"
-create_student "S45672" "Elia" "Perrone" "16-682-088"
+create_student "S83934" "Brian" "Pulfer" "16-682-080" | grep Error
+create_student "S06739" "Gionas" "Bonardi" "16-682-081" | grep Error
+create_student "S09263" "Olmo" "Barberis" "16-682-082" | grep Error
+create_student "S82916" "Patrick" "Valnegri" "16-682-083" | grep Error
+create_student "S36890" "Kevin" "Dominguez" "16-682-084" | grep Error
+create_student "S94739" "Nicholas" "Sala" "16-682-085" | grep Error
+create_student "S02836" "Ivan" "Pavic" "16-682-086" | grep Error
+create_student "S74666" "Tommaso" "Agnola" "16-682-087" | grep Error
+create_student "S45672" "Elia" "Perrone" "16-682-088" | grep Error
 
-subscribe_student_to_semester "S83934" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S06739" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S09263" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S82916" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S36890" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S94739" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S02836" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S74666" "Semestre Primaverile 2019 - Informatica TP"
-subscribe_student_to_semester "S45672" "Semestre Primaverile 2019 - Informatica TP"
+subscribe_student_to_semester "S83934" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S06739" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S09263" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S82916" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S36890" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S94739" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S02836" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S74666" "Semestre Primaverile 2019 - Informatica TP" | grep Error
+subscribe_student_to_semester "S45672" "Semestre Primaverile 2019 - Informatica TP" | grep Error

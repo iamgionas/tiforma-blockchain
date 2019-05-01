@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentsService } from '../students.service';
 import { DatePipe } from '@angular/common';
+import { StudyPlan } from 'src/app/ch.supsi';
 
 @Component({
   selector: 'app-student-new',
@@ -11,6 +12,8 @@ import { DatePipe } from '@angular/common';
 export class StudentNewComponent implements OnInit {
 
   private loading: boolean;
+
+  studyPlans : StudyPlan[] = [];
 
   statuteValues = [
     "Mai immatricolato",
@@ -39,6 +42,10 @@ export class StudentNewComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+
+    this.studentsService.getStudyPlans().subscribe((sp : StudyPlan[]) => {
+      this.studyPlans = sp;
+    });
   }
 
   createStudent(){

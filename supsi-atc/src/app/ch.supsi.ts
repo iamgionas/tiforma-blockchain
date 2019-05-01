@@ -29,6 +29,7 @@ export class Student extends Contact {
    statute: string;
    serialNumber: string;
    comment: string;
+   studyPlan: StudyPlan;
 }
 export class CreateStudent extends Transaction {
    contactID: string;
