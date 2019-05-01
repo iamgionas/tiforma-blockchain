@@ -57,7 +57,7 @@
           <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Moduli'" routerLink="/modules/{{f.moduleCode}}">{{f.name +" "+f.moduleCode}}</h2>
           <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Formazioni'" routerLink="/formations/{{f.name}}">{{f.department.split('#')[1]+" - "+f.name}}</h2>
           <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Semestri'" routerLink="/semesters/{{f.name}}">{{f.name}}</h2>
-          <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Certificazioni'" routerLink="/certifications/{{f.certificationID}}">{{f.name +" "+f.department}}</h2>
+          <h2 id="headingResult" class="h2 text-center" *ngIf="[type] == 'Certificazioni'" routerLink="/certifications/{{f.certificationID}}">{{f.module.split('#')[1] +" - "+f.student.split('#')[1]}}</h2>
         </div>
       </div>
     </div>

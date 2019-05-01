@@ -342,9 +342,13 @@ export class MainSearchComponent implements OnInit {
       this.found = [];
  
       for(let i = 0; i<allCertifications.length; i++){
-        if(allCertifications[i].name.includes(this.searchValue)){
-          this.found.push(allCertifications[i]);
-        }
+
+        this.restService.getObject('Student',allCertifications[i].student.toString().split('#')[1]).subscribe(student =>{
+          if(student.name.includes(this.searchValue)){
+            this.found.push(allCertifications[i]);
+          }
+        })
+
       }
      });
   }
@@ -356,9 +360,13 @@ export class MainSearchComponent implements OnInit {
       this.found = [];
  
       for(let i = 0; i<allCertifications.length; i++){
-        if(allCertifications[i].surname.includes(this.searchValue)){
-          this.found.push(allCertifications[i]);
-        }
+
+        this.restService.getObject('Student',allCertifications[i].student.toString().split('#')[1]).subscribe(student =>{
+          if(student.surname.includes(this.searchValue)){
+            this.found.push(allCertifications[i]);
+          }
+        })
+
       }
      });
   }
@@ -370,9 +378,12 @@ export class MainSearchComponent implements OnInit {
       this.found = [];
  
       for(let i = 0; i<allCertifications.length; i++){
-        if(allCertifications[i].module.moduleCode.toString().includes(this.searchValue.toString())){
-          this.found.push(allCertifications[i]);
-        }
+
+        this.restService.getObject('Module',allCertifications[i].module.toString().split('#')[1]).subscribe(module =>{
+          if(module.moduleCode.toString().includes(this.searchValue.toString())){
+            this.found.push(allCertifications[i]);
+          }
+        })
       }
      });
   }
