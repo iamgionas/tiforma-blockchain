@@ -314,7 +314,18 @@ async function updateSemester(parameters){
 */
 async function deleteSemester(parameters){
   let assetRegistry = await getAssetRegistry('ch.supsi.Semester');
-  await assetRegistry.remove(parameters.semester.name);
+  let studentModuleRegistry = await getAssetRegistry('ch.supsi.StudentModule');
+  
+  let semester = parameters.semester;
+  
+  
+  if(semester.modules){
+    for(let i=0; i<semester.modules.length; i++){
+      await studentModuleRegistry.remove(semester.modules[i].studentModuleID);
+    }
+  }
+  
+  await assetRegistry.remove(semester.name);
 }
 
 /**
