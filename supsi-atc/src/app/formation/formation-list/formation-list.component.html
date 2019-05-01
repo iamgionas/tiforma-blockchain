@@ -3,7 +3,7 @@
     <button routerLink="new" type="button" class="btn btn-secondary">
       Aggiungi Piano Studio
     </button>
-    <ul class="list-group mt-3">
+    <ul class="list-group mt-3  text-left">
       <li *ngFor="let sp of studyPlans" class="list-group-item list-group-item-action" [routerLinkActive]="['active']"
         routerLink="{{sp.name}}">
         {{sp.name}}</li>

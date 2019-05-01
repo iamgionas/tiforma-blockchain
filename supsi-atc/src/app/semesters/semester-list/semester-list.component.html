@@ -3,7 +3,7 @@
         <button routerLink="new" type="button" class="btn btn-secondary">
           Aggiungi Semestre
         </button>
-    <ul class="list-group mt-3">
+    <ul class="list-group mt-3 text-left">
       <li *ngFor="let s of semesters" class="list-group-item list-group-item-action" [routerLinkActive]="['active']"
         routerLink="{{s.name}}">
         {{s.name}}</li>
