@@ -9,11 +9,13 @@ import { SemestersService } from '../semesters.service';
 })
 export class SemesterListComponent implements OnInit {
 
+  // Lista di oggeti Semestri -> per gestire la colonna lista di sinistra nell'HTML
   private semesters: Semester[] = [];
 
   constructor(private semestersService: SemestersService) { }
 
   ngOnInit() {
+    // Richiesta rest asincroma per creare la lista dei semestri -> per gestire la lista a sinistra nell'HTML
     this.semestersService.getSemesters().subscribe((res: Semester[]) => {
       this.semesters = res;
     });

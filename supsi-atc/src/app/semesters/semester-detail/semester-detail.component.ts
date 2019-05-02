@@ -10,10 +10,17 @@ import { Semester } from 'src/app/ch.supsi';
 })
 export class SemesterDetailComponent implements OnInit {
 
-  public semester: Semester;
-  semesterToChild = this.route.snapshot.params['id'].toString();
+  // Variabile che permette di caricare il componente loading -> rotellina che gira
   private loading: boolean;
 
+  // Semestre selezionato dalla lista di sinistra
+  public semester: Semester;
+
+  // Variabile da passare al componente figlio
+  semesterToChild = this.route.snapshot.params['id'].toString();
+  
+  // Oggetto bidirezionale che viene modificato nel form nell'HTML
+  // Oggetto di tipo ch.supsi.UpdateSemester -> Oggetto JSON per la transazione 
   @Input() semesterData: any = {
     $class: 'ch.supsi.UpdateSemester',
     oldSemester: 'resource:ch.supsi.Semester#',
@@ -21,6 +28,8 @@ export class SemesterDetailComponent implements OnInit {
     modules: []
   };
 
+  // Oggetto per l'eliminazione dello Semestre
+  // Oggetto di tipo ch.supsi.DeleteSemester -> Oggetto JSON per la transazione 
   private semesterDataToDelete = {
     $class: "ch.supsi.DeleteSemester",
     semester: "resource:ch.supsi.Semester#"
@@ -33,8 +42,11 @@ export class SemesterDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+
     this.route.params.subscribe((params: any) => {
       if (params.id) {
+
+        // Richiesta rest asincrona per recuperare le info del semestre e completare il form
         this.semestersService.getSemester(this.route.snapshot.params['id']).subscribe((data: Semester) => {
           this.semester = data;
           
@@ -48,8 +60,11 @@ export class SemesterDetailComponent implements OnInit {
     })
   }
 
+  // Metodo per l'aggiornamento di un semestre
   updateSemester() {
     this.loading = true;
+
+    // Richiesta rest asincrona per aggiornare il semestre e ricaricare la pagina
     this.semestersService.updateSemester(this.semesterData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -57,8 +72,11 @@ export class SemesterDetailComponent implements OnInit {
     });
   }
 
+  // Metodo per l'eliminazione di un semestre
   deleteSemester() {
     this.loading = true;
+
+    // Richiesta rest asincrona per eliminare il semestre e ricaricare la pagina
     this.semestersService.deleteSemester(this.semesterDataToDelete).subscribe((result) => {
       window.location.reload();
     }, (err) => {
@@ -66,6 +84,7 @@ export class SemesterDetailComponent implements OnInit {
     });
   }
 
+    // Metodo per la stampa 
   printDetail() : void{
     let printContents, popupWin;
     

@@ -3,9 +3,7 @@ import { Semester, StudyPlan, Module, StudentModule, Student } from 'src/app/ch.
 import { SemestersService } from '../../semesters.service';
 import { FormationsService } from 'src/app/formation/formations.service';
 import { ModulesService } from 'src/app/modules/modules.service';
-import { StudentsModule } from 'src/app/students/students.module';
 import { StudentsService } from 'src/app/students/students.service';
-import { loadLContextFromNode } from '@angular/core/src/render3/discovery_utils';
 
 @Component({
   selector: 'app-semester-enrollment',
@@ -14,16 +12,16 @@ import { loadLContextFromNode } from '@angular/core/src/render3/discovery_utils'
 })
 export class SemesterEnrollmentComponent implements OnInit {
 
-  @Input() semesterChild: Semester;     //This element comes from the semester-detail component, it is the selected semester
-  @Input() formationSelected: string;   //This is the formation selected to filter the module list and the student list to add, it is the filter
+  @Input() semesterChild: Semester;     //Questo elemento proviene dal semester-detail component, è il semestre selezionato
+  @Input() formationSelected: string;   //Questo è la formazione selezionata per filitrare la lista dei moduli
   @Input() formationSelected2: string;
-  private studyPlanList: {} = {};       //This is the formation (StudyPlan) list -> DTI, DEAS , it is filled in the ngOnInit() method
-  private semesterModules: {} = {};    //This is the module list contained in the semester
-  private moduleAll: {};              //This list contains all the modules, is filled when in the page I click the button "Aggiungi modulo"
-  private moduleSelected: string;
+  private studyPlanList: {} = {};       //Questo è un oggetto che rappresenta la lista delle formazioni
+  private semesterModules: {} = {};     //Questo è un oggetto che rappresenta la lista dei moduli semestri
+  private moduleAll: {};                //Questo è un oggetto che rappresenta la lista di tutti i moduli
+  private moduleSelected: string;       //Questo è un elemento che seleziona il moduli per poi inserire gli studenti
   private moduleName: string;
-  private studentAll: {};
-  private semesterStudents: {};
+  private studentAll: {};               //Questo è un oggetto che rappresenta la lista di tutti gli studenti
+  private semesterStudents: {};         //Questo è un oggetto che rappresenta la lista dei studenti semestri
   private loading: boolean;
 
 
@@ -36,16 +34,16 @@ export class SemesterEnrollmentComponent implements OnInit {
 
   ngOnInit() {
     this.loading = false;
-    //This fills the formation list, it make a request to API to receive the formations
+    //Questo riempie la lista delle formazioni
     this.semestersService.getFormations().subscribe((res: StudyPlan[]) => {
       res.forEach(sp => { this.studyPlanList[sp.name] = sp.name; });
     });
 
-    //This fills the module list contained in the semester, semesterChild has a StudentModule list not a Module list
+    //Questo riempie la lista dei moduli contenuti nei semestri, semesterChild has a StudentModule list not a Module list
     this.getListOfModule(this.semesterChild.modules);
   }
 
-  /************************************ STUDENTS */
+  /************************************ STUDENTI */
   mSelected(moduleSelected, mudoleName) {
     this.moduleName = mudoleName;
     this.semesterStudents = {};
@@ -61,7 +59,7 @@ export class SemesterEnrollmentComponent implements OnInit {
 
   }
 
-  //Method that is called when the button "AggiungiModulo" is pressed, fills the array with the list of all the module of the formation selected
+  //Bottone "AggiungiModulo" -> riempie l'array con tutti gli studenti
   toListStudentAll() {
     this.studentAll = {};
 
@@ -73,7 +71,7 @@ export class SemesterEnrollmentComponent implements OnInit {
     })
   }
 
-  //Mehtod that adds a student to  a studentMoule
+  //Metodo che aggiunge lo studentente allo student module
   addStudent(student) {
     this.loading = true;
     var studentModule = {
@@ -89,6 +87,7 @@ export class SemesterEnrollmentComponent implements OnInit {
     });
   }
 
+  //Metodo che elimina uno studente dallo student module
   deleteStudent(student){
     this.loading = true;
     var studentToDelete = {
@@ -105,15 +104,15 @@ export class SemesterEnrollmentComponent implements OnInit {
 
 
 
-  /************************************ MODULES */
+  /************************************ Moduli */
 
-  //Method that fills the module list with all module contained in the Semester.modules field (StudentModule)
+  //Metodo che riempie la lista dei moduli con tutti i moduli contenuti nel semestre
   getListOfModule(studentModule: object[]) {
     if (studentModule) {
       studentModule.forEach(element => {
-        var studentModule = element.toString().split('#')[1]; //I get only the id after #
-        this.semestersService.getStudentModule(studentModule).subscribe((res: StudentModule) => { //All student module of this semester
-          this.modulesService.getModule(res.module.toString().split('#')[1]).subscribe((resm: Module) => { //All module of the student module of this semester
+        var studentModule = element.toString().split('#')[1]; //Prendo solo l'id dopo il #
+        this.semestersService.getStudentModule(studentModule).subscribe((res: StudentModule) => { //Tutti gli studenti moduli del semestre
+          this.modulesService.getModule(res.module.toString().split('#')[1]).subscribe((resm: Module) => { //Tutti i moduli dello student module del semestre
             this.semesterModules[studentModule] = resm.name;
           });
         });
@@ -121,7 +120,7 @@ export class SemesterEnrollmentComponent implements OnInit {
     }
   }
 
-  //Method that is called when the button "AggiungiModulo" is pressed, fills the array with the list of all the module of the formation selected
+  //Bottone "AggiungiModulo", riempie l'array con la lista di tutti i moduli 
   toListModuleAll() {
     this.moduleAll = {};
     this.formationsService.getStudyPlan(this.formationSelected).subscribe((res: StudyPlan) => {
@@ -143,7 +142,7 @@ export class SemesterEnrollmentComponent implements OnInit {
     });
   }
 
-  //Mehtod that creates a studentMoule and adds this one in a semesters
+  //Metodo che crea e aggiungi uno studentModule e lo aggiunge al semestre 
   addModule(module) {
     this.loading = true;
     var studentModuleID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -171,7 +170,7 @@ export class SemesterEnrollmentComponent implements OnInit {
     });
   }
 
-  //Mehtod that removes a studentMoule from a semester
+  //Metodo che rimuove uno studentemodule dal semestre
   deleteModule(module) {
     this.loading = true;
     var studentModuleToDelete = {

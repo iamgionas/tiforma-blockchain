@@ -11,10 +11,13 @@ import { StudyPlan } from 'src/app/ch.supsi';
 })
 export class StudentNewComponent implements OnInit {
 
+  // Variabile che permette di caricare il componente loading -> rotellina che gira
   private loading: boolean;
 
+  // Lista di oggeti di Formazioni -> per gestire la select list nell'HTML
   studyPlans : StudyPlan[] = [];
 
+  // Lista di stato -> per gestire la select list nella pagina HTML
   statuteValues = [
     "Mai immatricolato",
     "Immatricolato",
@@ -22,6 +25,8 @@ export class StudentNewComponent implements OnInit {
     "Ospite"
   ]
 
+  // Oggetto bidirezionale che viene modificato nel form nell'HTML
+  // Oggetto di tipo ch.supsi.CreateStudent -> Oggetto JSON per la transazione 
   @Input() studentData: any = {
     $class: 'ch.supsi.CreateStudent',
     contactID: '',
@@ -43,14 +48,18 @@ export class StudentNewComponent implements OnInit {
   ngOnInit() {
     this.loading = false;
 
+    // Richiesta rest asincroma per creare la lista delle formazioni -> per gestire la select list nell'HTML
     this.studentsService.getStudyPlans().subscribe((sp : StudyPlan[]) => {
       this.studyPlans = sp;
     });
   }
 
   createStudent(){
+    // Generazione di un ID studente randomico 
     this.studentData.contactID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    // Visualizzo la pagina di caricamento
     this.loading = true;
+    // Eseguo la creazione dello studente e riaggiorno la pagina
     this.studentsService.createStudent(this.studentData).subscribe((result) => {
       window.location.reload();
     }, (err) => {
