@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { Semester, StudyPlan, Module, StudentModule, Student } from 'src/app/ch.supsi';
 import { SemestersService } from '../../semesters.service';
 import { FormationsService } from 'src/app/formation/formations.service';
 import { ModulesService } from 'src/app/modules/modules.service';
 import { StudentsService } from 'src/app/students/students.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-semester-enrollment',
@@ -12,7 +13,10 @@ import { StudentsService } from 'src/app/students/students.service';
 })
 export class SemesterEnrollmentComponent implements OnInit {
 
-  @Input() semesterChild: Semester;     //Questo elemento proviene dal semester-detail component, è il semestre selezionato
+  @Input() semesterChild: Semester;
+
+  //@Input() semesterChild: Semester;     //Questo elemento proviene dal semester-detail component, è il semestre selezionato
+  
   @Input() formationSelected: string;   //Questo è la formazione selezionata per filitrare la lista dei moduli
   @Input() formationSelected2: string;
   private studyPlanList: {} = {};       //Questo è un oggetto che rappresenta la lista delle formazioni
@@ -31,16 +35,27 @@ export class SemesterEnrollmentComponent implements OnInit {
     private modulesService: ModulesService,
     private studentsService: StudentsService) { }
 
+    ngOnChanges(changes: SimpleChanges) {
+      //const name: SimpleChange = changes.semesterChild;
+      /*console.log('prev value: ', semesterChild.previousValue);
+      console.log('got name: ', semesterChild.currentValue);
+      this.semesterChild = name.currentValue.toUpperCase();*/
+      this.semesterChild = changes.semesterChild.currentValue;
+      this.ngOnInit();
+    }
 
   ngOnInit() {
-    this.loading = false;
-    //Questo riempie la lista delle formazioni
-    this.semestersService.getFormations().subscribe((res: StudyPlan[]) => {
-      res.forEach(sp => { this.studyPlanList[sp.name] = sp.name; });
-    });
+        this.studyPlanList = {};  
+        this.semesterModules = {};
+        this.semesterStudents = {};
+        this.loading = false;
+        //Questo riempie la lista delle formazioni
+        this.semestersService.getFormations().subscribe((res: StudyPlan[]) => {
+          res.forEach(sp => { this.studyPlanList[sp.name] = sp.name; });
+        });
 
-    //Questo riempie la lista dei moduli contenuti nei semestri, semesterChild has a StudentModule list not a Module list
-    this.getListOfModule(this.semesterChild.modules);
+        //Questo riempie la lista dei moduli contenuti nei semestri, semesterChild has a StudentModule list not a Module list
+        this.getListOfModule(this.semesterChild.modules);
   }
 
   /************************************ STUDENTI */
@@ -88,7 +103,7 @@ export class SemesterEnrollmentComponent implements OnInit {
   }
 
   //Metodo che elimina uno studente dallo student module
-  deleteStudent(student){
+  deleteStudent(student) {
     this.loading = true;
     var studentToDelete = {
       "$class": "ch.supsi.RemoveStudentFromStudentModule",

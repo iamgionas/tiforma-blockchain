@@ -17,7 +17,7 @@ export class SemesterDetailComponent implements OnInit {
   public semester: Semester;
 
   // Variabile da passare al componente figlio
-  semesterToChild = this.route.snapshot.params['id'].toString();
+  private semesterToChild: String;
   
   // Oggetto bidirezionale che viene modificato nel form nell'HTML
   // Oggetto di tipo ch.supsi.UpdateSemester -> Oggetto JSON per la transazione 
@@ -45,7 +45,8 @@ export class SemesterDetailComponent implements OnInit {
 
     this.route.params.subscribe((params: any) => {
       if (params.id) {
-
+// Variabile da passare al componente figlio
+      this.semesterToChild = this.route.snapshot.params['id'].toString();
         // Richiesta rest asincrona per recuperare le info del semestre e completare il form
         this.semestersService.getSemester(this.route.snapshot.params['id']).subscribe((data: Semester) => {
           this.semester = data;
